@@ -10,7 +10,11 @@ jobs:
   publish_artifact:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    steps:        
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.14'
+          registry-url: https://registry.npmjs.org
       - name: Download artifact
         uses: actions/github-script@v6
         with:
