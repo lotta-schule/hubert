@@ -5,11 +5,7 @@ import { OverlayProvider } from '@react-aria/overlays';
 
 const ProviderFactory = (): React.FC => {
     const ComponentClass: React.FC = ({ children }) => {
-        return (
-            <OverlayProvider>
-                        {children}
-            </OverlayProvider>
-        );
+        return <OverlayProvider>{children}</OverlayProvider>;
     };
 
     return ComponentClass;
@@ -17,7 +13,7 @@ const ProviderFactory = (): React.FC => {
 
 const customRender = (
     ui: React.ReactElement,
-    renderOptions: Omit<RenderOptions, 'wrapper'> = {},
+    renderOptions: Omit<RenderOptions, 'wrapper'> = {}
 ) =>
     render(ui, {
         wrapper: ProviderFactory(),

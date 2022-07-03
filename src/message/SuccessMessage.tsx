@@ -8,18 +8,15 @@ export interface SuccessMessageProps {
 
 export const SuccessMessage = React.memo<SuccessMessageProps>(
     ({ message, className }) => {
-
-        const color = 'rgb(' +
-            getComputedStyle(document.documentElement)
-            .getPropertyValue('--lotta-success-color') +
+        const color =
+            'rgb(' +
+            getComputedStyle(document.documentElement).getPropertyValue(
+                '--lotta-success-color'
+            ) +
             ')';
 
         return (
-            <Message
-                color={color}
-                message={message}
-                className={className}
-            />
+            <Message color={color} message={message} className={className} />
         );
     }
 );

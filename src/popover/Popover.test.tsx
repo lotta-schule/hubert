@@ -1,11 +1,11 @@
-import {render} from '../test-utils';
+import { render } from '../test-utils';
 import { Popover } from './Popover';
 
 describe('Popover', () => {
     it('should render', () => {
         const screen = render(
             <Popover>
-            <div>TADA</div>
+                <div>TADA</div>
             </Popover>
         );
         expect(screen.container).toMatchInlineSnapshot(`

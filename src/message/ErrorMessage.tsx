@@ -20,9 +20,11 @@ export const ErrorMessage = React.memo<ErrorMessageProps>(
             return null;
         }
 
-        const color = 'rgb(' +
-            getComputedStyle(document.documentElement)
-            .getPropertyValue('--lotta-error-color') +
+        const color =
+            'rgb(' +
+            getComputedStyle(document.documentElement).getPropertyValue(
+                '--lotta-error-color'
+            ) +
             ')';
 
         return (

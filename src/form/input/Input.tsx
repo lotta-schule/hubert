@@ -4,7 +4,8 @@ import clsx from 'clsx';
 
 import styles from './Input.module.scss';
 
-export interface SingleLineInputProps extends React.HTMLProps<HTMLInputElement> {
+export interface SingleLineInputProps
+    extends React.HTMLProps<HTMLInputElement> {
     inline?: boolean;
     multiline?: false;
 }
@@ -17,7 +18,10 @@ export interface MultiLineInputProps extends TextareaProps {
 export type InputProps = SingleLineInputProps | MultiLineInputProps;
 
 export const Input = React.forwardRef(
-    ({ className, inline, multiline, children, ...props }: InputProps, ref: React.ForwardedRef<HTMLInputElement | HTMLTextAreaElement>) => {
+    (
+        { className, inline, multiline, children, ...props }: InputProps,
+        ref: React.ForwardedRef<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
         const component = multiline === true ? Textarea : 'input';
         return React.createElement(
             component,
