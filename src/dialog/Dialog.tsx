@@ -32,7 +32,15 @@ export const Dialog: React.FC<DialogProps & { open?: boolean }> = ({
 
   if (isBrowser && element.current === null) {
     element.current = document.createElement('div');
-    document.getElementById('dialogContainer')!.appendChild(element.current);
+    const dialogContainer =
+      document.getElementById('dialogContainer') ||
+      (() => {
+        const container = document.createElement('div');
+        container.id = 'dialogContainer';
+        document.body.appendChild(container);
+        return container;
+      })();
+    dialogContainer.appendChild(element.current);
   }
 
   React.useEffect(() => () => element.current?.remove(), []);
