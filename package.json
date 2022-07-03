@@ -1,6 +1,6 @@
 {
   "name": "@lotta-schule/lotti",
-  "version": "0.0.1-alpha.6",
+  "version": "0.0.1-alpha.7",
   "description": "Component Library for lotta",
   "scripts": {
     "watch": "vite build --watch",
@@ -16,6 +16,7 @@
   "module": "dist/lotti.es.js",
   "types": "dist/index.d.ts",
   "exports": {
+    "./style.css": "./dsti/style.css",
     ".": {
       "import": "./dist/lotti.es.js"
     }
