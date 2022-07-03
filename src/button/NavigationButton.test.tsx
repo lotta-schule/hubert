@@ -1,6 +1,6 @@
 import * as React from 'react';
+import { render } from '../test-utils';
 import { NavigationButton } from './NavigationButton';
-import { render } from 'test/util';
 
 describe('shared/NavigationButton', () => {
     it('should render NavigationButton with label', () => {

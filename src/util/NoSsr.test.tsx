@@ -1,5 +1,5 @@
 import { renderToStaticMarkup } from 'react-dom/server';
-import { render } from 'test/util';
+import { render } from '../test-utils';
 import { NoSsr } from './NoSsr';
 
 describe('NoSsr', () => {

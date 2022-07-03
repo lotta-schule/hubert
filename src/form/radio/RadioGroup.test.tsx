@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { render } from 'test/util';
+import userEvent from '@testing-library/user-event';
+import { render } from '../../test-utils';
 import { Radio } from './Radio';
 import { RadioGroup } from './RadioGroup';
-import userEvent from '@testing-library/user-event';
 
 describe('shared/general/form/radio', () => {
     it('should render with correct name', () => {

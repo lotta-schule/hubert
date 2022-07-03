@@ -1,6 +1,6 @@
-import { render } from 'test/util';
-import { Tag } from './Tag';
 import userEvent from '@testing-library/user-event';
+import { render } from '../test-utils';
+import { Tag } from './Tag';
 
 describe('Tag', () => {
     it('should correctly render a tag', () => {

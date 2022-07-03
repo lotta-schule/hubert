@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render } from 'test/util';
+import { render } from '../../test-utils';
 import { Select } from './Select';
 
 describe('shared/general/form/select', () => {

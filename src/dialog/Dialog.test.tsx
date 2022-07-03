@@ -1,5 +1,5 @@
 import userEvent from '@testing-library/user-event';
-import { render, waitFor } from 'test/util';
+import { render, waitFor } from '../test-utils';
 import { Dialog } from './Dialog';
 
 describe('general/dialog', () => {

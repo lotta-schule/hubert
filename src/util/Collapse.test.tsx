@@ -1,5 +1,5 @@
 import { Collapse } from './Collapse';
-import { render, waitFor } from 'test/util';
+import { render, waitFor } from '../test-utils';
 
 const content = (
     <div>

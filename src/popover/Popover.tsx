@@ -7,9 +7,10 @@ import { PopoverOverlay } from './PopoverOverlay';
 
 export interface PopoverProps {
     buttonProps?: ButtonProps;
+    children?: React.ReactNode;
 }
 
-export const Popover = ({ buttonProps }: PopoverProps) => {
+export const Popover = ({ buttonProps, children }: PopoverProps) => {
     const state = useOverlayTriggerState({});
 
     const triggerRef = React.useRef<HTMLButtonElement>(null);
@@ -59,7 +60,7 @@ export const Popover = ({ buttonProps }: PopoverProps) => {
                     isOpen={state.isOpen}
                     onClose={state.close}
                 >
-                    This is the content of the popover.
+                    {children}
                 </PopoverOverlay>
             )}
         </>

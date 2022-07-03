@@ -1,5 +1,5 @@
 import userEvent from '@testing-library/user-event';
-import { render } from 'test/util';
+import { render } from '../test-utils';
 import { Tab } from './Tab';
 import { Tabbar } from './Tabbar';
 

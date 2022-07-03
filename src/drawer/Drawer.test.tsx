@@ -1,6 +1,6 @@
-import { render, waitFor } from 'test/util';
-import { Drawer } from './Drawer';
 import userEvent from '@testing-library/user-event';
+import { render, waitFor } from '../test-utils';
+import { Drawer } from './Drawer';
 
 describe('general/Drawer', () => {
     it('should not show drawer when not open', async () => {

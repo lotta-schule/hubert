@@ -1,4 +1,4 @@
-import { render } from 'test/util';
+import { render } from '../test-utils';
 import { Avatar } from '../avatar/Avatar';
 import { Button } from '../button/Button';
 import { List, ListItem } from './List';

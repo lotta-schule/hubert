@@ -1,7 +1,7 @@
-import { render } from 'test/util';
+import userEvent from '@testing-library/user-event';
+import { render } from '../test-utils';
 import { Menu } from './Menu';
 import { MenuItem, MenuList } from './MenuList';
-import userEvent from '@testing-library/user-event';
 
 describe('Menu', () => {
     it('should render a Menu button', async () => {

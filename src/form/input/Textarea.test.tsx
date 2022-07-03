@@ -1,6 +1,6 @@
-import { render, waitFor } from 'test/util';
-import { Textarea } from './Textarea';
 import userEvent from '@testing-library/user-event';
+import { render, waitFor } from '../../test-utils';
+import { Textarea } from './Textarea';
 
 describe('general/form/input/Textarea', () => {
     it('should render correctly', () => {

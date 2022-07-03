@@ -1,4 +1,4 @@
-import { render } from 'test/util';
+import { render } from '../test-utils';
 import { Divider } from './Divider';
 
 describe('general/divider', () => {

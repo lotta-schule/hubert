@@ -1,4 +1,4 @@
-import { render } from 'test/util';
+import { render } from '../test-utils';
 import { Tab } from './Tab';
 
 describe('tabs/Tab', () => {

@@ -1,6 +1,6 @@
-import { render } from 'test/util';
-import { Deletable } from './Deletable';
 import userEvent from '@testing-library/user-event';
+import { render } from '../test-utils';
+import { Deletable } from './Deletable';
 
 describe('shared/general/util/Deletable', () => {
     it('should show a Delete button when onDelete is given', () => {
