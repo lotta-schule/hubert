@@ -17,4 +17,7 @@ export * from './progress';
 export * from './table';
 export * from './tabs';
 export * from './tag';
+export * from './theme';
 export * from './util';
+
+export * from './LottiProvider';

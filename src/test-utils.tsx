@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { pick } from 'lodash';
 import { render, RenderOptions } from '@testing-library/react';
-import { OverlayProvider } from '@react-aria/overlays';
+import { LottiProvider } from './LottiProvider';
+import { defaultTheme } from './theme';
 
 const ProviderFactory = (): React.FC => {
     const ComponentClass: React.FC = ({ children }) => {
-        return <OverlayProvider>{children}</OverlayProvider>;
+        return <LottiProvider theme={defaultTheme}>{children}</LottiProvider>;
     };
 
     return ComponentClass;
