@@ -44,8 +44,12 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run typecheck
-  build:
+  build_and_pack:
     runs-on: ubuntu-latest
+    needs:
+      - lint
+      - test
+      - typecheck
     steps:
       - uses: actions/checkout@v3
         with:
@@ -57,3 +61,11 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run build
+      - run: npm pack
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: npm package
+          path: lotta-schule-lotti*.tgz
+          if-no-files-found: error
+
