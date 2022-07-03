@@ -1,6 +1,5 @@
 import { LottiProvider } from '../src/LottiProvider';
 import { defaultTheme } from '../src/theme';
-import '../src/button/button.scss';
 
 export const parameters = {
     actions: { argTypesRegex: '^on[A-Z].*' },
