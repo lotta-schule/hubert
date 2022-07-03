@@ -5,14 +5,14 @@ import clsx from 'clsx';
 import styles from './AvatarGroup.module.scss';
 
 export interface AvatarGroupProps {
-    children: React.ReactElement<AvatarProps>[];
+  children: React.ReactElement<AvatarProps>[];
 
-    /**
-     * The maximum number of avatars to show
-     */
-    max?: number;
+  /**
+   * The maximum number of avatars to show
+   */
+  max?: number;
 
-    className?: string;
+  className?: string;
 }
 
 /**
@@ -20,26 +20,24 @@ export interface AvatarGroupProps {
  */
 
 export const AvatarGroup: React.FC<AvatarGroupProps> = ({
-    max = 3,
-    className,
-    children,
+  max = 3,
+  className,
+  children,
 }) => {
-    const avatars = React.Children.toArray(
-        children
-    ) as React.ReactElement<AvatarProps>[];
-    const overshoot = avatars.length - max;
-    return (
-        <div className={clsx(styles.root, className)}>
-            <div role={'group'}>
-                {avatars.splice(0, max).map((child, index) => {
-                    return React.cloneElement(child, {
-                        className: clsx(child.props.className, styles.avatar),
-                    });
-                })}
-            </div>
-            {overshoot > 0 && (
-                <div className={styles.overshoot}>+{overshoot}</div>
-            )}
-        </div>
-    );
+  const avatars = React.Children.toArray(
+    children
+  ) as React.ReactElement<AvatarProps>[];
+  const overshoot = avatars.length - max;
+  return (
+    <div className={clsx(styles.root, className)}>
+      <div role={'group'}>
+        {avatars.splice(0, max).map((child) => {
+          return React.cloneElement(child, {
+            className: clsx(child.props.className, styles.avatar),
+          });
+        })}
+      </div>
+      {overshoot > 0 && <div className={styles.overshoot}>+{overshoot}</div>}
+    </div>
+  );
 };

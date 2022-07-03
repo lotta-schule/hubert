@@ -9,51 +9,51 @@ import clsx from 'clsx';
 import styles from './Checkbox.module.scss';
 
 export type CheckboxProps = {
-    featureColor?: [red: number, green: number, blue: number];
+  featureColor?: [red: number, green: number, blue: number];
 
-    className?: string;
-    style?: React.CSSProperties;
+  className?: string;
+  style?: React.CSSProperties;
 
-    children?: React.ReactNode;
+  children?: React.ReactNode;
 } & ToggleProps &
-    React.AriaAttributes;
+  React.AriaAttributes;
 
 export const Checkbox = React.memo<CheckboxProps>(
-    ({ style, className, featureColor, ...props }) => {
-        const customStyle =
-            featureColor &&
-            ({
-                '--control-indicator-color': featureColor.join(', '),
-            } as React.CSSProperties);
+  ({ style, className, featureColor, ...props }) => {
+    const customStyle =
+      featureColor &&
+      ({
+        '--control-indicator-color': featureColor.join(', '),
+      } as React.CSSProperties);
 
-        const ref = React.useRef() as React.MutableRefObject<HTMLInputElement>;
-        const state = useToggleState(props);
-        const { inputProps } = useCheckbox(props, state, ref);
-        const { isFocusVisible, focusProps } = useFocusRing();
+    const ref = React.useRef() as React.MutableRefObject<HTMLInputElement>;
+    const state = useToggleState(props);
+    const { inputProps } = useCheckbox(props, state, ref);
+    const { isFocusVisible, focusProps } = useFocusRing();
 
-        return (
-            <label
-                style={{ ...style, ...customStyle }}
-                className={clsx(className, styles.root)}
-            >
-                <VisuallyHidden>
-                    <input
-                        {...inputProps}
-                        {...focusProps}
-                        ref={ref}
-                        className={clsx(className, styles.input)}
-                    />
-                </VisuallyHidden>
-                <div
-                    className={clsx(styles.controlIndicator, {
-                        [styles.isSelected]: state.isSelected,
-                        [styles.isFocusVisible]: isFocusVisible,
-                        [styles.isDisabled]: props.isDisabled,
-                    })}
-                />
-                {props.children}
-            </label>
-        );
-    }
+    return (
+      <label
+        style={{ ...style, ...customStyle }}
+        className={clsx(className, styles.root)}
+      >
+        <VisuallyHidden>
+          <input
+            {...inputProps}
+            {...focusProps}
+            ref={ref}
+            className={clsx(className, styles.input)}
+          />
+        </VisuallyHidden>
+        <div
+          className={clsx(styles.controlIndicator, {
+            [styles.isSelected]: state.isSelected,
+            [styles.isFocusVisible]: isFocusVisible,
+            [styles.isDisabled]: props.isDisabled,
+          })}
+        />
+        {props.children}
+      </label>
+    );
+  }
 );
 Checkbox.displayName = 'Checkbox';

@@ -2,13 +2,13 @@ import { render } from '../test-utils';
 import { Popover } from './Popover';
 
 describe('Popover', () => {
-    it('should render', () => {
-        const screen = render(
-            <Popover>
-                <div>TADA</div>
-            </Popover>
-        );
-        expect(screen.container).toMatchInlineSnapshot(`
+  it('should render', () => {
+    const screen = render(
+      <Popover>
+        <div>TADA</div>
+      </Popover>
+    );
+    expect(screen.container).toMatchInlineSnapshot(`
 <div>
   <div
     data-overlay-container="true"
@@ -22,5 +22,5 @@ describe('Popover', () => {
   </div>
 </div>
 `);
-    });
+  });
 });

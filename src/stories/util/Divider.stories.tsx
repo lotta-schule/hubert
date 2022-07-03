@@ -3,9 +3,9 @@ import { Story, Meta } from '@storybook/react';
 import { Divider } from '../../divider/Divider';
 
 export default {
-    title: 'util/Divider',
-    component: Divider,
-    argTypes: {},
+  title: 'util/Divider',
+  component: Divider,
+  argTypes: {},
 } as Meta;
 
 const Template: Story = (args) => <Divider {...args} />;

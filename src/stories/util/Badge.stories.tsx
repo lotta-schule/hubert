@@ -3,14 +3,14 @@ import { Story, Meta } from '@storybook/react';
 import { Badge } from '../../badge';
 
 export default {
-    title: 'util/Badge',
-    Component: Badge,
-    argTypes: {},
+  title: 'util/Badge',
+  Component: Badge,
+  argTypes: {},
 } as Meta;
 
 const Template: Story = (args) => <Badge {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-    value: 12,
+  value: 12,
 };

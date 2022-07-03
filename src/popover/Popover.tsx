@@ -6,63 +6,63 @@ import { Button, ButtonProps } from '../button';
 import { PopoverOverlay } from './PopoverOverlay';
 
 export interface PopoverProps {
-    buttonProps?: ButtonProps;
-    children?: React.ReactNode;
+  buttonProps?: ButtonProps;
+  children?: React.ReactNode;
 }
 
 export const Popover = ({ buttonProps, children }: PopoverProps) => {
-    const state = useOverlayTriggerState({});
+  const state = useOverlayTriggerState({});
 
-    const triggerRef = React.useRef<HTMLButtonElement>(null);
-    const overlayRef = React.useRef<HTMLDivElement>(null);
+  const triggerRef = React.useRef<HTMLButtonElement>(null);
+  const overlayRef = React.useRef<HTMLDivElement>(null);
 
-    const { triggerProps, overlayProps } = useOverlayTrigger(
-        { type: 'dialog' },
-        state,
-        triggerRef
-    );
+  const { triggerProps, overlayProps } = useOverlayTrigger(
+    { type: 'dialog' },
+    state,
+    triggerRef
+  );
 
-    // Get popover positioning props relative to the trigger
-    const { overlayProps: positionProps } = useOverlayPosition({
-        targetRef: triggerRef,
-        overlayRef,
-        placement: 'top',
-        offset: 5,
-        isOpen: state.isOpen,
-    });
+  // Get popover positioning props relative to the trigger
+  const { overlayProps: positionProps } = useOverlayPosition({
+    targetRef: triggerRef,
+    overlayRef,
+    placement: 'top',
+    offset: 5,
+    isOpen: state.isOpen,
+  });
 
-    const { buttonProps: buttonAttributes } = useButton(
-        {
-            onPress: () => state.open(),
-        },
-        triggerRef
-    );
+  const { buttonProps: buttonAttributes } = useButton(
+    {
+      onPress: () => state.open(),
+    },
+    triggerRef
+  );
 
-    const triggerElement = React.useMemo(
-        () =>
-            React.createElement(Button, {
-                ...triggerProps,
-                ...buttonAttributes,
-                ...buttonProps,
-                ref: triggerRef,
-            }),
-        [buttonAttributes, buttonProps, triggerProps]
-    );
+  const triggerElement = React.useMemo(
+    () =>
+      React.createElement(Button, {
+        ...triggerProps,
+        ...buttonAttributes,
+        ...buttonProps,
+        ref: triggerRef,
+      }),
+    [buttonAttributes, buttonProps, triggerProps]
+  );
 
-    return (
-        <>
-            {triggerElement}
-            {state.isOpen && (
-                <PopoverOverlay
-                    {...overlayProps}
-                    {...positionProps}
-                    ref={overlayRef}
-                    isOpen={state.isOpen}
-                    onClose={state.close}
-                >
-                    {children}
-                </PopoverOverlay>
-            )}
-        </>
-    );
+  return (
+    <>
+      {triggerElement}
+      {state.isOpen && (
+        <PopoverOverlay
+          {...overlayProps}
+          {...positionProps}
+          ref={overlayRef}
+          isOpen={state.isOpen}
+          onClose={state.close}
+        >
+          {children}
+        </PopoverOverlay>
+      )}
+    </>
+  );
 };

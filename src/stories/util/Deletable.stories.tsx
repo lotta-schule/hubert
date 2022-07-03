@@ -3,21 +3,21 @@ import { Story, Meta } from '@storybook/react';
 import { Deletable, DeletableProps } from '../../util';
 
 export default {
-    title: 'util/Deletable',
-    component: Deletable,
-    argTypes: {},
+  title: 'util/Deletable',
+  component: Deletable,
+  argTypes: {},
 } as Meta;
 
 const Template: Story<DeletableProps> = (args) => (
-    <Deletable {...args}>
-        <img
-            alt={''}
-            style={{ backgroundColor: 'green', width: 150, height: 150 }}
-        />
-    </Deletable>
+  <Deletable {...args}>
+    <img
+      alt={''}
+      style={{ backgroundColor: 'green', width: 150, height: 150 }}
+    />
+  </Deletable>
 );
 
 export const Default = Template.bind({});
 Default.args = {
-    onDelete: () => {},
+  onDelete: () => {},
 };

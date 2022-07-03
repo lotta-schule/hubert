@@ -4,28 +4,28 @@ import { NavigationButton, NavigationButtonProps } from '../../button';
 import { Close } from '@material-ui/icons';
 
 export default {
-    title: 'Buttons/NavigationButton',
-    component: NavigationButton,
-    argTypes: {},
+  title: 'Buttons/NavigationButton',
+  component: NavigationButton,
+  argTypes: {},
 } as Meta;
 
 const Template: Story<Omit<NavigationButtonProps, 'ref'>> = (args) => (
-    <NavigationButton {...args} />
+  <NavigationButton {...args} />
 );
 
 export const Default = Template.bind({});
 Default.args = {
-    label: 'Navigation-Button',
+  label: 'Navigation-Button',
 };
 
 export const Selected = Template.bind({});
 Selected.args = {
-    label: 'Navigation-Button selected',
-    selected: true,
+  label: 'Navigation-Button selected',
+  selected: true,
 };
 
 export const IconButton = Template.bind({});
 IconButton.args = {
-    label: 'Navigation-Button with Icon',
-    icon: <Close />,
+  label: 'Navigation-Button with Icon',
+  icon: <Close />,
 };

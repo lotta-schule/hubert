@@ -3,7 +3,7 @@ import { render } from '../test-utils';
 import { Toolbar } from './Toolbar';
 
 describe('Toolbar', () => {
-    it('should render', () => {
-        render(<Toolbar />);
-    });
+  it('should render', () => {
+    render(<Toolbar />);
+  });
 });

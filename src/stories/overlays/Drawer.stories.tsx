@@ -4,31 +4,27 @@ import { Drawer } from '../../drawer';
 import { Button } from '../../button';
 
 export default {
-    title: 'overlays/Drawer',
-    component: Drawer,
-    argTypes: {},
+  title: 'overlays/Drawer',
+  component: Drawer,
+  argTypes: {},
 } as Meta;
 
 const Template: Story = (args) => {
-    const [isOpen, setIsOpen] = React.useState(false);
-    return (
-        <div>
-            <Button onClick={() => setIsOpen(true)}>toggle</Button>
-            <Drawer
-                {...args}
-                isOpen={isOpen}
-                onClose={() => setIsOpen(false)}
-            />
-        </div>
-    );
+  const [isOpen, setIsOpen] = React.useState(false);
+  return (
+    <div>
+      <Button onClick={() => setIsOpen(true)}>toggle</Button>
+      <Drawer {...args} isOpen={isOpen} onClose={() => setIsOpen(false)} />
+    </div>
+  );
 };
 
 export const Default = Template.bind({});
 Default.args = {
-    children: (
-        <div>
-            <img src="https://picsum.photos/300/200" alt="" />
-            <div>Ich bin eine Box mit Inhalt</div>
-        </div>
-    ),
+  children: (
+    <div>
+      <img src="https://picsum.photos/300/200" alt="" />
+      <div>Ich bin eine Box mit Inhalt</div>
+    </div>
+  ),
 };

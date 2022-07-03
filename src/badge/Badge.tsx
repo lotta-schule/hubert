@@ -4,25 +4,21 @@ import clsx from 'clsx';
 import styles from './Badge.module.scss';
 
 export type BadgeProps = {
-    className?: string;
+  className?: string;
 
-    value?: number | string | null;
+  value?: number | string | null;
 };
 
 export const Badge = React.memo<BadgeProps>(
-    ({ className, value, ...props }) => {
-        if (!value) {
-            return null;
-        }
-        return (
-            <div
-                role={'status'}
-                className={clsx(className, styles.root)}
-                {...props}
-            >
-                {value}
-            </div>
-        );
+  ({ className, value, ...props }) => {
+    if (!value) {
+      return null;
     }
+    return (
+      <div role={'status'} className={clsx(className, styles.root)} {...props}>
+        {value}
+      </div>
+    );
+  }
 );
 Badge.displayName = 'Badge';

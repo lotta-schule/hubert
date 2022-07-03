@@ -4,28 +4,28 @@ import { actions } from '@storybook/addon-actions';
 import { Tag } from '../../tag';
 
 export default {
-    title: 'util/Tag',
-    component: Tag,
-    argTypes: {
-        children: {
-            name: 'children',
-            type: { name: 'string', required: true },
-            defaultValue: 'Hallo',
-            description: 'The content of the tag',
-        },
+  title: 'util/Tag',
+  component: Tag,
+  argTypes: {
+    children: {
+      name: 'children',
+      type: { name: 'string', required: true },
+      defaultValue: 'Hallo',
+      description: 'The content of the tag',
     },
+  },
 } as Meta;
 
 const Template: Story = (args: any) => <Tag {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-    children: 'Hallo',
-    onDelete: undefined,
+  children: 'Hallo',
+  onDelete: undefined,
 };
 
 export const Deletable = Template.bind({});
 Deletable.args = {
-    children: 'Hallo',
-    ...actions('onDelete'),
+  children: 'Hallo',
+  ...actions('onDelete'),
 };

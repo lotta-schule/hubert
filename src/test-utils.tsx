@@ -4,21 +4,21 @@ import { LottiProvider } from './LottiProvider';
 import { defaultTheme } from './theme';
 
 const ProviderFactory = (): React.FC => {
-    const ComponentClass: React.FC = ({ children }) => {
-        return <LottiProvider theme={defaultTheme}>{children}</LottiProvider>;
-    };
+  const ComponentClass: React.FC = ({ children }) => {
+    return <LottiProvider theme={defaultTheme}>{children}</LottiProvider>;
+  };
 
-    return ComponentClass;
+  return ComponentClass;
 };
 
 const customRender = (
-    ui: React.ReactElement,
-    renderOptions: Omit<RenderOptions, 'wrapper'> = {}
+  ui: React.ReactElement,
+  renderOptions: Omit<RenderOptions, 'wrapper'> = {}
 ) =>
-    render(ui, {
-        wrapper: ProviderFactory(),
-        ...renderOptions,
-    });
+  render(ui, {
+    wrapper: ProviderFactory(),
+    ...renderOptions,
+  });
 
 // re-export everything
 export * from '@testing-library/react';

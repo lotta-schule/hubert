@@ -4,11 +4,11 @@ import { render } from '../test-utils';
 import { Button } from './Button';
 
 describe('shared/Button', () => {
-    it('should render Button with label', () => {
-        render(<Button>Click</Button>);
-    });
+  it('should render Button with label', () => {
+    render(<Button>Click</Button>);
+  });
 
-    it('should render Button with icon', () => {
-        render(<Button icon={<Close />} />);
-    });
+  it('should render Button with icon', () => {
+    render(<Button icon={<Close />} />);
+  });
 });

@@ -3,8 +3,8 @@ import { Story, Meta } from '@storybook/react';
 import { Message, ErrorMessage, SuccessMessage } from '../../message';
 
 export default {
-    title: 'util/Message',
-    component: Message,
+  title: 'util/Message',
+  component: Message,
 } as Meta;
 
 const DefaultTemplate: Story = (args: any) => <Message {...args} />;
@@ -13,21 +13,21 @@ const SuccessTemplate: Story = (args: any) => <SuccessMessage {...args} />;
 
 export const Default = DefaultTemplate.bind({});
 Default.args = {
-    message: 'Hallo',
-    color: '#ccc',
+  message: 'Hallo',
+  color: '#ccc',
 };
 export const Empty = DefaultTemplate.bind({});
 Empty.args = {
-    message: '',
-    color: '#ccc',
+  message: '',
+  color: '#ccc',
 };
 
 export const ErrorMsg = ErrorTemplate.bind({});
 ErrorMsg.args = {
-    error: new Error('Upsi'),
+  error: new Error('Upsi'),
 };
 
 export const SuccessMsg = SuccessTemplate.bind({});
 SuccessMsg.args = {
-    message: 'Glückwunsch',
+  message: 'Glückwunsch',
 };

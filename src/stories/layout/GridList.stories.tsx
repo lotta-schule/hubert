@@ -3,29 +3,29 @@ import { Story, Meta } from '@storybook/react';
 import { GridList, GridListItem } from '../../gridlist';
 
 export default {
-    title: 'Layout/GridList',
-    component: GridList,
-    argTypes: {},
+  title: 'Layout/GridList',
+  component: GridList,
+  argTypes: {},
 } as Meta;
 
 const Template: Story = (args) => (
-    <GridList {...args}>
-        <GridListItem>
-            <img src="https://picsum.photos/600/400" alt="" />
-        </GridListItem>
-        <GridListItem>
-            <img src="https://picsum.photos/600/400" alt="" />
-        </GridListItem>
-        <GridListItem>
-            <img src="https://picsum.photos/600/400" alt="" />
-        </GridListItem>
-        <GridListItem>
-            <img src="https://picsum.photos/600/400" alt="" />
-        </GridListItem>
-        <GridListItem>
-            <img src="https://picsum.photos/600/400" alt="" />
-        </GridListItem>
-    </GridList>
+  <GridList {...args}>
+    <GridListItem>
+      <img src="https://picsum.photos/600/400" alt="" />
+    </GridListItem>
+    <GridListItem>
+      <img src="https://picsum.photos/600/400" alt="" />
+    </GridListItem>
+    <GridListItem>
+      <img src="https://picsum.photos/600/400" alt="" />
+    </GridListItem>
+    <GridListItem>
+      <img src="https://picsum.photos/600/400" alt="" />
+    </GridListItem>
+    <GridListItem>
+      <img src="https://picsum.photos/600/400" alt="" />
+    </GridListItem>
+  </GridList>
 );
 
 export const Default = Template.bind({});
