@@ -14,8 +14,8 @@ export default Vite.defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'lotti',
-      formats: ['es', 'umd'],
-      fileName: (format) => `lotti.${format}.js`,
+      formats: ['es'],
+      fileName: `lotti`,
     },
     rollupOptions: {
       external: ['react', 'react-dom'],

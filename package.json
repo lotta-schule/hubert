@@ -1,6 +1,6 @@
 {
   "name": "@lotta-schule/lotti",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.3",
   "description": "Component Library for lotta",
   "scripts": {
     "watch": "vite build --watch",
@@ -13,13 +13,11 @@
     "build-storybook": "build-storybook"
   },
   "source": "src/index.ts",
-  "main": "dist/lotti.umd.js",
   "module": "dist/lotti.es.js",
-  "types": "dist/src/index.d.ts",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/lotti.es.js",
-      "require": "./dist/lotti.umd.js"
+      "import": "./dist/lotti.es.js"
     }
   },
   "author": "",
