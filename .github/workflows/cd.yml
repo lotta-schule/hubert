@@ -23,7 +23,7 @@ jobs:
             console.log(JSON.stringify(allArtifacts, null, 2));
             console.log(JSON.stringify(allArtifacts.data.artifacts, null, 2));
             let matchArtifact = allArtifacts.data.artifacts.filter((artifact) => {
-              return artifact.name == "npm_package"
+              return artifact.name == "npm package"
             })[0];
             console.log(JSON.stringify(context, null, 2));
             let download = await github.rest.actions.downloadArtifact({
