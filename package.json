@@ -1,6 +1,6 @@
 {
   "name": "@lotta-schule/lotti",
-  "version": "0.0.1-alpha.5",
+  "version": "0.0.1-alpha.6",
   "description": "Component Library for lotta",
   "scripts": {
     "watch": "vite build --watch",

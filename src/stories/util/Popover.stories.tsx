@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 import { Popover } from '../../popover';
-import { Image } from '@material-ui/icons';
 
 export default {
   title: 'util/Popover',
