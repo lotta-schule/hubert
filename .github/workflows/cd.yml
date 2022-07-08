@@ -44,6 +44,6 @@ jobs:
 
       - name: publish to npm
         run: |
-          npm publish lotta-schule-lotti*.tgz
+          npm publish lotta-schule-hubert*.tgz
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
