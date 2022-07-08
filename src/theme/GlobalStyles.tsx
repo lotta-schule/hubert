@@ -34,4 +34,4 @@ export const GlobalStyles = React.memo(() => {
 
   return null;
 });
-GlobalStyles.displayName = 'GlobalLottiStyles';
+GlobalStyles.displayName = 'GlobalHubertStyles';

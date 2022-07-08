@@ -20,4 +20,4 @@ export * from './tag';
 export * from './theme';
 export * from './util';
 
-export * from './LottiProvider';
+export * from './HubertProvider';

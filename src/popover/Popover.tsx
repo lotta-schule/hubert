@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { useOverlayPosition, useOverlayTrigger } from '@react-aria/overlays';
+import { useOverlayTrigger } from '@react-aria/overlays';
 import { useOverlayTriggerState } from '@react-stately/overlays';
 import { useButton } from '@react-aria/button';
 import { Button, ButtonProps } from '../button';
 import { PopoverOverlay } from './PopoverOverlay';
+import { usePopper } from 'react-popper';
 
 export interface PopoverProps {
   buttonProps?: ButtonProps;
@@ -23,20 +24,17 @@ export const Popover = ({
   const triggerRef = React.useRef<HTMLButtonElement>(null);
   const overlayRef = React.useRef<HTMLDivElement>(null);
 
+  const { styles: popperStyles, attributes: popperAttributes } = usePopper(
+    triggerRef.current,
+    overlayRef.current,
+    { placement: 'auto', strategy: 'fixed' }
+  );
+
   const { triggerProps, overlayProps } = useOverlayTrigger(
     { type: 'dialog' },
     state,
     triggerRef
   );
-
-  // Get popover positioning props relative to the trigger
-  const { overlayProps: positionProps } = useOverlayPosition({
-    targetRef: triggerRef,
-    overlayRef,
-    placement: 'top',
-    offset: 5,
-    isOpen: state.isOpen,
-  });
 
   const { buttonProps: buttonAttributes } = useButton(
     {
@@ -62,8 +60,8 @@ export const Popover = ({
       {state.isOpen && (
         <PopoverOverlay
           {...overlayProps}
-          {...positionProps}
-          style={style}
+          {...popperAttributes.popper}
+          style={{ ...popperStyles.popper, ...style }}
           className={className}
           ref={overlayRef}
           isOpen={state.isOpen}

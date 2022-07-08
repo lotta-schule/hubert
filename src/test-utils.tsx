@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { render, RenderOptions } from '@testing-library/react';
-import { LottiProvider } from './LottiProvider';
+import { HubertProvider } from './HubertProvider';
 import { defaultTheme } from './theme';
 
 const ProviderFactory = (): React.FC => {
   const ComponentClass: React.FC = ({ children }) => {
-    return <LottiProvider theme={defaultTheme}>{children}</LottiProvider>;
+    return <HubertProvider theme={defaultTheme}>{children}</HubertProvider>;
   };
 
   return ComponentClass;
