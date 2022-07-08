@@ -22,13 +22,23 @@ export const GlobalStyles = React.memo(() => {
     }
   };
 
-  React.useEffect(() => {
-    for (const [key, value] of Object.entries(theme)) {
-      if (typeof value === 'string') {
-        const varKey = `--lotta-${kebabCase(key)}`;
-        const varVal = getVarValue(value);
-        document.documentElement.style.setProperty(varKey, varVal);
+  const getVarListWithName = (
+    key: string,
+    value: Record<string, any>
+  ): [varname: string, varval: string][] => {
+    return Object.keys(value).reduce((acc, valueKey) => {
+      const varKey = [key, valueKey].filter(Boolean).map(kebabCase).join('-');
+      const valueValue = value[valueKey];
+      if (typeof valueValue === 'object') {
+        return acc.concat(getVarListWithName(varKey, valueValue));
       }
+      return [...acc, [varKey, getVarValue(valueValue)]];
+    }, [] as [string, string][]);
+  };
+
+  React.useEffect(() => {
+    for (const [varKey, varVal] of getVarListWithName('', theme)) {
+      document.documentElement.style.setProperty(`--lotta-${varKey}`, varVal);
     }
   }, [theme]);
 

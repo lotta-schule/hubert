@@ -16,8 +16,10 @@ export const defaultTheme = {
   highlightColor: 'rgba(0, 0, 0, 0.12)',
   bannerBackgroundColor: 'rgb(54, 123, 240)',
   accentGrey: 'rgb(227, 227, 227)',
-  typographyTitleFontFamily: "'Schoolbell', cursive",
-  typographyFontFamily: 'Muli',
+  typography: {
+    FontFamily: 'Muli',
+    titleFontFamily: "'Schoolbell', cursive",
+  },
   spacing: `8px`,
   borderRadius: `4px`,
 };

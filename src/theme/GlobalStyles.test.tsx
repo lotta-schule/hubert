@@ -23,5 +23,12 @@ describe('ThemeStylesheetManager', () => {
     expect(
       document.documentElement.style.getPropertyValue('--lotta-spacing')
     ).toEqual('8px');
+
+    // nested values
+    expect(
+      document.documentElement.style.getPropertyValue(
+        '--lotta-typography-font-family'
+      )
+    ).toEqual('Muli');
   });
 });
