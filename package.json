@@ -1,6 +1,6 @@
 {
   "name": "@lotta-schule/hubert",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.5",
   "description": "Component Library for lotta",
   "scripts": {
     "test": "jest",
@@ -69,6 +69,14 @@
   },
   "peerDependencies": {
     "@material-ui/icons": ">= 4.0.0",
+    "framer-motion": "^6.3.16",
+    "react": ">= 17.0.0",
+    "react-dom": ">= 17.0.0"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.6.5",
+    "@popperjs/core": "^2.11.5",
+    "@reach/tooltip": "^0.17.0",
     "@react-aria/button": "^3.5.1",
     "@react-aria/checkbox": "^3.4.1",
     "@react-aria/dialog": "^3.2.1",
@@ -76,15 +84,8 @@
     "@react-aria/overlays": "^3.9.1",
     "@react-aria/progress": "^3.2.1",
     "@react-aria/ssr": "^3.2.0",
-    "@react-aria/visually-hidden": "^3.3.1",
-    "framer-motion": "^6.3.16",
-    "react": ">= 17.0.0",
-    "react-dom": ">= 17.0.0"
-  },
-  "dependencies": {
-    "@headlessui/react": "^1.6.5",
-    "@reach/tooltip": "^0.17.0",
     "@react-aria/utils": "^3.13.1",
+    "@react-aria/visually-hidden": "^3.3.1",
     "@react-stately/overlays": "^3.3.1",
     "@react-stately/toggle": "^3.3.1",
     "clsx": "^1.2.0",
