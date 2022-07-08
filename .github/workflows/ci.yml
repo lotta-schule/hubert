@@ -71,6 +71,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: npm package
-          path: lotta-schule-lotti*.tgz
+          path: lotta-schule-hubert*.tgz
           if-no-files-found: error
 
