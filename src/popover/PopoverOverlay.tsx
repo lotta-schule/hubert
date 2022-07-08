@@ -3,11 +3,12 @@ import { FocusScope } from '@react-aria/focus';
 import { DismissButton, useOverlay } from '@react-aria/overlays';
 import { Box } from '../layout';
 import { motion } from 'framer-motion';
-
-import styles from './PopoverOverlay.module.scss';
 import clsx from 'clsx';
 
-export interface PopoverOverlayProps {
+import styles from './PopoverOverlay.module.scss';
+
+export interface PopoverOverlayProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   isOpen: boolean;
   onClose: () => void;
   style?: React.CSSProperties;
@@ -19,7 +20,14 @@ const AnimatedBox = motion(Box);
 
 export const PopoverOverlay = React.forwardRef(
   (
-    { children, isOpen, onClose, className, style }: PopoverOverlayProps,
+    {
+      children,
+      isOpen,
+      onClose,
+      className,
+      style,
+      ...divProps
+    }: PopoverOverlayProps,
     ref: React.ForwardedRef<HTMLDivElement>
   ) => {
     const { overlayProps } = useOverlay(
@@ -34,7 +42,9 @@ export const PopoverOverlay = React.forwardRef(
     return (
       <FocusScope restoreFocus>
         <AnimatedBox
+          role={'presentation'}
           {...(overlayProps as any)}
+          {...divProps}
           className={clsx(styles.root, className)}
           style={style}
           ref={ref}

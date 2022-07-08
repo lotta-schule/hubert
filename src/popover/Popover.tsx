@@ -6,7 +6,7 @@ import { Button, ButtonProps } from '../button';
 import { PopoverOverlay } from './PopoverOverlay';
 import { usePopper } from 'react-popper';
 
-export interface PopoverProps {
+export interface PopoverProps extends React.HTMLAttributes<HTMLDivElement> {
   buttonProps?: ButtonProps;
   style?: React.CSSProperties;
   className?: string;
@@ -16,8 +16,8 @@ export interface PopoverProps {
 export const Popover = ({
   buttonProps,
   style,
-  className,
   children,
+  ...divProps
 }: PopoverProps) => {
   const state = useOverlayTriggerState({});
 
@@ -27,7 +27,7 @@ export const Popover = ({
   const { styles: popperStyles, attributes: popperAttributes } = usePopper(
     triggerRef.current,
     overlayRef.current,
-    { placement: 'auto', strategy: 'fixed' }
+    { placement: 'auto', strategy: 'absolute' }
   );
 
   const { triggerProps, overlayProps } = useOverlayTrigger(
@@ -61,8 +61,8 @@ export const Popover = ({
         <PopoverOverlay
           {...overlayProps}
           {...popperAttributes.popper}
+          {...divProps}
           style={{ ...popperStyles.popper, ...style }}
-          className={className}
           ref={overlayRef}
           isOpen={state.isOpen}
           onClose={state.close}
