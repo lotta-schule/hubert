@@ -1,4 +1,5 @@
 .root {
+  .tooltip {
     z-index: 1;
     pointer-events: none;
     position: absolute;
@@ -11,7 +12,12 @@
     border: rgb(var(--lotta-text-color));
     border-radius: var(--lotta-border-radius);
     white-space: pre-line;
-    &:empty {
-        display: none;
+    z-index: 500;
+    width: max-content;
+    max-width: 75vw;
+    max-height: 75vh;
+    > :only-child {
+      width: 100%;
     }
+  }
 }

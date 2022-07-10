@@ -2,19 +2,21 @@
 
 exports[`util/Tooltip should render 1`] = `
 <div>
-  <button
-    aria-selected="false"
-    class="lotta-base-button variant__default lotta-button"
-    data-reach-tooltip-trigger=""
-    data-state="tooltip-hidden"
-    role="button"
-    type="button"
+  <div
+    class="root"
   >
-    <span
-      class="lotta-button_text"
+    <button
+      aria-selected="false"
+      class="lotta-base-button variant__default lotta-button"
+      role="button"
+      type="button"
     >
-      Test
-    </span>
-  </button>
+      <span
+        class="lotta-button_text"
+      >
+        Test
+      </span>
+    </button>
+  </div>
 </div>
 `;
