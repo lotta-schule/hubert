@@ -6,6 +6,7 @@ import { Button, ButtonProps } from '../button/Button';
 import { MenuPopover } from './MenuPopover';
 import { useButton } from '@react-aria/button';
 import { useMenuTrigger } from '@react-aria/menu';
+import { AnimatePresence, motion } from 'framer-motion';
 import { WithDescription } from './Menu';
 
 export type MenuButtonProps = {
@@ -67,15 +68,24 @@ export const MenuButton = React.forwardRef(
     return (
       <div style={{ position: 'relative', display: 'inline-block' }}>
         <Button ref={ref} {...buttonProps} {...ariaButtonProps} />
-        {state.isOpen && (
-          <MenuPopover
-            {...(props as any)}
-            {...menuProps}
-            onClose={() => {
-              state.close();
-            }}
-          />
-        )}
+        <AnimatePresence>
+          {state.isOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0, y: -20 }}
+              animate={{ opacity: 1, height: 'auto', y: 0 }}
+              exit={{ opacity: 0, height: 0 }}
+            >
+              <MenuPopover
+                isOpen={state.isOpen}
+                {...(props as any)}
+                {...menuProps}
+                onClose={() => {
+                  state.close();
+                }}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     );
   }

@@ -12,7 +12,10 @@ export type MenuPopoverProps = {
 } & MenuProps;
 
 export const MenuPopover = React.forwardRef(
-  (props: MenuPopoverProps, forwardedRef: React.Ref<HTMLUListElement>) => {
+  (
+    { isOpen, ...props }: MenuPopoverProps,
+    forwardedRef: React.Ref<HTMLUListElement>
+  ) => {
     // Handle events that should cause the menu to close,
     // e.g. blur, clicking outside, or pressing the escape key.
     const overlayRef = React.useRef<HTMLDivElement>(null);
@@ -20,7 +23,7 @@ export const MenuPopover = React.forwardRef(
       {
         onClose: props.onClose,
         shouldCloseOnBlur: true,
-        isOpen: props.isOpen,
+        isOpen: isOpen,
         isDismissable: true,
       },
       overlayRef
