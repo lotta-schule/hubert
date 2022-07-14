@@ -1,0 +1,30 @@
+.root {
+  background-color: rgb(var(--lotta-box-background-color));
+  border-radius: var(--lotta-border-radius);
+  border: 1px solid rgb(var(--lotta-primary-color));
+  width: auto;
+  max-width: 80vw;
+  max-height: 50vh;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 40px;
+  padding: 0;
+  margin-top: calc(var(--lotta-spacing) / 2);
+  li {
+    padding: var(--lotta-spacing);
+    border-bottom: 1px solid rgb(var(--lotta-primary-color));
+    outline: none;
+    cursor: pointer;
+    &:last-of-type {
+      border-bottom: none;
+    }
+    &.isSelected {
+      background-color: rgba(var(--lotta-primary-color), 0.1);
+    }
+
+    .leftSection {
+      width: 2em;
+      flex: none;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

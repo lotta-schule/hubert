@@ -1,21 +1,24 @@
-import userEvent from '@testing-library/user-event';
-import { render } from '../test-utils';
+import { render, waitFor } from '../test-utils';
 import { Menu } from './Menu';
-import { MenuItem, MenuList } from './MenuList';
+import { Item } from './MenuItem';
+import userEvent from '@testing-library/user-event';
 
 describe('Menu', () => {
-  it('should render a Menu button', async () => {
+  it('should render a Menu', async () => {
+    const onAction = jest.fn();
     const screen = render(
-      <Menu buttonProps={{ label: 'Click' }}>
-        <MenuList>
-          <MenuItem>A</MenuItem>
-          <MenuItem>B</MenuItem>
-          <MenuItem>C</MenuItem>
-        </MenuList>
+      <Menu title={'Test Menu'} onAction={onAction}>
+        <Item key={'a'}>A</Item>
+        <Item key={'b'}>B</Item>
+        <Item key={'c'}>C</Item>
       </Menu>
     );
-    expect(screen.getByRole('button')).toHaveTextContent('Click');
-    userEvent.click(screen.getByRole('button'));
-    expect(await screen.findByRole('menu')).toBeVisible();
+    const listItems = screen.getAllByRole('menuitem');
+    expect(listItems).toHaveLength(3);
+    expect(listItems[0]).toHaveTextContent('A');
+    userEvent.click(listItems[2]);
+    await waitFor(() => {
+      expect(onAction).toHaveBeenCalledWith('c');
+    });
   });
 });

@@ -6,23 +6,21 @@ import styles from './List.module.scss';
 
 export type ListProps = React.HTMLProps<HTMLUListElement>;
 
-export const List: React.FC<ListProps> = ({
-  children,
-  className,
-  ...props
-}) => {
-  return (
-    <ul className={clsx(styles.root, className)} {...props}>
-      {children}
-    </ul>
-  );
-};
+export const List = React.forwardRef(
+  (
+    { children, className, ...props }: ListProps,
+    ref: React.Ref<HTMLUListElement>
+  ) => {
+    return (
+      <ul className={clsx(styles.root, className)} {...props} ref={ref}>
+        {children}
+      </ul>
+    );
+  }
+);
 List.displayName = 'List';
 
-export type ListItemProps = (
-  | React.HTMLProps<HTMLLIElement>
-  | React.HTMLProps<HTMLLinkElement>
-) & {
+export type ListItemProps = React.HTMLProps<HTMLLIElement> & {
   leftSection?: React.ReactNode;
   rightSection?: React.ReactNode;
   isDivider?: boolean;
@@ -30,17 +28,10 @@ export type ListItemProps = (
 
 export const ListItem = React.forwardRef(
   (
-    {
-      children,
-      className,
-      leftSection,
-      rightSection,
-      href,
-      ...props
-    }: ListItemProps,
-    ref: React.ForwardedRef<HTMLLinkElement | HTMLLIElement>
+    { children, className, leftSection, rightSection, ...props }: ListItemProps,
+    ref: React.ForwardedRef<HTMLLIElement>
   ) => {
-    if ('isDivider' in props && props.isDivider === true) {
+    if (props.isDivider === true) {
       // eslint-disable-next-line no-unused-vars
       const { isDivider, ...rest } = props as React.HTMLProps<HTMLLIElement> & {
         isDivider: boolean;
@@ -55,15 +46,15 @@ export const ListItem = React.forwardRef(
         </li>
       );
     }
-    const elementName = href ? 'a' : 'li';
-    return React.createElement(
-      elementName,
-      { className: clsx(styles.li, className), href, ref, ...props },
-      <>
-        {leftSection && <div>{leftSection}</div>}
-        <div className={styles.mainSection}>{children}</div>
-        {rightSection && <div>{rightSection}</div>}
-      </>
+
+    return (
+      <li className={clsx(styles.li, className)} ref={ref} {...props}>
+        <>
+          {leftSection && <div>{leftSection}</div>}
+          <div className={styles.mainSection}>{children}</div>
+          {rightSection && <div>{rightSection}</div>}
+        </>
+      </li>
     );
   }
 );

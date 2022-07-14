@@ -1,62 +1,74 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { Menu as HeadlessMenu } from '@headlessui/react';
-import { usePopper, PopperProps } from 'react-popper';
-import { Button, ButtonProps } from '../button/Button';
-import omit from 'lodash/omit';
+import { useTreeState } from '@react-stately/tree';
+import { CollectionChildren } from '@react-types/shared';
+import { useMenu } from '@react-aria/menu';
+import { mergeProps } from '@react-aria/utils';
+import { MenuItem } from './MenuItem';
+import { List, ListProps } from '../list';
+import clsx from 'clsx';
 
-export type MenuProps = {
-  buttonProps: ButtonProps;
-  placement?: PopperProps<unknown>['placement'];
-};
+import styles from './Menu.module.scss';
 
-export const Menu: React.FC<MenuProps> = ({
-  buttonProps,
-  placement = 'bottom-end',
-  children,
-}) => {
-  const isBrowser = typeof window !== 'undefined';
-  const element = React.useRef<HTMLDivElement | null>(null);
+export type WithDescription =
+  | {
+      /**
+       * Provide a short title describing the menu.
+       * This is a shothand for the `aria-label` attribute.
+       */
+      title: string;
+    }
+  | { 'aria-label': string }
+  | { 'aria-labelledby': string };
 
-  const [referenceButtonElement, setReferenceButtonElement] =
-    React.useState<HTMLDivElement | null>(null);
-  const [popperElement, setPopperElement] =
-    React.useState<HTMLDivElement | null>(null);
+export type MenuProps = ListProps &
+  WithDescription & {
+    children: CollectionChildren<object>;
+    onClose?: () => void;
+    onAction?: (_key: React.Key) => void;
+  };
 
-  const { styles, attributes } = usePopper(
-    referenceButtonElement,
-    popperElement,
-    { placement }
-  );
+export const Menu = React.forwardRef(
+  (
+    { className, title, onAction, onClose, ...props }: MenuProps,
+    forwardedRef: React.Ref<HTMLUListElement | null>
+  ) => {
+    const ref = React.useRef<HTMLUListElement>(null);
 
-  React.useEffect(() => () => element.current?.remove(), []);
+    React.useImperativeHandle(forwardedRef, () => ref.current);
 
-  if (isBrowser && element.current === null) {
-    element.current = document.createElement('div');
-    document.getElementById('dialogContainer')!.appendChild(element.current);
+    // Create menu state based on the incoming props
+    const state = useTreeState({
+      children: props.children,
+      selectionMode: 'none',
+    });
+
+    const { menuProps } = useMenu(
+      {
+        'aria-label': title,
+        ...props,
+      },
+      state,
+      ref
+    );
+
+    return (
+      <List
+        className={clsx(styles.root, className)}
+        {...mergeProps(menuProps, props)}
+        ref={ref}
+      >
+        {[...state.collection].map((item) => (
+          <MenuItem
+            key={item.key}
+            item={item as any}
+            state={state}
+            onAction={onAction}
+            onClose={onClose}
+          />
+        ))}
+        {props.children}
+      </List>
+    );
   }
-  return (
-    <div style={{ position: 'relative' }}>
-      <HeadlessMenu>
-        <div
-          ref={setReferenceButtonElement}
-          style={{ display: 'inline-block' }}
-        >
-          <HeadlessMenu.Button as={Button as any} {...buttonProps} />
-        </div>
-        {element.current &&
-          ReactDOM.createPortal(
-            <HeadlessMenu.Items
-              ref={setPopperElement}
-              style={{ zIndex: 10000, ...styles.popper }}
-              {...omit(attributes.popper, 'role')}
-            >
-              {children}
-            </HeadlessMenu.Items>,
-            element.current
-          )}
-      </HeadlessMenu>
-    </div>
-  );
-};
+);
 Menu.displayName = 'Menu';

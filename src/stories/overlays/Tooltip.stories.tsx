@@ -4,7 +4,7 @@ import { Tooltip } from '../../util';
 import { Button } from '../../button';
 
 export default {
-  title: 'util/Tooltip',
+  title: 'overlays/Tooltip',
   component: Tooltip,
 } as Meta;
 
