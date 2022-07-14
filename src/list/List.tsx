@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import styles from './List.module.scss';
 
-export type ListProps = React.HTMLProps<HTMLUListElement>;
+export type ListProps = Omit<React.HTMLProps<HTMLUListElement>, 'ref'>;
 
 export const List = React.forwardRef(
   (

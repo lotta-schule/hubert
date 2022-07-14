@@ -14,7 +14,7 @@ export type MenuButtonProps = {
   type?: 'menu' | 'listbox';
   align?: MenuTriggerProps['align'];
   direction?: MenuTriggerProps['direction'];
-  onOpenChange?: (isOpen: boolean) => void;
+  onOpenChange?: (_isOpen: boolean) => void;
 } & WithDescription;
 
 export const MenuButton = React.forwardRef(

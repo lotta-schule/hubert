@@ -10,15 +10,10 @@ import clsx from 'clsx';
 
 import styles from './Menu.module.scss';
 
-export type ItemProps = {
-  leftSection?: React.ReactNode;
-  label?: string;
-};
-
 export const Item = AriaItem;
 
 export interface MenuItemProps {
-  item: Node<ItemProps>;
+  item: Node<object>;
   state: TreeState<object>;
   isDisabled?: boolean;
   isDivider?: boolean;
