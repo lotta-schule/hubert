@@ -1,4 +1,6 @@
 .root {
+  display: fixed;
+  z-index: 50000;
   background-color: rgb(var(--lotta-box-background-color));
   border-radius: var(--lotta-border-radius);
   border: 1px solid rgb(var(--lotta-primary-color));
