@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { DismissButton, useOverlay } from '@react-aria/overlays';
 import { FocusScope } from '@react-aria/focus';
+import { AnimatePresence, motion } from 'framer-motion';
 import { CollectionChildren } from '@react-types/shared';
 import { Menu, MenuProps } from './Menu';
 
@@ -34,15 +35,25 @@ export const MenuPopover = React.forwardRef(
     // <DismissButton> components at the start and end of the list
     // to allow screen reader users to dismiss the popup easily.
     return (
-      <FocusScope restoreFocus>
-        <div {...overlayProps} ref={overlayRef}>
-          <DismissButton onDismiss={props.onClose} />
-          <Menu {...props} ref={forwardedRef}>
-            {props.children}
-          </Menu>
-          <DismissButton onDismiss={props.onClose} />
-        </div>
-      </FocusScope>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0, y: -20 }}
+            animate={{ opacity: 1, height: 'auto', y: 0 }}
+            exit={{ opacity: 0, height: 0 }}
+            {...(overlayProps as any)}
+            ref={overlayRef}
+          >
+            <FocusScope restoreFocus>
+              <DismissButton onDismiss={props.onClose} />
+              <Menu {...props} ref={forwardedRef}>
+                {props.children}
+              </Menu>
+              <DismissButton onDismiss={props.onClose} />
+            </FocusScope>
+          </motion.div>
+        )}
+      </AnimatePresence>
     );
   }
 );
