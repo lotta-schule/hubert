@@ -30,17 +30,17 @@ export const MenuPopover = React.forwardRef(
       overlayRef
     );
 
-    // Wrap in <FocusScope> so that focus is restored back to the
-    // trigger when the menu is closed. In addition, add hidden
-    // <DismissButton> components at the start and end of the list
-    // to allow screen reader users to dismiss the popup easily.
+    const styles: React.CSSProperties = {
+      position: 'fixed',
+    };
+
     return (
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0, y: -20 }}
-            animate={{ opacity: 1, height: 'auto', y: 0 }}
-            exit={{ opacity: 0, height: 0 }}
+            initial={{ opacity: 0, height: 0, y: -20, ...styles }}
+            animate={{ opacity: 1, height: 'auto', y: 0, ...styles }}
+            exit={{ opacity: 0, height: 0, ...styles }}
             {...(overlayProps as any)}
             ref={overlayRef}
           >

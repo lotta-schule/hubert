@@ -3,10 +3,12 @@ import { useMenuTriggerState } from '@react-stately/menu';
 import { CollectionChildren } from '@react-types/shared';
 import { MenuTriggerProps } from '@react-types/menu';
 import { Button, ButtonProps } from '../button/Button';
-import { MenuPopover } from './MenuPopover';
 import { useButton } from '@react-aria/button';
 import { useMenuTrigger } from '@react-aria/menu';
 import { WithDescription } from './Menu';
+import { MenuPopover } from './MenuPopover';
+
+import styles from './MenuButton.module.scss';
 
 export type MenuButtonProps = {
   buttonProps: Omit<ButtonProps, 'ref'>;
@@ -65,7 +67,7 @@ export const MenuButton = React.forwardRef(
     }
 
     return (
-      <div style={{ position: 'relative', display: 'inline-block' }}>
+      <div className={styles.root}>
         <Button ref={ref} {...buttonProps} {...ariaButtonProps} />
         <MenuPopover
           isOpen={state.isOpen}
