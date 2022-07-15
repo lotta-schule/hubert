@@ -6,7 +6,7 @@ exports[`util/Tooltip should render 1`] = `
     class="root"
   >
     <button
-      aria-selected="false"
+      aria-current="false"
       class="lotta-base-button variant__default lotta-button"
       role="button"
       type="button"

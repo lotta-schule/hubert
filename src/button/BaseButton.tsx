@@ -50,6 +50,10 @@ export const BaseButton = React.forwardRef<any, BaseButtonProps>(
     ref
   ) => {
     const ComponentClass = props.href ? 'a' : ('button' as any);
+    const selectedAriaAttribute =
+      props.role && ['gridcell', 'option', 'row', 'tab'].includes(props.role)
+        ? 'aria-selected'
+        : 'aria-current';
     return React.createElement(
       ComponentClass,
       {
@@ -57,7 +61,7 @@ export const BaseButton = React.forwardRef<any, BaseButtonProps>(
         type: props.type ?? 'button',
         role: 'button',
         style,
-        ['aria-selected']: selected,
+        [selectedAriaAttribute]: selected,
         className: clsx(
           'lotta-base-button',
           `variant__${variant}`,
