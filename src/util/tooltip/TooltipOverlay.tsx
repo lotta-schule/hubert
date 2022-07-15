@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useTooltip } from '@react-aria/tooltip';
 import { TooltipTriggerState } from '@react-stately/tooltip';
 import { mergeProps } from '@react-aria/utils';
+import { AnimatePresence, motion } from 'framer-motion';
 import clsx from 'clsx';
 
 import styles from './Tooltip.module.scss';
@@ -19,15 +20,22 @@ export const TooltipOverlay = React.memo(
       ref: React.ForwardedRef<HTMLDivElement>
     ) => {
       const { tooltipProps } = useTooltip(props, state);
-      return state.isOpen ? (
-        <div
-          className={clsx(className, styles.tooltip)}
-          ref={ref}
-          {...mergeProps(props, tooltipProps)}
-        >
-          {label}
-        </div>
-      ) : null;
+      return (
+        <AnimatePresence>
+          {state.isOpen && (
+            <motion.div
+              className={clsx(className, styles.tooltip)}
+              initial={{ opacity: 0, y: '-100%' }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              ref={ref}
+              {...(mergeProps(props, tooltipProps) as any)}
+            >
+              {label}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      );
     }
   )
 );
