@@ -9,7 +9,6 @@ import { WithDescription } from './Menu';
 import { MenuPopover } from './MenuPopover';
 
 import styles from './MenuButton.module.scss';
-import { useOverlayPosition } from '@react-aria/overlays';
 
 export type MenuButtonProps = {
   buttonProps: Omit<ButtonProps, 'ref'>;
