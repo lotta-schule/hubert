@@ -4,17 +4,20 @@ import { CollectionChildren } from '@react-types/shared';
 import { Button, ButtonProps } from '../button/Button';
 import { useButton } from '@react-aria/button';
 import { useMenuTrigger } from '@react-aria/menu';
-import { Placement } from '@react-types/overlays';
 import { WithDescription } from './Menu';
+import { MenuPopoverProps } from './MenuPopover';
 import { MenuPopover } from './MenuPopover';
+import clsx from 'clsx';
 
 import styles from './MenuButton.module.scss';
 
 export type MenuButtonProps = {
   buttonProps: Omit<ButtonProps, 'ref'>;
+  className?: string;
+  style?: React.CSSProperties;
   children: CollectionChildren<object>;
   type?: 'menu' | 'listbox';
-  placement?: Placement;
+  placement?: MenuPopoverProps['placement'];
   onOpenChange?: (_isOpen: boolean) => void;
   onAction?: (_action: React.Key) => void;
 } & WithDescription;
@@ -24,8 +27,9 @@ export const MenuButton = React.forwardRef(
     {
       buttonProps,
       type,
-      placement = 'bottom',
       onOpenChange,
+      className,
+      style,
       ...props
     }: MenuButtonProps,
     forwardedRef: React.Ref<HTMLButtonElement | null>
@@ -64,12 +68,11 @@ export const MenuButton = React.forwardRef(
     }
 
     return (
-      <div className={styles.root}>
+      <div className={clsx(styles.root, className)} style={style}>
         <Button ref={ref} {...buttonProps} {...ariaButtonProps} />
         <MenuPopover
           isOpen={state.isOpen}
           triggerRef={ref}
-          placement={placement}
           {...(props as any)}
           {...menuProps}
           onClose={state.close}
