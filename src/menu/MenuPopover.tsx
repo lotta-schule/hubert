@@ -21,7 +21,6 @@ export const MenuPopover = React.forwardRef(
     { isOpen, triggerRef, placement = 'auto', ...props }: MenuPopoverProps,
     forwardedRef: React.Ref<HTMLUListElement>
   ) => {
-    console.log({ placement });
     const overlayRef = React.useRef<HTMLDivElement>(null);
     const { overlayProps } = useOverlay(
       {

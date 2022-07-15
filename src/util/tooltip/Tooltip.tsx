@@ -36,7 +36,9 @@ export const Tooltip = React.forwardRef(
 
     return (
       <div className={styles.root}>
-        {React.cloneElement(children, { ref, ...triggerProps })}
+        <div className={styles.trigger} ref={ref} {...triggerProps}>
+          {children}
+        </div>
         <TooltipOverlay
           className={className}
           state={state}

@@ -12,13 +12,13 @@ const Template: Story = (args: any) => <Tooltip {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  children: <Button label={'Hover me'} />,
+  children: <Button onClick={() => alert('click')} label={'Hover me'} />,
   label: 'Simple Tooltip',
 };
 
 export const Image = Template.bind({});
 Image.args = {
-  children: <Button label={'Hover me'} />,
+  children: <Button onClick={() => alert('click')} label={'Hover me'} />,
   label: (
     <img
       src="https://picsum.photos/600/400"
