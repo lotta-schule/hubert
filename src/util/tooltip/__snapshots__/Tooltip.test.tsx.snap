@@ -5,18 +5,22 @@ exports[`util/Tooltip should render 1`] = `
   <div
     class="root"
   >
-    <button
-      aria-current="false"
-      class="lotta-base-button variant__default lotta-button"
-      role="button"
-      type="button"
+    <div
+      class="trigger"
     >
-      <span
-        class="lotta-button_text"
+      <button
+        aria-current="false"
+        class="lotta-base-button variant__default lotta-button"
+        role="button"
+        type="button"
       >
-        Test
-      </span>
-    </button>
+        <span
+          class="lotta-button_text"
+        >
+          Test
+        </span>
+      </button>
+    </div>
   </div>
 </div>
 `;
