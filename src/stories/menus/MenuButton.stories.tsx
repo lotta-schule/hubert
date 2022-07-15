@@ -13,18 +13,28 @@ export default {
 } as Meta;
 
 const Template: Story = (args: any) => (
-  <MenuButton {...args}>
-    <Item key={'Menuitem 1'}>
-      <Home /> MenuItem 1
-    </Item>
-    <Item key={'Menuitem 2'}>
-      <AccessAlarm />
-      MenuItem 1
-    </Item>
-    <Item key={'Menuitem 3'}>MenuItem 3</Item>
-    <Item key={'Menuitem 4'}>MenuItem 4</Item>
-    <Item key={'Menuitem 5'}>MenuItem 5</Item>
-  </MenuButton>
+  <div
+    style={{
+      width: '100vw',
+      height: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
+  >
+    <MenuButton {...args}>
+      <Item key={'Menuitem 1'}>
+        <Home /> MenuItem 1
+      </Item>
+      <Item key={'Menuitem 2'}>
+        <AccessAlarm />
+        MenuItem 1
+      </Item>
+      <Item key={'Menuitem 3'}>MenuItem 3</Item>
+      <Item key={'Menuitem 4'}>MenuItem 4</Item>
+      <Item key={'Menuitem 5'}>MenuItem 5</Item>
+    </MenuButton>
+  </div>
 );
 
 export const Default = Template.bind({});

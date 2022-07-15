@@ -9,6 +9,7 @@ import { WithDescription } from './Menu';
 import { MenuPopover } from './MenuPopover';
 
 import styles from './MenuButton.module.scss';
+import { useOverlayPosition } from '@react-aria/overlays';
 
 export type MenuButtonProps = {
   buttonProps: Omit<ButtonProps, 'ref'>;
@@ -17,6 +18,7 @@ export type MenuButtonProps = {
   align?: MenuTriggerProps['align'];
   direction?: MenuTriggerProps['direction'];
   onOpenChange?: (_isOpen: boolean) => void;
+  onAction?: (_action: React.Key) => void;
 } & WithDescription;
 
 export const MenuButton = React.forwardRef(
@@ -71,6 +73,8 @@ export const MenuButton = React.forwardRef(
         <Button ref={ref} {...buttonProps} {...ariaButtonProps} />
         <MenuPopover
           isOpen={state.isOpen}
+          triggerRef={ref}
+          placement={`${direction} ${align}`}
           {...(props as any)}
           {...menuProps}
           onClose={state.close}
