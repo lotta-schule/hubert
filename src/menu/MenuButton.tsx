@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useMenuTriggerState } from '@react-stately/menu';
 import { CollectionChildren } from '@react-types/shared';
-import { MenuTriggerProps } from '@react-types/menu';
 import { Button, ButtonProps } from '../button/Button';
 import { useButton } from '@react-aria/button';
 import { useMenuTrigger } from '@react-aria/menu';
+import { Placement } from '@react-types/overlays';
 import { WithDescription } from './Menu';
 import { MenuPopover } from './MenuPopover';
 
@@ -14,8 +14,7 @@ export type MenuButtonProps = {
   buttonProps: Omit<ButtonProps, 'ref'>;
   children: CollectionChildren<object>;
   type?: 'menu' | 'listbox';
-  align?: MenuTriggerProps['align'];
-  direction?: MenuTriggerProps['direction'];
+  placement?: Placement;
   onOpenChange?: (_isOpen: boolean) => void;
   onAction?: (_action: React.Key) => void;
 } & WithDescription;
@@ -25,8 +24,7 @@ export const MenuButton = React.forwardRef(
     {
       buttonProps,
       type,
-      direction = 'bottom',
-      align = 'start',
+      placement = 'bottom',
       onOpenChange,
       ...props
     }: MenuButtonProps,
@@ -41,8 +39,6 @@ export const MenuButton = React.forwardRef(
     const state = useMenuTriggerState({
       closeOnSelect: true,
       onOpenChange,
-      direction,
-      align,
     });
     let { menuTriggerProps, menuProps } = useMenuTrigger(
       { type, isDisabled: buttonProps.disabled },
@@ -73,7 +69,7 @@ export const MenuButton = React.forwardRef(
         <MenuPopover
           isOpen={state.isOpen}
           triggerRef={ref}
-          placement={`${direction} ${align}`}
+          placement={placement}
           {...(props as any)}
           {...menuProps}
           onClose={state.close}

@@ -36,7 +36,6 @@ export const Menu = React.forwardRef(
 
     React.useImperativeHandle(forwardedRef, () => ref.current);
 
-    // Create menu state based on the incoming props
     const state = useTreeState({
       children: props.children,
       selectionMode: 'none',
