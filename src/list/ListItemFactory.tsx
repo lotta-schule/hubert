@@ -60,7 +60,7 @@ export const ListItemPreliminary = {
         {...otherProps}
         leftSection={leftSection}
         rightSection={rightSection}
-        isSelected={item.value.selected ?? otherProps.selected}
+        isSelected={item.value?.selected ?? otherProps.selected}
       >
         <div>{content}</div>
         {description && <span>{description}</span>}

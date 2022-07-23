@@ -4,11 +4,14 @@ import { ListState } from '@react-stately/list';
 import { useOption } from '@react-aria/listbox';
 import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
-import { ListItemPreliminary } from '../list/ListItemFactory';
+import {
+  ListItemPreliminary,
+  ListItemPreliminaryItem,
+} from '../list/ListItemFactory';
 
 export type ListBoxOptionProps = {
-  item: Node<object>;
-  state: ListState<object>;
+  item: Node<ListItemPreliminaryItem>;
+  state: ListState<ListItemPreliminaryItem>;
 };
 
 export const ListBoxOption = React.memo(

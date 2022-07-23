@@ -1,12 +1,7 @@
 import * as React from 'react';
 import { ComponentMeta, Story } from '@storybook/react';
 import { ComboBox, ComboBoxProps } from '../../form/comboBox';
-import {
-  AccessAlarm,
-  Home,
-  AccountBalance,
-  CropSquareSharp,
-} from '@material-ui/icons';
+import { AccessAlarm, Home, AccountBalance } from '@material-ui/icons';
 
 export default {
   title: 'form/ComboBox',

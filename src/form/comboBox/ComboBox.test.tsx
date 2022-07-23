@@ -38,7 +38,9 @@ describe('Combobox', () => {
         expect(screen.getByRole('listbox')).toBeVisible();
       });
       await waitFor(() => {
-        expect(screen.getAllByRole('option')).toHaveLength(1);
+        expect(
+          screen.getAllByRole('option').filter((li) => li.dataset.isFocused)
+        ).toHaveLength(1);
       });
       expect(screen.getByRole('option', { name: /doorbell/i })).toBeVisible();
     });

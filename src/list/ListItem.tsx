@@ -47,6 +47,7 @@ export const ListItem = React.forwardRef(
           [styles.isFocused]: isFocused,
           [styles.isSelected]: isSelected,
         })}
+        {...(isFocused ? { ['data-is-focused']: true } : {})}
         ref={ref}
         {...props}
       >
