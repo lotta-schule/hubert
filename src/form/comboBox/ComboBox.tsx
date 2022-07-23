@@ -17,7 +17,7 @@ import clsx from 'clsx';
 
 import styles from './ComboBox.module.scss';
 
-export interface ComboBoxProps {
+export type ComboBoxProps = {
   className?: string;
   style?: React.CSSProperties;
   disabled?: boolean;
@@ -25,14 +25,13 @@ export interface ComboBoxProps {
   placeholder?: string;
   hideLabel?: boolean;
   title: string;
-  value?: React.Key;
   items?:
     | ListItemPreliminaryItem[]
     | ((_value: string) => Promise<ListItemPreliminaryItem[]>);
   autoFocus?: boolean;
   allowsCustomValue?: boolean;
   onSelect?: (_value: React.Key | string) => void;
-}
+};
 
 export const ComboBox = React.memo(
   ({

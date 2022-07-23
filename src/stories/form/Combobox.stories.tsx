@@ -37,7 +37,7 @@ WithPredefinedItems.args = {
       key: 'alarm',
       leftSection: <AccessAlarm />,
       label: 'Alarm with right X',
-      rightSection: <CropSquareSharp />,
+      selected: true,
     },
     {
       key: 'account',
