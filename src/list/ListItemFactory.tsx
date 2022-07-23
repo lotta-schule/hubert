@@ -25,7 +25,7 @@ export const ListItemPreliminary = {
 
   createListItem: (
     item: Node<object>,
-    otherProps: ListItemProps & { ref?: React.Ref<HTMLLIElement> }
+    otherProps: ListItemProps & { ref?: React.Ref<HTMLLIElement> } = {}
   ) => {
     if (!Array.isArray(item.rendered)) {
       throw new Error('<Item /> must have more than one child');

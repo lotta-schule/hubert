@@ -5,7 +5,6 @@ import { useOption } from '@react-aria/listbox';
 import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
 import { ListItemPreliminary } from '../list/ListItemFactory';
-import { ListItem } from '../list';
 
 export type ListBoxOptionProps = {
   item: Node<object>;

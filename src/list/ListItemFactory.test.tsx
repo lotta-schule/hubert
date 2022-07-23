@@ -1,4 +1,6 @@
+import * as React from 'react';
 import { Menu, Book } from '@material-ui/icons';
+import { ItemProps } from '@react-types/shared';
 import { Item } from '../menu';
 import { render } from '../test-utils';
 import {
@@ -22,10 +24,14 @@ describe('list/ListItemFactory', () => {
       expect(item.key).toEqual('test');
       expect(item.type).toBe(Item);
       expect(item.props['aria-label']).toEqual('Test');
-      expect(item.props.textValue).toEqual('Test');
+      expect(
+        (item.props as ItemProps<ListItemPreliminaryItem>).textValue
+      ).toEqual('Test');
       expect(item.props.children).toHaveLength(4);
       expect(
-        item.props.children.find((child: React.ReactNode) => child === 'Test')
+        React.Children.toArray(item.props.children!).find(
+          (child: React.ReactNode) => child === 'Test'
+        )
       ).toBeTruthy();
     });
 

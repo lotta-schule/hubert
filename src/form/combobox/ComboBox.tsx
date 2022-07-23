@@ -14,7 +14,7 @@ import { Popover } from '../../popover/new/Popover';
 import { CircularProgress } from '../../progress';
 import clsx from 'clsx';
 
-import styles from './Combobox.module.scss';
+import styles from './ComboBox.module.scss';
 
 export interface ComboBoxProps {
   className?: string;
@@ -53,7 +53,7 @@ export const ComboBox = React.memo(
       autoFocus,
       label,
       onSelectionChange,
-      onInputChange: useDebounce(async (value: string) => {
+      onInputChange: async (value: string) => {
         if (value && typeof value === 'string') {
           if (typeof items === 'function') {
             try {
@@ -74,7 +74,7 @@ export const ComboBox = React.memo(
         } else {
           setFilteredItems(Array.isArray(items) ? items : []);
         }
-      }, 1000),
+      },
     });
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const inputRef = React.useRef<HTMLInputElement>(null);

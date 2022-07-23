@@ -1,6 +1,6 @@
 import userEvent from '@testing-library/user-event';
 import { render, waitFor } from '../../test-utils';
-import { ComboBox } from './Combobox';
+import { ComboBox } from './ComboBox';
 
 describe('Combobox', () => {
   it('should render an input and a button', () => {

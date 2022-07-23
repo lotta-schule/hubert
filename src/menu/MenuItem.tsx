@@ -6,7 +6,6 @@ import { Node } from '@react-types/shared';
 import { mergeProps } from '@react-aria/utils';
 import { TreeState } from '@react-stately/tree';
 import { ListItem } from '../list';
-import clsx from 'clsx';
 
 import styles from './Menu.module.scss';
 
