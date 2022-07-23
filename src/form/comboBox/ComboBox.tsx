@@ -47,7 +47,7 @@ export const ComboBox = React.memo(
     allowsCustomValue,
     onSelect,
   }: ComboBoxProps) => {
-    const [filteredItems, setFilteredItems] = React.useState(
+    const [allItemList, setAllitemsList] = React.useState(
       Array.isArray(items) ? items : []
     );
     const [isLoading, setIsLoading] = React.useState(false);
@@ -59,7 +59,7 @@ export const ComboBox = React.memo(
             try {
               setIsLoading(true);
               const newItems = await items(value);
-              setFilteredItems(newItems);
+              setAllitemsList(newItems);
               if (newItems.length) {
                 state.setOpen(true);
               }
@@ -67,16 +67,23 @@ export const ComboBox = React.memo(
               setIsLoading(false);
             }
           } else {
-            setFilteredItems(
-              items?.filter((item) =>
+            const foundItem = items?.find(
+              (item) =>
+                item.key
+                  .toString()
+                  .toLocaleLowerCase()
+                  .includes(value.toLocaleLowerCase()) ||
                 item.label
                   .toLocaleLowerCase()
                   .includes(value.toLocaleLowerCase())
-              ) ?? []
             );
+
+            if (foundItem) {
+              state.selectionManager.setFocusedKey(foundItem.key);
+            }
           }
         } else {
-          setFilteredItems(Array.isArray(items) ? items : []);
+          setAllitemsList(Array.isArray(items) ? items : []);
         }
       },
       [items]
@@ -90,7 +97,7 @@ export const ComboBox = React.memo(
     const state = useComboBoxState({
       children: ListItemPreliminary.createItem,
       isDisabled: disabled,
-      items: filteredItems,
+      items: allItemList,
       autoFocus,
       label,
       onSelectionChange: (value) => {
@@ -122,7 +129,7 @@ export const ComboBox = React.memo(
         popoverRef,
         isDisabled: disabled,
         label,
-        items: filteredItems,
+        items: allItemList,
         allowsCustomValue,
         placeholder: placeholder ?? title,
         onKeyUp: (event) => {
