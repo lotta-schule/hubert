@@ -1,6 +1,13 @@
-import userEvent from '@testing-library/user-event';
 import { render, waitFor } from '../../test-utils';
 import { ComboBox } from './ComboBox';
+import userEvent from '@testing-library/user-event';
+
+const defaultItems = [
+  { key: 'Apple', label: 'Apple' },
+  { key: 'Bread', label: 'Bread' },
+  { key: 'Car', label: 'Car' },
+  { key: 'Doorbell', label: 'Doorbell' },
+];
 
 describe('Combobox', () => {
   it('should render an input and a button', () => {
@@ -12,15 +19,7 @@ describe('Combobox', () => {
   describe('with predefined items', () => {
     it('should show all options when clicking on the button', async () => {
       const screen = render(
-        <ComboBox
-          title={'Chose something'}
-          items={[
-            { key: 'A', label: 'A' },
-            { key: 'B', label: 'B' },
-            { key: 'C', label: 'C' },
-            { key: 'D', label: 'D' },
-          ]}
-        />
+        <ComboBox title={'Chose something'} items={defaultItems} />
       );
       expect(screen.getByRole('combobox')).toBeVisible();
       userEvent.click(screen.getByRole('button'));
@@ -32,15 +31,7 @@ describe('Combobox', () => {
 
     it('should filter items when text is entered', async () => {
       const screen = render(
-        <ComboBox
-          title={'Chose something'}
-          items={[
-            { key: 'Apple', label: 'Apple' },
-            { key: 'Bread', label: 'Bread' },
-            { key: 'Car', label: 'Car' },
-            { key: 'Doorbell', label: 'Doorbell' },
-          ]}
-        />
+        <ComboBox title={'Chose something'} items={defaultItems} />
       );
       userEvent.type(screen.getByRole('combobox'), 'Do');
       await waitFor(() => {
@@ -54,6 +45,12 @@ describe('Combobox', () => {
   });
 
   describe('With fetched items', () => {
+    const onItems = jest.fn(async () => defaultItems);
+
+    afterEach(() => {
+      onItems.mockClear();
+    });
+
     it('should hide button when items is a function', () => {
       const onItems = jest.fn(async () => [{ key: 'A', label: 'A' }]);
 
@@ -64,14 +61,6 @@ describe('Combobox', () => {
       expect(screen.queryByRole('button')).toBeNull();
     });
     it('should show all options when clicking on the button', async () => {
-      const onItems = jest.fn(async () => {
-        return [
-          { key: 'A', label: 'A' },
-          { key: 'B', label: 'B' },
-          { key: 'C', label: 'C' },
-          { key: 'D', label: 'D' },
-        ];
-      });
       const screen = render(
         <ComboBox title={'Chose something'} items={onItems} />
       );
@@ -79,14 +68,41 @@ describe('Combobox', () => {
       await waitFor(() => {
         expect(onItems).toHaveBeenCalledWith('D');
       });
-      /* TODO:
       await waitFor(() => {
         expect(screen.getByRole('listbox')).toBeVisible();
       });
       await waitFor(() => {
         expect(screen.getAllByRole('option')).toHaveLength(4);
       });
-         */
     });
+  });
+
+  it('should be possible to add a custom value', () => {
+    const onSelect = jest.fn();
+    const screen = render(
+      <ComboBox
+        title={'Chose something'}
+        allowsCustomValue
+        onSelect={onSelect}
+      />
+    );
+    userEvent.type(screen.getByRole('combobox'), 'Papaya{Enter}');
+    expect(onSelect).toHaveBeenCalledWith('Papaya');
+  });
+
+  it('should render as disabled when disabled is set', () => {
+    const screen = render(<ComboBox title={'Chose something'} disabled />);
+    expect(screen.getByRole('combobox')).toBeDisabled();
+    expect(screen.getByRole('button')).toBeDisabled();
+  });
+
+  it('should set placeholder', () => {
+    const screen = render(
+      <ComboBox title={'Chose something'} placeholder={'Nothing chosen'} />
+    );
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'placeholder',
+      'Nothing chosen'
+    );
   });
 });

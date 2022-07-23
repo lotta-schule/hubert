@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { ComponentMeta, Story } from '@storybook/react';
-import { ComboBox, ComboBoxProps } from '../../form/combobox';
-import { Item } from '../../menu';
+import { ComboBox, ComboBoxProps } from '../../form/comboBox';
 import {
   AccessAlarm,
   Home,
@@ -12,9 +11,7 @@ import {
 export default {
   title: 'form/ComboBox',
   component: ComboBox,
-  subcomponents: {
-    Item,
-  },
+  subcomponents: {},
 } as ComponentMeta<typeof ComboBox>;
 
 const Template: Story<ComboBoxProps> = (args) => (

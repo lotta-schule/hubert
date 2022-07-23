@@ -28,7 +28,8 @@ export interface ComboBoxProps {
     | ListItemPreliminaryItem[]
     | ((_value: string) => Promise<ListItemPreliminaryItem[]>);
   autoFocus?: boolean;
-  onSelectionChange?: (_value: React.Key) => void;
+  allowsCustomValue?: boolean;
+  onSelect?: (_value: React.Key | string) => void;
 }
 
 export const ComboBox = React.memo(
@@ -37,9 +38,11 @@ export const ComboBox = React.memo(
     style,
     disabled,
     autoFocus,
+    placeholder,
     items,
     title,
-    onSelectionChange,
+    allowsCustomValue,
+    onSelect,
   }: ComboBoxProps) => {
     const [filteredItems, setFilteredItems] = React.useState(
       Array.isArray(items) ? items : []
@@ -52,7 +55,11 @@ export const ComboBox = React.memo(
           if (typeof items === 'function') {
             try {
               setIsLoading(true);
-              setFilteredItems(await items(value));
+              const newItems = await items(value);
+              setFilteredItems(newItems);
+              if (newItems.length) {
+                state.setOpen(true);
+              }
             } finally {
               setIsLoading(false);
             }
@@ -83,8 +90,9 @@ export const ComboBox = React.memo(
       items: filteredItems,
       autoFocus,
       label,
-      onSelectionChange,
+      onSelectionChange: onSelect,
       onInputChange: debouncedOnInputChange,
+      allowsCustomValue,
     });
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const inputRef = React.useRef<HTMLInputElement>(null);
@@ -104,8 +112,21 @@ export const ComboBox = React.memo(
         buttonRef,
         listBoxRef,
         popoverRef,
+        isDisabled: disabled,
         label,
         items: filteredItems,
+        allowsCustomValue,
+        placeholder,
+        onKeyUp: (event) => {
+          if (event.code === 'Enter' && allowsCustomValue) {
+            if (
+              !state.selectedKey &&
+              !state.collection.getItem(state.inputValue)
+            ) {
+              onSelect?.(state.inputValue);
+            }
+          }
+        },
       },
       state
     );
