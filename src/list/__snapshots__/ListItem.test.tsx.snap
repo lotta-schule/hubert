@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`list/ListItem should render a list item 1`] = `
+<div>
+  <div
+    data-overlay-container="true"
+  >
+    <li
+      class="li"
+    >
+      <div
+        class="mainSection"
+      >
+        Item
+      </div>
+    </li>
+  </div>
+</div>
+`;

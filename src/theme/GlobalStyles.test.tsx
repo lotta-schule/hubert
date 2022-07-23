@@ -18,7 +18,7 @@ describe('ThemeStylesheetManager', () => {
     // in format #rgba(r, g, b, a)
     expect(
       document.documentElement.style.getPropertyValue('--lotta-disabled-color')
-    ).toEqual('0, 0, 0');
+    ).toEqual('97, 97, 97');
     // a spacing measurement
     expect(
       document.documentElement.style.getPropertyValue('--lotta-spacing')

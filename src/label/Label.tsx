@@ -4,11 +4,14 @@ import clsx from 'clsx';
 import styles from './label.module.scss';
 
 export type LabelProps = {
-  label: string;
+  label: React.ReactNode;
 } & React.HTMLProps<HTMLLabelElement>;
 
-export const Label = React.forwardRef<any, LabelProps>(
-  ({ children, className, label, ...props }, ref) => (
+export const Label = React.forwardRef(
+  (
+    { children, className, label, ...props }: LabelProps,
+    ref: React.Ref<HTMLLabelElement>
+  ) => (
     <label {...props} ref={ref} className={clsx(className, styles.root)}>
       <span className={styles.label}>{label}</span>
       {children}

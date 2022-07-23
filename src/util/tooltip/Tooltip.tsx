@@ -21,7 +21,7 @@ export const Tooltip = React.forwardRef(
     { children, className, label, delay = 750, ...props }: TooltipProps,
     forwardedRef: React.Ref<HTMLDivElement | null>
   ) => {
-    const ref = React.useRef<HTMLDivElement | null>(null);
+    const ref = React.useRef<HTMLDivElement>(null);
     React.useImperativeHandle(forwardedRef, () => ref.current);
 
     const isDisabled = ref.current?.getAttribute('disabled') !== null;

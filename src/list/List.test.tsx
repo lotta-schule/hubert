@@ -1,7 +1,8 @@
 import { render } from '../test-utils';
 import { Avatar } from '../avatar/Avatar';
 import { Button } from '../button/Button';
-import { List, ListItem } from './List';
+import { List } from './List';
+import { ListItem } from './ListItem';
 
 describe('List', () => {
   it('should render', () => {

@@ -27,7 +27,7 @@ export const Popover = ({
   const { styles: popperStyles, attributes: popperAttributes } = usePopper(
     triggerRef.current,
     overlayRef.current,
-    { placement: 'auto', strategy: 'absolute' }
+    { placement: 'auto', strategy: 'fixed' }
   );
 
   const { triggerProps, overlayProps } = useOverlayTrigger(

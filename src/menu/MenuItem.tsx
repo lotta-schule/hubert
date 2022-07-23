@@ -66,7 +66,7 @@ export const MenuItem = React.forwardRef(
       <ListItem
         {...mergeProps(menuItemProps, focusProps)}
         ref={ref}
-        className={clsx({ [styles.isSelected]: isFocused })}
+        isSelected={isFocused}
         leftSection={<div className={styles.leftSection}>{leftSection}</div>}
       >
         {content}

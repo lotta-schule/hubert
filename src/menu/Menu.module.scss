@@ -3,8 +3,8 @@
   border-radius: var(--lotta-border-radius);
   border: 1px solid rgb(var(--lotta-primary-color));
   width: 20em;
-  max-width: 80vw;
-  max-height: 50vh;
+  max-height: 300px;
+  overflow: auto;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 40px;
   padding: 0;
   margin-top: calc(var(--lotta-spacing) / 2);
@@ -15,9 +15,6 @@
     cursor: pointer;
     &:last-of-type {
       border-bottom: none;
-    }
-    &.isSelected {
-      background-color: rgba(var(--lotta-primary-color), 0.1);
     }
 
     .leftSection {

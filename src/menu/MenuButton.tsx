@@ -4,9 +4,9 @@ import { CollectionChildren } from '@react-types/shared';
 import { Button, ButtonProps } from '../button/Button';
 import { useButton } from '@react-aria/button';
 import { useMenuTrigger } from '@react-aria/menu';
-import { WithDescription } from './Menu';
-import { MenuPopoverProps } from './MenuPopover';
-import { MenuPopover } from './MenuPopover';
+import { mergeProps } from '@react-aria/utils';
+import { Popover, PopoverProps } from '../popover/new/Popover';
+import { Menu, WithDescription } from './Menu';
 import clsx from 'clsx';
 
 import styles from './MenuButton.module.scss';
@@ -16,8 +16,7 @@ export type MenuButtonProps = {
   className?: string;
   style?: React.CSSProperties;
   children: CollectionChildren<object>;
-  type?: 'menu' | 'listbox';
-  placement?: MenuPopoverProps['placement'];
+  placement?: PopoverProps['placement'];
   onOpenChange?: (_isOpen: boolean) => void;
   onAction?: (_action: React.Key) => void;
 } & WithDescription;
@@ -26,9 +25,9 @@ export const MenuButton = React.forwardRef(
   (
     {
       buttonProps,
-      type,
-      onOpenChange,
       className,
+      onOpenChange,
+      placement,
       style,
       ...props
     }: MenuButtonProps,
@@ -44,8 +43,8 @@ export const MenuButton = React.forwardRef(
       closeOnSelect: true,
       onOpenChange,
     });
-    let { menuTriggerProps, menuProps } = useMenuTrigger(
-      { type, isDisabled: buttonProps.disabled },
+    const { menuTriggerProps, menuProps } = useMenuTrigger(
+      { type: 'menu', isDisabled: buttonProps.disabled },
       state,
       ref
     );
@@ -70,13 +69,16 @@ export const MenuButton = React.forwardRef(
     return (
       <div className={clsx(styles.root, className)} style={style}>
         <Button ref={ref} {...buttonProps} {...ariaButtonProps} />
-        <MenuPopover
+        <Popover
           isOpen={state.isOpen}
-          triggerRef={ref}
-          {...(props as any)}
-          {...menuProps}
           onClose={state.close}
-        />
+          placement={placement}
+          triggerRef={ref}
+        >
+          <Menu {...mergeProps(menuProps, props)} onClose={state.close}>
+            {props.children}
+          </Menu>
+        </Popover>
       </div>
     );
   }
