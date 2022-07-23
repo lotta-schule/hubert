@@ -21,7 +21,9 @@ export interface ComboBoxProps {
   className?: string;
   style?: React.CSSProperties;
   disabled?: boolean;
+  resetInputOnSelect?: boolean;
   placeholder?: string;
+  hideLabel?: boolean;
   title: string;
   value?: React.Key;
   items?:
@@ -39,6 +41,8 @@ export const ComboBox = React.memo(
     disabled,
     autoFocus,
     placeholder,
+    hideLabel,
+    resetInputOnSelect,
     items,
     title,
     allowsCustomValue,
@@ -90,7 +94,12 @@ export const ComboBox = React.memo(
       items: filteredItems,
       autoFocus,
       label,
-      onSelectionChange: onSelect,
+      onSelectionChange: (value) => {
+        onSelect?.(value);
+        if (resetInputOnSelect) {
+          state.setInputValue('');
+        }
+      },
       onInputChange: debouncedOnInputChange,
       allowsCustomValue,
     });
@@ -116,7 +125,7 @@ export const ComboBox = React.memo(
         label,
         items: filteredItems,
         allowsCustomValue,
-        placeholder,
+        placeholder: placeholder ?? title,
         onKeyUp: (event) => {
           if (event.code === 'Enter' && allowsCustomValue) {
             if (
@@ -124,8 +133,13 @@ export const ComboBox = React.memo(
               !state.collection.getItem(state.inputValue)
             ) {
               onSelect?.(state.inputValue);
+              if (resetInputOnSelect) {
+                state.setInputValue('');
+              }
+              return;
             }
           }
+          event.continuePropagation();
         },
       },
       state
@@ -133,41 +147,42 @@ export const ComboBox = React.memo(
 
     const { buttonProps } = useButton(triggerProps, buttonRef);
 
+    const labelContent = (
+      <div className={styles.inputWrapper}>
+        <Input {...inputProps} ref={inputRef} />
+        {typeof items !== 'function' && (
+          <Button
+            {...buttonProps}
+            ref={buttonRef}
+            className={styles.triggerButton}
+          >
+            <span aria-hidden="true">▼</span>
+          </Button>
+        )}
+        {isLoading && (
+          <CircularProgress
+            isIndeterminate
+            className={styles.progress}
+            style={{ width: '1em', height: '1em' }}
+            label={'Vorschläge werden geladen'}
+          />
+        )}
+        <Popover
+          triggerRef={inputRef}
+          ref={popoverRef}
+          isOpen={state.isOpen}
+          onClose={state.close}
+          placement={'bottom'}
+        >
+          <ListBox {...listBoxProps} ref={listBoxRef} state={state} />
+        </Popover>
+      </div>
+    );
+
     return (
       <div className={clsx(styles.root, className)} style={style}>
-        {React.cloneElement(
-          label,
-          labelProps,
-          <div className={styles.inputWrapper}>
-            <Input {...inputProps} ref={inputRef} />
-            {typeof items !== 'function' && (
-              <Button
-                {...buttonProps}
-                ref={buttonRef}
-                className={styles.triggerButton}
-              >
-                <span aria-hidden="true">▼</span>
-              </Button>
-            )}
-            {isLoading && (
-              <CircularProgress
-                isIndeterminate
-                className={styles.progress}
-                style={{ width: '1em', height: '1em' }}
-                label={'Vorschläge werden geladen'}
-              />
-            )}
-            <Popover
-              triggerRef={inputRef}
-              ref={popoverRef}
-              isOpen={state.isOpen}
-              onClose={state.close}
-              placement={'bottom'}
-            >
-              <ListBox {...listBoxProps} ref={listBoxRef} state={state} />
-            </Popover>
-          </div>
-        )}
+        {!hideLabel && React.cloneElement(label, labelProps, labelContent)}
+        {hideLabel && labelContent}
       </div>
     );
   }

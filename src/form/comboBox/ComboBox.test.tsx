@@ -96,7 +96,7 @@ describe('Combobox', () => {
     expect(screen.getByRole('button')).toBeDisabled();
   });
 
-  it('should set placeholder', () => {
+  it('should correctly set placeholder', () => {
     const screen = render(
       <ComboBox title={'Chose something'} placeholder={'Nothing chosen'} />
     );
@@ -104,5 +104,27 @@ describe('Combobox', () => {
       'placeholder',
       'Nothing chosen'
     );
+  });
+
+  it('should correctly hide label', () => {
+    const screen = render(<ComboBox title={'Chose something'} hideLabel />);
+    expect(screen.queryByText('Chose something')).toBeNull();
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'placeholder',
+      'Chose something'
+    );
+  });
+
+  it('should reset input value on select', () => {
+    const screen = render(
+      <ComboBox
+        title={'Chose something'}
+        allowsCustomValue
+        resetInputOnSelect
+      />
+    );
+    expect(screen.queryByRole('label')).toBeNull();
+    userEvent.type(screen.getByRole('combobox'), 'Papaya{Enter}');
+    expect(screen.getByRole('combobox')).toHaveValue('');
   });
 });
