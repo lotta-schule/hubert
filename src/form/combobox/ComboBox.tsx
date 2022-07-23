@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useComboBoxState } from '@react-stately/combobox';
 import { useComboBox } from '@react-aria/combobox';
 import { useButton } from '@react-aria/button';
+import { debounce } from 'lodash';
 import {
   ListItemPreliminary,
   ListItemPreliminaryItem,
@@ -45,15 +46,8 @@ export const ComboBox = React.memo(
     );
     const [isLoading, setIsLoading] = React.useState(false);
 
-    const label = <Label label={title} />;
-    const state = useComboBoxState({
-      children: ListItemPreliminary.createItem,
-      isDisabled: disabled,
-      items: filteredItems,
-      autoFocus,
-      label,
-      onSelectionChange,
-      onInputChange: async (value: string) => {
+    const onInputChange = React.useCallback(
+      async (value: string) => {
         if (value && typeof value === 'string') {
           if (typeof items === 'function') {
             try {
@@ -75,6 +69,22 @@ export const ComboBox = React.memo(
           setFilteredItems(Array.isArray(items) ? items : []);
         }
       },
+      [items]
+    );
+
+    const debouncedOnInputChange = debounce(onInputChange, 500, {
+      trailing: true,
+    });
+
+    const label = <Label label={title} />;
+    const state = useComboBoxState({
+      children: ListItemPreliminary.createItem,
+      isDisabled: disabled,
+      items: filteredItems,
+      autoFocus,
+      label,
+      onSelectionChange,
+      onInputChange: debouncedOnInputChange,
     });
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const inputRef = React.useRef<HTMLInputElement>(null);
