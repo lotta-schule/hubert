@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useListBox, AriaListBoxOptions } from '@react-aria/listbox';
 import { ComboBoxState } from '@react-stately/combobox';
 import { ListItemPreliminaryItem } from 'list/ListItemFactory';
-import { Label } from '../label';
 import { List } from '../list';
 import { ListBoxOption } from './ListBoxOption';
 import clsx from 'clsx';
@@ -26,18 +25,16 @@ export const ListBox = React.forwardRef(
     const { listBoxProps, labelProps } = useListBox(props, state, ref);
 
     return (
-      <div>
-        <Label {...labelProps} label={labelProps.children as any}>
-          <List
-            className={clsx(styles.root, className)}
-            {...listBoxProps}
-            ref={ref}
-          >
-            {[...state.collection].map((item) => (
-              <ListBoxOption key={item.key} item={item} state={state} />
-            ))}
-          </List>
-        </Label>
+      <div aria-label={(labelProps.children as any) ?? 'Vorschläge'}>
+        <List
+          className={clsx(styles.root, className)}
+          {...listBoxProps}
+          ref={ref}
+        >
+          {[...state.collection].map((item) => (
+            <ListBoxOption key={item.key} item={item} state={state} />
+          ))}
+        </List>
       </div>
     );
   }

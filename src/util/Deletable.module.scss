@@ -1,19 +1,20 @@
 .root {
-    display: inline-block;
-    position: relative;
+  display: inline-block;
+  position: relative;
+  .button {
+    position: absolute;
+    top: calc(var(--deletable-button-offset, 8px) * -1);
+    right: calc(var(--deletable-button-offset, 8px) * -1);
+    right: calc(var(--deletable-button-offset, 8px) * -1);
+    width: 15px;
+    height: 15px;
+    overflow: hidden;
+    z-index: 1;
+    transform: scale(0);
+  }
+  &:hover {
     .button {
-        position: absolute;
-        top: -7.5px;
-        right: -7.5px;
-        width: 15px;
-        height: 15px;
-        overflow: hidden;
-        z-index: 1;
-        transform: scale(0);
+      transform: scale(1);
     }
-    &:hover {
-        .button {
-            transform: scale(1);
-        }
-    }
+  }
 }

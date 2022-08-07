@@ -3,6 +3,7 @@ import { useComboBoxState } from '@react-stately/combobox';
 import { useComboBox } from '@react-aria/combobox';
 import { useButton } from '@react-aria/button';
 import { debounce } from 'lodash';
+import { ExpandMore } from '@material-ui/icons';
 import {
   ListItemPreliminary,
   ListItemPreliminaryItem,
@@ -21,7 +22,7 @@ export type ComboBoxProps = {
   className?: string;
   style?: React.CSSProperties;
   disabled?: boolean;
-  resetInputOnSelect?: boolean;
+  noResetInputOnSelect?: boolean;
   placeholder?: string;
   hideLabel?: boolean;
   title: string;
@@ -41,25 +42,29 @@ export const ComboBox = React.memo(
     autoFocus,
     placeholder,
     hideLabel,
-    resetInputOnSelect,
+    noResetInputOnSelect,
     items,
     title,
     allowsCustomValue,
     onSelect,
   }: ComboBoxProps) => {
-    const [allItemList, setAllitemsList] = React.useState(
-      Array.isArray(items) ? items : []
-    );
+    const isItemListCalculated = typeof items === 'function';
+
+    const [calculatedItems, setCalculatedItems] = React.useState<
+      ListItemPreliminaryItem[]
+    >([]);
     const [isLoading, setIsLoading] = React.useState(false);
+
+    const allItems = (isItemListCalculated ? calculatedItems : items) ?? [];
 
     const onInputChange = React.useCallback(
       async (value: string) => {
         if (value && typeof value === 'string') {
-          if (typeof items === 'function') {
+          if (isItemListCalculated) {
             try {
               setIsLoading(true);
               const newItems = await items(value);
-              setAllitemsList(newItems);
+              setCalculatedItems(newItems);
               if (newItems.length) {
                 state.setOpen(true);
               }
@@ -67,7 +72,7 @@ export const ComboBox = React.memo(
               setIsLoading(false);
             }
           } else {
-            const foundItem = items?.find(
+            const foundItem = allItems?.find(
               (item) =>
                 item.key
                   .toString()
@@ -82,8 +87,6 @@ export const ComboBox = React.memo(
               state.selectionManager.setFocusedKey(foundItem.key);
             }
           }
-        } else {
-          setAllitemsList(Array.isArray(items) ? items : []);
         }
       },
       [items]
@@ -93,17 +96,22 @@ export const ComboBox = React.memo(
       trailing: true,
     });
 
-    const label = <Label label={title} />;
     const state = useComboBoxState({
       children: ListItemPreliminary.createItem,
       isDisabled: disabled,
-      items: allItemList,
+      items: allItems,
       autoFocus,
-      label,
+      label: title,
       onSelectionChange: (value) => {
+        console.log('onSelectionChange ', value);
         onSelect?.(value);
-        if (resetInputOnSelect) {
-          state.setInputValue('');
+        if (!noResetInputOnSelect) {
+          requestAnimationFrame(() => {
+            state.setInputValue('');
+          });
+        }
+        if (typeof items === 'function') {
+          state.close();
         }
       },
       onInputChange: debouncedOnInputChange,
@@ -128,22 +136,33 @@ export const ComboBox = React.memo(
         listBoxRef,
         popoverRef,
         isDisabled: disabled,
-        label,
-        items: allItemList,
+        label: title,
+        items: allItems,
         allowsCustomValue,
         placeholder: placeholder ?? title,
         onKeyUp: (event) => {
+          const select = () => {
+            onSelect?.(state.inputValue);
+            if (!noResetInputOnSelect) {
+              requestAnimationFrame(() => {
+                state.setInputValue('');
+              });
+            }
+          };
           if (event.code === 'Enter' && allowsCustomValue) {
             if (
               !state.selectedKey &&
               !state.collection.getItem(state.inputValue)
             ) {
-              onSelect?.(state.inputValue);
-              if (resetInputOnSelect) {
-                state.setInputValue('');
-              }
+              select();
               return;
             }
+          } else if (
+            !state.selectedKey &&
+            state.collection.getItem(state.inputValue)
+          ) {
+            select();
+            return;
           }
           event.continuePropagation();
         },
@@ -151,7 +170,10 @@ export const ComboBox = React.memo(
       state
     );
 
-    const { buttonProps } = useButton(triggerProps, buttonRef);
+    const { buttonProps } = useButton(
+      { ...triggerProps, ['aria-label']: 'Vorschläge anzeigen' },
+      buttonRef
+    );
 
     const labelContent = (
       <div className={styles.inputWrapper}>
@@ -162,7 +184,7 @@ export const ComboBox = React.memo(
             ref={buttonRef}
             className={styles.triggerButton}
           >
-            <span aria-hidden="true">▼</span>
+            <ExpandMore />
           </Button>
         )}
         {isLoading && (
@@ -187,7 +209,11 @@ export const ComboBox = React.memo(
 
     return (
       <div className={clsx(styles.root, className)} style={style}>
-        {!hideLabel && React.cloneElement(label, labelProps, labelContent)}
+        {!hideLabel && (
+          <Label {...labelProps} label={title}>
+            {labelContent}
+          </Label>
+        )}
         {hideLabel && labelContent}
       </div>
     );

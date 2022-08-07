@@ -11,13 +11,18 @@ export type LabelProps = {
 export const Label = React.forwardRef(
   (
     { children, className, label, ...props }: LabelProps,
-    ref: React.Ref<HTMLDivElement>
+    forwardedRef: React.Ref<HTMLDivElement | null>
   ) => {
+    const ref = React.useRef<HTMLDivElement>(null);
+
+    React.useImperativeHandle(forwardedRef, () => ref.current);
+
     const { labelProps, fieldProps } = useLabel({
       label,
       labelElementType: 'span',
       ...props,
     });
+
     return (
       <div {...props} ref={ref} className={clsx(className, styles.root)}>
         <span className={styles.label} {...labelProps}>

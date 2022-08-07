@@ -15,15 +15,11 @@ export interface AvatarGroupProps {
   className?: string;
 }
 
-/**
- * Primary UI shared for userAvatar interaction
- */
-
-export const AvatarGroup: React.FC<AvatarGroupProps> = ({
+export const AvatarGroup = ({
   max = 3,
   className,
   children,
-}) => {
+}: AvatarGroupProps) => {
   const avatars = React.Children.toArray(
     children
   ) as React.ReactElement<AvatarProps>[];
