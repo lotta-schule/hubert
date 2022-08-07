@@ -2,6 +2,10 @@
   display: inline-flex;
   flex-direction: column;
 
+  &.isFullWidth {
+    width: 100%;
+  }
+
   .inputWrapper {
     position: relative;
     display: flex;

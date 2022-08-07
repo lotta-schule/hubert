@@ -2,6 +2,8 @@ import { render, waitFor } from '../../test-utils';
 import { ComboBox } from './ComboBox';
 import userEvent from '@testing-library/user-event';
 
+import styles from './ComboBox.module.scss';
+
 const defaultItems = [
   { key: 'Apple', label: 'Apple' },
   { key: 'Bread', label: 'Bread' },
@@ -245,6 +247,13 @@ describe('Combobox', () => {
     expect(screen.getByRole('combobox')).toHaveAttribute(
       'placeholder',
       'Chose something'
+    );
+  });
+
+  it('should add fullWidth class', () => {
+    const screen = render(<ComboBox fullWidth title={'Chose something'} />);
+    expect(screen.baseElement.querySelector(`.${styles.root}`)).toHaveClass(
+      styles.isFullWidth
     );
   });
 });

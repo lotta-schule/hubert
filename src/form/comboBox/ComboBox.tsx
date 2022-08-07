@@ -20,17 +20,43 @@ import styles from './ComboBox.module.scss';
 
 export type ComboBoxProps = {
   className?: string;
+
   style?: React.CSSProperties;
+
+  fullWidth?: boolean;
+
   disabled?: boolean;
-  noResetInputOnSelect?: boolean;
+
   placeholder?: string;
-  hideLabel?: boolean;
+
+  autoFocus?: boolean;
+
+  /*
+   * The title of the comboBox.
+   * Will be used as a fallback for the Label and the placeholder
+   */
   title: string;
+
+  /*
+   * If set, the input field text (containing the search text) will not be reset
+   * when a selection is made
+   */
+  noResetInputOnSelect?: boolean;
+
+  /*
+   * If set, the input text field will not be wrapped inside a <Label> component
+   */
+  hideLabel?: boolean;
+
+  /*
+   * Wether to allow values that are not part of the predefined or loaded item set
+   */
+  allowsCustomValue?: boolean;
+
   items?:
     | ListItemPreliminaryItem[]
     | ((_value: string) => Promise<ListItemPreliminaryItem[]>);
-  autoFocus?: boolean;
-  allowsCustomValue?: boolean;
+
   onSelect?: (_value: React.Key | string) => void;
 };
 
@@ -38,6 +64,7 @@ export const ComboBox = React.memo(
   ({
     className,
     style,
+    fullWidth,
     disabled,
     autoFocus,
     placeholder,
@@ -103,7 +130,6 @@ export const ComboBox = React.memo(
       autoFocus,
       label: title,
       onSelectionChange: (value) => {
-        console.log('onSelectionChange ', value);
         onSelect?.(value);
         if (!noResetInputOnSelect) {
           requestAnimationFrame(() => {
@@ -117,6 +143,7 @@ export const ComboBox = React.memo(
       onInputChange: debouncedOnInputChange,
       allowsCustomValue,
     });
+
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const inputRef = React.useRef<HTMLInputElement>(null);
     const listBoxRef = React.useRef<HTMLUListElement>(null);
@@ -208,7 +235,12 @@ export const ComboBox = React.memo(
     );
 
     return (
-      <div className={clsx(styles.root, className)} style={style}>
+      <div
+        className={clsx(styles.root, className, {
+          [styles.isFullWidth]: fullWidth,
+        })}
+        style={style}
+      >
         {!hideLabel && (
           <Label {...labelProps} label={title}>
             {labelContent}
