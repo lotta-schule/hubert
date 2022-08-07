@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useLabel } from '@react-aria/label';
 import clsx from 'clsx';
 
-import styles from './label.module.scss';
+import styles from './Label.module.scss';
 
 export type LabelProps = {
   label: React.ReactNode;
