@@ -75,7 +75,13 @@ export const MenuButton = React.forwardRef(
           placement={placement}
           triggerRef={ref}
         >
-          <Menu {...mergeProps(menuProps, props)} onClose={state.close}>
+          <Menu
+            {...mergeProps(
+              { ...menuProps, autoFocus: !!menuProps.autoFocus },
+              props
+            )}
+            onClose={state.close}
+          >
             {props.children}
           </Menu>
         </Popover>
