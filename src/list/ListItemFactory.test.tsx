@@ -23,7 +23,6 @@ describe('list/ListItemFactory', () => {
 
       expect(item.key).toEqual('test');
       expect(item.type).toBe(Item);
-      expect(item.props['aria-label']).toEqual('Test');
       expect(
         (item.props as ItemProps<ListItemPreliminaryItem>).textValue
       ).toEqual('Test');

@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import * as React from 'react';
 import { CollectionElement, Node } from '@react-types/shared';
 import { Item } from '../menu';
@@ -7,21 +6,31 @@ import { Check } from '@material-ui/icons';
 
 export type ListItemPreliminaryItem = {
   key: React.Key;
-  label: string;
   leftSection?: React.ReactNode;
   description?: string | React.ReactNode;
   rightSection?: React.ReactNode;
 } & (
   | {
-      rightSection?: React.ReactNode;
-      selected?: false;
+      label: string;
+      textValue?: string;
     }
-  | { selected?: true; rightSection?: React.ReactNode }
-);
+  | {
+      label: React.ReactNode;
+      textValue: string;
+    }
+) &
+  (
+    | {
+        rightSection?: React.ReactNode;
+        selected?: false;
+      }
+    | { selected?: true; rightSection?: React.ReactNode }
+  );
 
 export const ListItemPreliminary = {
   createItem: ({
     label,
+    textValue,
     key,
     leftSection,
     description,
@@ -34,7 +43,7 @@ export const ListItemPreliminary = {
         <Check />
       ) : null;
     return (
-      <Item aria-label={label} key={key} textValue={label}>
+      <Item key={key} textValue={textValue ?? (label as string)}>
         <span>{leftSection}</span>
         {label}
         {description ?? null}

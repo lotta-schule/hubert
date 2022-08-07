@@ -84,9 +84,38 @@ export const ComboBox = React.memo(
 
     const allItems = (isItemListCalculated ? calculatedItems : items) ?? [];
 
+    const findItem = React.useCallback(
+      (
+        searchText: string,
+        options?: { matchOnlyIfExclusive?: boolean; matchExact?: boolean }
+      ) => {
+        const rightValue = searchText.toLocaleLowerCase();
+        const results = allItems.filter((item) => {
+          const leftValue = (item.textValue ?? item.label)
+            ?.toString()
+            .toLocaleLowerCase();
+
+          if (!leftValue) {
+            return false;
+          } else if (options?.matchExact) {
+            return leftValue === searchText.toLocaleLowerCase();
+          } else {
+            return leftValue.includes(rightValue);
+          }
+        });
+
+        if (!options?.matchOnlyIfExclusive || results.length === 1) {
+          return results[0];
+        }
+        return null;
+      },
+      [allItems]
+    );
+
     const onInputChange = React.useCallback(
-      async (value: string) => {
-        if (value && typeof value === 'string') {
+      async (valueObj: string | { value: string; valueType: 'string' }) => {
+        const value = typeof valueObj === 'string' ? valueObj : valueObj.value;
+        if (value) {
           if (isItemListCalculated) {
             try {
               setIsLoading(true);
@@ -99,19 +128,9 @@ export const ComboBox = React.memo(
               setIsLoading(false);
             }
           } else {
-            const foundItem = allItems?.find(
-              (item) =>
-                item.key
-                  .toString()
-                  .toLocaleLowerCase()
-                  .includes(value.toLocaleLowerCase()) ||
-                item.label
-                  .toLocaleLowerCase()
-                  .includes(value.toLocaleLowerCase())
-            );
-
-            if (foundItem) {
-              state.selectionManager.setFocusedKey(foundItem.key);
+            const item = findItem(value);
+            if (item) {
+              state.selectionManager.setFocusedKey(item.key);
             }
           }
         }
@@ -130,11 +149,11 @@ export const ComboBox = React.memo(
       autoFocus,
       label: title,
       onSelectionChange: (value) => {
-        onSelect?.(value);
+        if (value) {
+          onSelect?.(value);
+        }
         if (!noResetInputOnSelect) {
-          requestAnimationFrame(() => {
-            state.setInputValue('');
-          });
+          state.setInputValue('');
         }
         if (typeof items === 'function') {
           state.close();
@@ -167,30 +186,36 @@ export const ComboBox = React.memo(
         items: allItems,
         allowsCustomValue,
         placeholder: placeholder ?? title,
-        onKeyUp: (event) => {
-          const select = () => {
-            onSelect?.(state.inputValue);
-            if (!noResetInputOnSelect) {
-              requestAnimationFrame(() => {
+        onKeyDown: (event) => {
+          if (
+            event.code === 'Enter' &&
+            !state.selectedKey &&
+            state.inputValue !== ''
+          ) {
+            const select = (item: ListItemPreliminaryItem | string) => {
+              const value = typeof item === 'string' ? item : item.key;
+              if (value) {
+                onSelect?.(value);
+              }
+              if (!noResetInputOnSelect) {
                 state.setInputValue('');
-              });
-            }
-          };
-          if (event.code === 'Enter' && allowsCustomValue) {
-            if (
-              !state.selectedKey &&
-              !state.collection.getItem(state.inputValue)
-            ) {
-              select();
+              }
+            };
+
+            const item = findItem(state.inputValue, {
+              matchOnlyIfExclusive: true,
+              matchExact: true,
+            });
+
+            if (item && state.collection.getItem(item.key)) {
+              select(item);
+              return;
+            } else if (!item && allowsCustomValue) {
+              select(state.inputValue);
               return;
             }
-          } else if (
-            !state.selectedKey &&
-            state.collection.getItem(state.inputValue)
-          ) {
-            select();
-            return;
           }
+
           event.continuePropagation();
         },
       },

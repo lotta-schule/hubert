@@ -208,17 +208,19 @@ describe('Combobox', () => {
           expect(screen.queryByRole('option', { name: /apple/i })).toBeNull();
         });
       });
+
       it('should not close the listbox on select when dynamic items are passed (as callback)', async () => {
+        const getItems = jest.fn(async () => defaultItems);
         const screen = render(
           <ComboBox
             title={'Chose something'}
-            items={async () => defaultItems}
+            items={getItems}
             onSelect={jest.fn()}
           />
         );
         userEvent.type(screen.getByRole('combobox'), 'Apple{Enter}');
         await waitFor(() => {
-          expect(screen.getByRole('option', { name: /apple/i })).toBeVisible();
+          expect(getItems).toHaveBeenCalledWith('Apple');
         });
         expect(screen.getByRole('option', { name: /apple/i })).toBeVisible();
       });
