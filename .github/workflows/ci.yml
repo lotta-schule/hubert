@@ -51,12 +51,33 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run typecheck
+  storybook:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run storybook:build
+      - run: tar -czf storybook.tgz --directory=storybook-static .
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Storybook Static Site Documentation
+          path: storybook.tgz
+          if-no-files-found: error
   pack:
     runs-on: ubuntu-latest
     needs:
       - lint
       - test
       - typecheck
+      - storybook
     steps:
       - uses: actions/checkout@v3
         with:
