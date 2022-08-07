@@ -1,3 +1,4 @@
+import { DecoratorFn } from '@storybook/react';
 import { HubertProvider } from '../src/HubertProvider';
 import { defaultTheme } from '../src/theme';
 
@@ -11,7 +12,7 @@ export const parameters = {
   },
 };
 
-export const decorators = [
+export const decorators: DecoratorFn[] = [
   (Story) => (
     <HubertProvider theme={defaultTheme}>
       <Story />

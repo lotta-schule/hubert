@@ -1,6 +1,7 @@
-const { mergeConfig } = require('vite');
+import type { StorybookViteConfig } from '@storybook/builder-vite';
+import { mergeConfig } from 'vite';
 
-module.exports = {
+const config: StorybookViteConfig = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
@@ -17,13 +18,13 @@ module.exports = {
   },
   viteFinal: (config, { configType }) => {
     if (configType === 'PRODUCTION') {
-      const newConfig = mergeConfig(config, {
+      return mergeConfig(config, {
         base: './',
       });
-      console.log(newConfig);
-      return newConfig;
     }
 
     return config;
   },
 };
+
+export default config;
