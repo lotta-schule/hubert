@@ -63,7 +63,7 @@ jobs:
           node-version: 16
           cache: 'npm'
       - run: npm ci
-      - run: npm run storybook:build
+      - run: STORYBOOK_BASE_HREF=${{ github.event.repository.name }} npm run storybook:build
       - run: tar -czf storybook.tgz --directory=storybook-static .
       - name: Upload package artifact
         uses: actions/upload-artifact@v3
