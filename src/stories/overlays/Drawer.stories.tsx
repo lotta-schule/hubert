@@ -18,6 +18,11 @@ const Template: Story = (args) => {
     </div>
   );
 };
+Template.parameters = {
+  viewport: {
+    defaultViewport: 'iphonex',
+  },
+};
 
 export const Default = Template.bind({});
 Default.args = {
