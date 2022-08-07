@@ -3,10 +3,7 @@ import { Menu, Book } from '@material-ui/icons';
 import { ItemProps } from '@react-types/shared';
 import { Item } from '../menu';
 import { render } from '../test-utils';
-import {
-  ListItemPreliminary,
-  ListItemPreliminaryItem,
-} from './ListItemFactory';
+import { ListItemFactory, ListItemPreliminaryItem } from './ListItemFactory';
 
 describe('list/ListItemFactory', () => {
   describe('create Item', () => {
@@ -19,7 +16,7 @@ describe('list/ListItemFactory', () => {
         description: 'Test description',
       };
 
-      const item = ListItemPreliminary.createItem(preliminaryItem);
+      const item = ListItemFactory.createItem(preliminaryItem);
 
       expect(item.key).toEqual('test');
       expect(item.type).toBe(Item);
@@ -40,7 +37,7 @@ describe('list/ListItemFactory', () => {
         label: 'Test',
       };
 
-      const item = ListItemPreliminary.createItem(preliminaryItem);
+      const item = ListItemFactory.createItem(preliminaryItem);
 
       expect(item.key).toEqual('test');
       expect(item.props.children).toHaveLength(4);
@@ -50,8 +47,8 @@ describe('list/ListItemFactory', () => {
   describe('create ListItem', () => {
     it('should render a listItem with complete information from an item', () => {
       const screen = render(
-        ListItemPreliminary.createListItem({
-          rendered: ListItemPreliminary.createItem({
+        ListItemFactory.createListItem({
+          rendered: ListItemFactory.createItem({
             key: 'test',
             label: 'Test',
             leftSection: <Menu />,
@@ -112,8 +109,8 @@ describe('list/ListItemFactory', () => {
 
     it('should render a listItem with complete information from an item', () => {
       const screen = render(
-        ListItemPreliminary.createListItem({
-          rendered: ListItemPreliminary.createItem({
+        ListItemFactory.createListItem({
+          rendered: ListItemFactory.createItem({
             key: 'test',
             label: 'Test',
           }).props.children,

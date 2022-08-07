@@ -5,7 +5,7 @@ import { useButton } from '@react-aria/button';
 import { debounce } from 'lodash';
 import { ExpandMore } from '@material-ui/icons';
 import {
-  ListItemPreliminary,
+  ListItemFactory,
   ListItemPreliminaryItem,
 } from '../../list/ListItemFactory';
 import { Input } from '../input';
@@ -143,7 +143,7 @@ export const ComboBox = React.memo(
     });
 
     const state = useComboBoxState({
-      children: ListItemPreliminary.createItem,
+      children: ListItemFactory.createItem,
       isDisabled: disabled,
       items: allItems,
       autoFocus,
@@ -175,7 +175,7 @@ export const ComboBox = React.memo(
       labelProps,
     } = useComboBox(
       {
-        children: ListItemPreliminary.createItem,
+        children: ListItemFactory.createItem,
         autoFocus,
         inputRef,
         buttonRef,

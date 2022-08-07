@@ -5,7 +5,7 @@ import { useOption } from '@react-aria/listbox';
 import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
 import {
-  ListItemPreliminary,
+  ListItemFactory,
   ListItemPreliminaryItem,
 } from '../list/ListItemFactory';
 
@@ -34,7 +34,7 @@ export const ListBoxOption = React.memo(
       // focus ring for accessibility
       const { isFocusVisible, focusProps } = useFocusRing();
 
-      return ListItemPreliminary.createListItem(item, {
+      return ListItemFactory.createListItem(item, {
         ...mergeProps(optionProps, focusProps),
         ref: ref,
         isDisabled,

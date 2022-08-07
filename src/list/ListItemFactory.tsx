@@ -27,7 +27,7 @@ export type ListItemPreliminaryItem = {
     | { selected?: true; rightSection?: React.ReactNode }
   );
 
-export const ListItemPreliminary = {
+export const ListItemFactory = {
   createItem: ({
     label,
     textValue,
