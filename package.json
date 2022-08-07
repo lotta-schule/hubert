@@ -99,7 +99,7 @@
     "react-popper": "^2.3.0"
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx,json,css,scss,md,graphql}": [
+    "**/*.{js,jsx,ts,tsx,json,css,scss,md,mdx,graphql}": [
       "prettier --write"
     ]
   }
