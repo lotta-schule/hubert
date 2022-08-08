@@ -1,7 +1,10 @@
 {
   "name": "@lotta-schule/hubert",
-  "version": "0.0.1-alpha.29",
+  "version": "0.0.1-alpha.30",
   "description": "Component Library for lotta",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "test": "jest",
     "lint": "eslint --ext js,jsx,ts,tsx src",
@@ -19,6 +22,7 @@
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
     "@jest/globals": "^28.1.2",
+    "@lotta-schule/storybook-addon-theme": ">= 0.0.0",
     "@storybook/addon-a11y": "^6.5.9",
     "@storybook/addon-actions": "^6.5.9",
     "@storybook/addon-essentials": "^6.5.9",

@@ -22,6 +22,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "exclude": ["node_modules", "test"],
+  "exclude": ["node_modules", "test", "packages"],
   "include": ["**/*.ts", "**/*.tsx"]
 }

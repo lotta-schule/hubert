@@ -63,6 +63,7 @@ jobs:
           node-version: 16
           cache: 'npm'
       - run: npm ci
+      - run: npm -w @lotta-schule/storybook-addon-theme run build
       - run: npm run storybook:build
         env:
           STORYBOOK_BASE_HREF: /${{ github.event.repository.name }}

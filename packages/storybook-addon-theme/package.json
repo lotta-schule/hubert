@@ -1,0 +1,34 @@
+{
+  "name": "@lotta-schule/storybook-addon-theme",
+  "version": "0.0.1-alpha.0",
+  "description": "Addon for storybook which allows managing the Hubert theme from within the documentation",
+  "author": "Alexis Rinaldoni <alexis@rinaldoni.net>",
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "start": "npm run build -- --watch",
+    "build": "esbuild src/preset/*.tsx --bundle --sourcemap --format=esm --external:react-dom --external:@storybook/* --external:react --outdir=dist",
+    "test": "jest"
+  },
+  "exports": {
+    ".": {
+      "require": "./preset.js"
+    },
+    "./*": {
+      "require": "./preset.js"
+    }
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "*.js"
+  ],
+  "devDependencies": {
+    "@types/node": "^18.6.4",
+    "esbuild": "^0.14.53",
+    "typescript": "^4.7.4"
+  },
+  "peerDependencies": {
+    "react": ">= 16.8.0",
+    "react-dom": ">= 16.8.0"
+  }
+}

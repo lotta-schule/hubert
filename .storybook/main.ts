@@ -9,6 +9,7 @@ const config: StorybookViteConfig = {
     '@storybook/addon-interactions',
     '@storybook/addon-viewport',
     '@storybook/addon-a11y',
+    '@lotta-schule/storybook-addon-theme',
   ],
   framework: '@storybook/react',
   core: {

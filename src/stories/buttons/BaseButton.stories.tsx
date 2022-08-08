@@ -7,6 +7,11 @@ export default {
   title: 'Buttons/BaseButton',
   component: BaseButton,
   argTypes: {},
+  parameters: {
+    hubertTheme: {
+      data: 'this data is passed to the addon panel',
+    },
+  },
 } as Meta;
 
 const Template: Story<Omit<BaseButtonProps, 'ref'>> = (args) => (

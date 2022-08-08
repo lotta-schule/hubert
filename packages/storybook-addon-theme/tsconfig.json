@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "rootDir": "./src",
+    "moduleResolution": "node",
+    "allowUmdGlobalAccess": true,
+
+    "lib": ["esnext", "dom"],
+
+    "jsx": "react",
+
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "./dist",
+    "noEmitHelpers": true,
+
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+
+    "skipLibCheck": true
+  },
+  "include": ["src"]
+}
