@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useGlobals } from '@storybook/api';
 import { Icons, IconButton } from '@storybook/components';
-import { TOOL_ID } from '../lib';
+import { TOOL_ID } from '../constant';
 
 export const ToolbarButton = () => {
   const [{ currentHubertTheme }, updateGlobals] = useGlobals();
