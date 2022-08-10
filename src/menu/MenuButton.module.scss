@@ -1,5 +1,14 @@
 .root {
   position: relative;
   display: inline-block;
-  z-index: 5000;
+  width: 100%;
+  outline: none;
+
+  button:focus-visible {
+    outline: none;
+  }
+
+  .menu {
+    z-index: 5000;
+  }
 }
