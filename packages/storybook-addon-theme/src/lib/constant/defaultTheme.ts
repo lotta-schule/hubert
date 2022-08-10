@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 export const defaultTheme = {
   primaryColor: '#ff5722',
   navigationBackgroundColor: '#333333',
@@ -22,16 +20,3 @@ export const defaultTheme = {
   spacing: `8px`,
   borderRadius: `4px`,
 };
-
-export const ThemeContext = React.createContext({ theme: defaultTheme });
-
-export interface ThemeProviderProps {
-  theme: typeof defaultTheme;
-  children?: React.ReactNode;
-}
-
-export const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => (
-  <ThemeContext.Provider value={props}>{children}</ThemeContext.Provider>
-);
-
-export const useTheme = () => React.useContext(ThemeContext);

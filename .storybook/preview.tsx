@@ -18,9 +18,14 @@ export const parameters = {
 };
 
 export const decorators: DecoratorFn[] = [
-  (Story) => (
-    <HubertProvider theme={defaultTheme}>
-      <Story />
-    </HubertProvider>
-  ),
+  (Story, context) => {
+    console.log(context);
+    return (
+      <HubertProvider
+        theme={{ ...defaultTheme, ...context.globals.hubertTheme }}
+      >
+        <Story />
+      </HubertProvider>
+    );
+  },
 ];

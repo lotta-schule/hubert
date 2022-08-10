@@ -1,6 +1,6 @@
 import { addons, types } from '@storybook/addons';
-import { Panel, ToolbarButton } from '../component';
-import { ADDON_ID, PANEL_ID, TOOL_ID } from '../lib';
+import { Panel, ToolbarButton } from '../lib/addon';
+import { ADDON_ID, PANEL_ID, TOOL_ID } from '../lib/constant';
 
 // The Toolbar Button from which the user can swiftly select the theme.
 addons.register(ADDON_ID, (_api) => {
