@@ -12,8 +12,8 @@ export default {
 const Template: Story<ComboBoxProps> = (args) => (
   <div
     style={{
-      width: '100vw',
-      height: '100vh',
+      width: 'auto',
+      height: 'auto',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',

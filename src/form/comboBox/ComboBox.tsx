@@ -228,7 +228,11 @@ export const ComboBox = React.memo(
     );
 
     const labelContent = (
-      <div className={styles.inputWrapper}>
+      <div
+        className={clsx(styles.inputWrapper, {
+          [styles.withoutButton]: typeof items === 'function',
+        })}
+      >
         <Input {...inputProps} ref={inputRef} />
         {typeof items !== 'function' && (
           <Button

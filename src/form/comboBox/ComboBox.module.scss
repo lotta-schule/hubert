@@ -9,14 +9,36 @@
   .inputWrapper {
     position: relative;
     display: flex;
+    input {
+      border-top-left-radius: 0.5em;
+      border-bottom-left-radius: 0.5em;
+      border-bottom: 0;
+      border-right: none;
+      border: 1px solid rgba(var(--lotta-primary-color), 1);
+    }
+    input:focus {
+      border-top-right-radius: 0%;
+      background-color: rgba(var(--lotta-primary-color), 0.1);
+    }
+    &.withoutButton {
+      input {
+        border: none;
+        border-bottom: 1px solid rgba(var(--lotta-text-color), 1);
+        border-top-left-radius: 0.5em;
+        border-top-right-radius: 0.5em;
+        border-bottom-left-radius: 0%;
+        &:focus {
+          border-bottom: 1px solid rgba(var(--lotta-primary-color), 1);
+        }
+      }
+    }
   }
-
   .triggerButton {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    border-color: #fff;
     border-image: initial;
-    border-bottom: 1px solid rgb(51, 51, 51);
+    border: 1px solid rgba(var(--lotta-primary-color), 1);
+    border-left: none;
   }
 
   .progress {

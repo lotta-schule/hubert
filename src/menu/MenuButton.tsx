@@ -80,6 +80,7 @@ export const MenuButton = React.forwardRef(
               { ...menuProps, autoFocus: !!menuProps.autoFocus },
               props
             )}
+            className={styles.menu}
             onClose={state.close}
           >
             {props.children}
