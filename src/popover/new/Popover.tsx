@@ -4,8 +4,8 @@ import { FocusScope } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
 import { PopperProps, usePopper } from 'react-popper';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ListItemPreliminaryItem } from 'list/ListItemFactory';
 import { CollectionChildren } from '@react-types/shared';
+import { ListItemPreliminaryItem } from '../../list/ListItemFactory';
 
 export type PopoverProps = {
   children: CollectionChildren<ListItemPreliminaryItem>;
