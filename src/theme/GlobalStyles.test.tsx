@@ -23,12 +23,26 @@ describe('ThemeStylesheetManager', () => {
     expect(
       document.documentElement.style.getPropertyValue('--lotta-spacing')
     ).toEqual('8px');
+  });
 
-    // nested values
-    expect(
-      document.documentElement.style.getPropertyValue(
-        '--lotta-typography-font-family'
-      )
-    ).toEqual('Muli');
+  describe('fonts', () => {
+    beforeAll(() => {
+      (document as any).fonts = {
+        add: jest.fn(),
+      };
+    });
+    it('should set the correct import style for fonts', () => {
+      render(<GlobalStyles />);
+
+      expect(
+        document.documentElement.style.getPropertyValue(
+          '--lotta-text-font-family'
+        )
+      ).toEqual("'Muli'");
+
+      expect(
+        document.head.querySelector('link[data-font-name="Muli"]')
+      ).toBeTruthy();
+    });
   });
 });

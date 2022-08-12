@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useTheme } from './ThemeContext';
+import { headerFonts, textFonts } from './fonts';
 import { kebabCase } from 'lodash';
 import Color from 'colorjs.io';
 
@@ -11,6 +12,8 @@ import '../button/navigation-button.scss';
 
 export const GlobalStyles = React.memo(() => {
   const { theme } = useTheme();
+
+  const allFonts = [...headerFonts, ...textFonts];
 
   const getVarValue = (value: string) => {
     try {
@@ -39,6 +42,24 @@ export const GlobalStyles = React.memo(() => {
   React.useEffect(() => {
     for (const [varKey, varVal] of getVarListWithName('', theme)) {
       document.documentElement.style.setProperty(`--lotta-${varKey}`, varVal);
+
+      if (varKey.endsWith('-font-family')) {
+        const fontName = varVal.match("'(.+)'")?.[1];
+        const fontDef = allFonts.find((f) => f.name === fontName);
+        if (fontDef) {
+          if (
+            !document.head.querySelector(
+              `link[data-font-name="${fontDef.name}"]`
+            )
+          ) {
+            const link = document.createElement('link');
+            link.setAttribute('rel', 'stylesheet');
+            link.setAttribute('href', fontDef.url);
+            link.setAttribute('data-font-name', fontDef.name);
+            document.head.appendChild(link);
+          }
+        }
+      }
     }
   }, [theme]);
 
