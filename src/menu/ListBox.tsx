@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useListBox, AriaListBoxOptions } from '@react-aria/listbox';
 import { ComboBoxState } from '@react-stately/combobox';
-import { ListItemPreliminaryItem } from 'list/ListItemFactory';
 import { List } from '../list';
 import { ListBoxOption } from './ListBoxOption';
+import { ListItemPreliminaryItem } from '../list/ListItemFactory';
 import clsx from 'clsx';
 
 import styles from './Menu.module.scss';
