@@ -28,7 +28,7 @@ export const Label = React.forwardRef(
         <span className={styles.label} {...labelProps}>
           {label}
         </span>
-        <div {...fieldProps}>{children}</div>
+        {React.cloneElement(children as React.ReactElement, fieldProps)}
       </div>
     );
   }

@@ -227,13 +227,17 @@ export const ComboBox = React.memo(
       buttonRef
     );
 
+    const inputAriaLabelProps = hideLabel
+      ? { 'aria-label': title, 'aria-labelledby': '' }
+      : {};
+
     const labelContent = (
       <div
         className={clsx(styles.inputWrapper, {
           [styles.withoutButton]: typeof items === 'function',
         })}
       >
-        <Input {...inputProps} ref={inputRef} />
+        <Input {...inputProps} {...inputAriaLabelProps} ref={inputRef} />
         {typeof items !== 'function' && (
           <Button
             {...buttonProps}
