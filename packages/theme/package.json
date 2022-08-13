@@ -1,6 +1,6 @@
 {
   "name": "@lotta-schule/theme",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.2",
   "description": "Theme definition for hubert, lotta's component library",
   "author": "Alexis Rinaldoni <alexis@rinaldoni.net>",
   "license": "GPL-3.0-or-later",

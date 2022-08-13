@@ -39,7 +39,7 @@ jobs:
   publish_artifact:
     runs-on: ubuntu-latest
     needs:
-      - publish_artifact
+      - check_version_name_tag
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/setup-node@v3
