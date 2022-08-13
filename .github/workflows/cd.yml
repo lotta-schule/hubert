@@ -77,9 +77,15 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create and push tag
-        run: |
-          git tag ${{needs.check_version_name_tag.outputs.version_name}}
-          git push ${{needs.check_tag.outputs.version_name}}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            await github.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/${{needs.check_tag.outputs.version_name}}",
+              sha: context.sha
+            })
 
   deploy-storybook:
     runs-on: ubuntu-latest
