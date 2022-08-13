@@ -83,7 +83,7 @@ jobs:
             await github.rest.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: "refs/tags/${{needs.check_tag.outputs.version_name}}",
+              ref: "refs/tags/${{ needs.check_version_name_tag.outputs.version_name }}",
               sha: context.sha
             })
 
