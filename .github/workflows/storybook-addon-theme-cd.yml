@@ -6,7 +6,7 @@ permissions:
 on:
   workflow_run:
     workflows:
-      - 'Storybook Addon: Theme - CI'
+      - 'Storybook Theme Addon - CI'
     types:
       - completed
     branches:

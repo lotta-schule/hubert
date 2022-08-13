@@ -26,14 +26,13 @@ jobs:
         with:
           node-version: '16.14'
           registry-url: https://registry.npmjs.org
-      - name: Read version
+      - name: read_version
         run: |
           export VERSION_NAME=$(node -p 'require("./package.json").version')
-          echo "::set-env name=VERSION_NAME::$VERSION_NAME"
           echo "::set-output name=version_name::$VERSION_NAME"
       - name: Check that tag does not exist
         run: |
-          [ -z $(git tag -l "$VERSION_NAME") ]
+          [ -z $(git tag -l "${{ steps.read_version.outputs.version_name }}") ]
 
   publish_artifact:
     runs-on: ubuntu-latest

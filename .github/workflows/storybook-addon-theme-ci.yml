@@ -1,4 +1,4 @@
-name: 'Storybook Addon: Theme - CI'
+name: 'Storybook Theme Addon - CI'
 
 on:
   push:
