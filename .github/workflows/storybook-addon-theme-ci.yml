@@ -3,7 +3,7 @@ name: 'Storybook Addon: Theme - CI'
 on:
   push:
     paths:
-      - 'packages/storybook-addon-theme'
+      - 'packages/storybook-addon-theme/**'
   pull_request:
 
 jobs:

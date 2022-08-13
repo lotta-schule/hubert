@@ -2,8 +2,8 @@ name: CI
 
 on:
   push:
-    paths:
-      - '!packages/**'
+    paths-ignore:
+      - 'packages/**'
   pull_request:
 
 jobs:
