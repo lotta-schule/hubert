@@ -16,7 +16,6 @@
     "noEmitHelpers": true,
 
     "isolatedModules": true,
-    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
 
