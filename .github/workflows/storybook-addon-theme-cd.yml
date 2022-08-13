@@ -1,0 +1,54 @@
+name: CD
+
+permissions:
+  contents: write
+
+on:
+  workflow_run:
+    workflows:
+      - 'Storybook Addon: Theme - CI'
+    types:
+      - completed
+    branches:
+      - main
+
+jobs:
+  publish_artifact:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.14'
+          registry-url: https://registry.npmjs.org
+
+      - name: Download artifact
+        uses: actions/github-script@v6
+        with:
+          script: |
+            let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               run_id: context.payload.workflow_run.id,
+            });
+            let matchArtifact = allArtifacts.data.artifacts.filter((artifact) => {
+              return artifact.name == "npm package storybook-addon-theme"
+            })[0];
+            let download = await github.rest.actions.downloadArtifact({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               artifact_id: matchArtifact.id,
+               archive_format: 'zip',
+            });
+            let fs = require('fs');
+            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/npm_package_storybook-addon-theme.zip`, Buffer.from(download.data));
+
+      - name: Unzip artifact
+        run: unzip npm_package_storybook-addon-theme.zip
+
+      - name: publish to npm
+        run: |
+          npm publish lotta-schule-storybook-addon-theme*.tgz
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
