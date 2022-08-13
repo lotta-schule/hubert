@@ -10,6 +10,7 @@
     "build": "build-storybook",
     "test": "jest",
     "lint": "eslint --ext js,jsx,ts,tsx src",
+    "typecheck": "tsc --noEmit",
     "prepare": "husky install"
   },
   "main": "src/index.ts",
