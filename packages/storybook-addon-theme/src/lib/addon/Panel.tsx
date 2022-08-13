@@ -34,7 +34,7 @@ export const Panel = ({ active, key }: RenderOptions) => {
           <ThemePropControl
             key={key}
             name={key}
-            value={value as string | Record<string, string>}
+            value={value}
             onChange={(value) => {
               const newTheme = { ...globals.hubertTheme, [key]: value };
               const newGlobals = { ...globals, hubertTheme: newTheme };
