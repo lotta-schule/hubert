@@ -10,12 +10,11 @@
 
     "jsx": "react",
 
-    "declaration": true,
-    "emitDeclarationOnly": true,
+    "declaration": false,
     "outDir": "./dist",
-    "noEmitHelpers": true,
 
     "isolatedModules": true,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
 
