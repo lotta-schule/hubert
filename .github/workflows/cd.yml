@@ -13,9 +13,32 @@ on:
       - main
 
 jobs:
-  publish_artifact:
+  check_tag:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    outputs:
+      version_name: ${{ steps.step3.outputs.version_name }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.14'
+          registry-url: https://registry.npmjs.org
+      - name: Read version
+        run: |
+          export VERSION_NAME=$(node -p 'require("./package.json").version')
+          echo "::set-env name=VERSION_NAME::$VERSION_NAME"
+          echo "::set-output name=version_name::$VERSION_NAME"
+      - name: Check that tag does not exist
+        run: |
+          [ -z $(git tag -l "$VERSION_NAME") ]
+
+  publish_artifact:
+    runs-on: ubuntu-latest
+    needs:
+      - create_tag
     steps:
       - uses: actions/setup-node@v3
         with:
@@ -52,8 +75,15 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: Create and push tag
+        run: |
+          npm tag ${{needs.check_tag.outputs.version_name}}
+          npm push ${{needs.check_tag.outputs.version_name}}
+
   deploy-storybook:
     runs-on: ubuntu-latest
+    needs:
+      - publish_artifact
     steps:
       - uses: actions/checkout@v3
         with:
