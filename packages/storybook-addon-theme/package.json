@@ -7,7 +7,7 @@
   "scripts": {
     "start": "npm run build -- --watch",
     "build": "esbuild src/preset/*.tsx --bundle --sourcemap --format=esm --external:react-dom --external:@storybook/* --external:react --outdir=dist",
-    "test": "jest",
+    "test": "test 1",
     "lint": "eslint --ext js,jsx,ts,tsx src",
     "typecheck": "tsc --noEmit"
   },
