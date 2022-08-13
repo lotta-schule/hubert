@@ -1,7 +1,7 @@
 .root {
   background-color: rgb(var(--lotta-box-background-color));
   border-radius: var(--lotta-border-radius);
-  border: 1px solid rgb(var(--lotta-accent-grey));
+  border: 1px solid rgb(var(--lotta-accent-grey-color));
   width: 20em;
   max-height: 300px;
   overflow: auto;
@@ -11,7 +11,7 @@
   overflow: auto;
   li {
     padding: var(--lotta-spacing);
-    border-bottom: 1px solid rgb(var(--lotta-accent-grey));
+    border-bottom: 1px solid rgb(var(--lotta-accent-grey-color));
     outline: none;
     cursor: pointer;
     &:last-of-type {

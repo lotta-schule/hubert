@@ -13,7 +13,7 @@ export const defaultTheme = {
   dividerColor: '#e0e0e0',
   highlightColor: '#e0e0e0',
   bannerBackgroundColor: 'rgb(54, 123, 240)',
-  accentGrey: 'rgb(227, 227, 227)',
+  accentGreyColor: 'rgb(227, 227, 227)',
 
   spacing: `8px`,
   borderRadius: `4px`,
