@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: 16
           cache: 'npm' # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-dependencies
-      - run: npm -w @lotta-schule/storybook-addon-theme ci 
+      - run: npm ci 
       - run: npm -w @lotta-schule/storybook-addon-theme run lint
   test:
     runs-on: ubuntu-latest
@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: 16
           cache: 'npm' # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-dependencies
-      - run: npm -w @lotta-schule/storybook-addon-theme ci
+      - run: npm ci
       - run: npm -w @lotta-schule/storybook-addon-theme test -- --ci --coverage
       - uses: codecov/codecov-action@v3
         with:
@@ -55,7 +55,7 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
-      - run: npm -w @lotta-schule/storybook-addon-theme ci
+      - run: npm ci
       - run: npm -w @lotta-schule/storybook-addon-theme pack
       - name: Upload package artifact
         uses: actions/upload-artifact@v3
