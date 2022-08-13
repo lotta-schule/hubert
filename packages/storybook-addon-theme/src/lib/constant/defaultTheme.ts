@@ -2,6 +2,7 @@ export const defaultTheme = {
   primaryColor: '#ff5722',
   navigationBackgroundColor: '#333333',
   errorColor: '#ff0000',
+  successColor: '#0a5225',
   navigationColor: '#333333',
   disabledColor: '#616161',
   textColor: '#212121',
@@ -13,6 +14,7 @@ export const defaultTheme = {
   highlightColor: '#e0e0e0',
   bannerBackgroundColor: 'rgb(54, 123, 240)',
   accentGrey: 'rgb(227, 227, 227)',
+
   spacing: `8px`,
   borderRadius: `4px`,
 

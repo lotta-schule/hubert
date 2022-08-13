@@ -11,7 +11,7 @@ import '../button/button-group.scss';
 import '../button/navigation-button.scss';
 
 export const GlobalStyles = React.memo(() => {
-  const { theme } = useTheme();
+  const theme = useTheme();
 
   const allFonts = [...headerFonts, ...textFonts];
 

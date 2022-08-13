@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useTheme } from '../theme';
 import { Message } from './Message';
 
 export interface ErrorMessageProps {
@@ -9,27 +10,23 @@ export interface ErrorMessageProps {
 
 export const ErrorMessage = React.memo<ErrorMessageProps>(
   ({ error, className, children }) => {
+    const theme = useTheme();
+
     const errorMessage = React.useMemo(() => {
       const errorMessage = typeof error === 'string' ? error : error?.message;
       if (errorMessage) {
         return errorMessage.replace(/^GraphQL error: /, '');
       }
     }, [error]);
+
     if (!(children || errorMessage)) {
       return null;
     }
 
-    const color =
-      'rgb(' +
-      getComputedStyle(document.documentElement).getPropertyValue(
-        '--lotta-error-color'
-      ) +
-      ')';
-
     return (
       <Message
         role={'alert'}
-        color={color}
+        color={theme.errorColor}
         message={errorMessage}
         className={className}
       >

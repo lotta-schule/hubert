@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useTheme } from '../theme';
 import { Message } from './Message';
 
 export interface SuccessMessageProps {
@@ -8,14 +9,15 @@ export interface SuccessMessageProps {
 
 export const SuccessMessage = React.memo<SuccessMessageProps>(
   ({ message, className }) => {
-    const color =
-      'rgb(' +
-      getComputedStyle(document.documentElement).getPropertyValue(
-        '--lotta-success-color'
-      ) +
-      ')';
+    const theme = useTheme();
 
-    return <Message color={color} message={message} className={className} />;
+    return (
+      <Message
+        color={theme.successColor}
+        message={message}
+        className={className}
+      />
+    );
   }
 );
 SuccessMessage.displayName = 'SuccessMessage';
