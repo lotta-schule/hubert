@@ -1,0 +1,23 @@
+{
+  "name": "@lotta-schule/theme",
+  "version": "0.0.1-alpha.1",
+  "description": "Theme definition for hubert, lotta's component library",
+  "author": "Alexis Rinaldoni <alexis@rinaldoni.net>",
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "start": "npm run build -- --watch",
+    "build": "tsc",
+    "lint": "eslint --ext js,jsx,ts,tsx src"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "*.js"
+  ],
+  "devDependencies": {
+    "@types/node": "^18.6.4",
+    "typescript": "^4.7.4"
+  }
+}

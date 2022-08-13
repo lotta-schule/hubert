@@ -1,0 +1,44 @@
+name: 'Theme - CI'
+
+on:
+  push:
+    paths:
+      - 'packages/theme/**'
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm' # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-dependencies
+      - run: npm ci 
+      - run: npm -w @lotta-schule/theme run lint
+  pack:
+    runs-on: ubuntu-latest
+    needs:
+      - lint
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      - run: npm ci
+      - run: npm -w @lotta-schule/theme pack
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: npm package theme
+          path: lotta-schule-theme*.tgz
+          if-no-files-found: error
+
