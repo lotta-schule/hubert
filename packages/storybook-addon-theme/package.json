@@ -13,10 +13,10 @@
   },
   "exports": {
     ".": {
-      "require": "./preset.js"
+      "require": "./dist/preset.js"
     },
     "./*": {
-      "require": "./preset.js"
+      "require": "./dist/*.js"
     }
   },
   "files": [
