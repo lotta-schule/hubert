@@ -1,7 +1,7 @@
 import { DecoratorFn } from '@storybook/react';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import { DefaultThemes } from '@lotta-schule/theme';
 import { HubertProvider } from '../src/HubertProvider';
-import { defaultTheme } from '../src/theme';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -19,11 +19,9 @@ export const parameters = {
 
 export const decorators: DecoratorFn[] = [
   (Story, context) => {
-    console.log(context);
+    const theme = { ...DefaultThemes.standard, ...context.globals.hubertTheme };
     return (
-      <HubertProvider
-        theme={{ ...defaultTheme, ...context.globals.hubertTheme }}
-      >
+      <HubertProvider theme={theme}>
         <Story />
       </HubertProvider>
     );
