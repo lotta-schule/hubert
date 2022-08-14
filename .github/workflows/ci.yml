@@ -53,6 +53,7 @@ jobs:
           node-version: 16
           cache: 'npm'
       - run: npm ci
+      - run: npm -w @lotta-schule/theme run build
       - run: npm -w @lotta-schule/storybook-addon-theme run build
       - run: npm run typecheck
   storybook:
