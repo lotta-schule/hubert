@@ -32,6 +32,7 @@ jobs:
           node-version: 16
           cache: 'npm' # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-dependencies
       - run: npm ci
+      - run: npm -w @lotta-schule/theme run build
       - run: npm test -- --ci --coverage
       - uses: codecov/codecov-action@v3
         with:
