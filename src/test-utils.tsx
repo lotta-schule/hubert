@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { render, RenderOptions } from '@testing-library/react';
 import { HubertProvider } from './HubertProvider';
-import { defaultTheme } from './theme';
+import { DefaultThemes } from '@lotta-schule/theme';
 
 const ProviderFactory = (): React.FC => {
   const ComponentClass: React.FC = ({ children }) => {
-    return <HubertProvider theme={defaultTheme}>{children}</HubertProvider>;
+    return (
+      <HubertProvider theme={DefaultThemes.standard}>{children}</HubertProvider>
+    );
   };
 
   return ComponentClass;

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { RenderOptions } from '@storybook/addons';
 import { useParameter, useGlobals } from '@storybook/api';
-import { AddonPanel } from '@storybook/components';
+import { AddonPanel, ArgsTable } from '@storybook/components';
 import { styled } from '@storybook/theming';
-import { Grid, ThemePropControl } from '../component';
-import { defaultTheme } from '../constant/defaultTheme';
+import { DefaultThemes, ThemeName } from '@lotta-schule/theme';
+import { generateArgs } from '../generateArgs';
 
 const PARAM_KEY = 'hubertTheme';
 
@@ -15,34 +15,30 @@ export const Panel = ({ active, key }: RenderOptions) => {
     font-weight: ${({ theme }) => theme.typography.weight.black};
   `;
 
-  const value = useParameter<{ data: string } | null>(PARAM_KEY, null);
   const [globals, setGlobals] = useGlobals();
-  const item = value ? value.data : 'No story parameter defined';
+  const themeName = useParameter<ThemeName>(PARAM_KEY, 'standard');
 
   const theme = {
-    ...defaultTheme,
+    ...DefaultThemes[themeName],
     ...globals.hubertTheme,
   };
 
   return (
     <AddonPanel active={!!active} key={key}>
       <StyledHeader>Edit the current theme</StyledHeader>
-      {item}
-
-      <Grid columns={3}>
-        {Object.entries(theme).map(([key, value]) => (
-          <ThemePropControl
-            key={key}
-            name={key}
-            value={value as string}
-            onChange={(value) => {
-              const newTheme = { ...globals.hubertTheme, [key]: value };
-              const newGlobals = { ...globals, hubertTheme: newTheme };
-              setGlobals(newGlobals);
-            }}
-          />
-        ))}
-      </Grid>
+      <ArgsTable
+        rows={generateArgs()}
+        args={theme}
+        updateArgs={(args) => {
+          setGlobals({
+            ...globals,
+            hubertTheme: {
+              ...globals.hubertTheme,
+              ...args,
+            },
+          });
+        }}
+      />
     </AddonPanel>
   );
 };

@@ -4,7 +4,6 @@
  */
 
 export default {
-  preset: 'ts-jest',
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -183,7 +182,7 @@ export default {
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   transformIgnorePatterns: [
-    '/node_modules/',
+    '/node_modules/(?!@lotta-schule)',
     '\\.pnp\\.[^\\/]+$',
     '^.+\\.module\\.(css|sass|scss)$',
   ],

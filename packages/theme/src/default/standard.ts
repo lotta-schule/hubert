@@ -1,6 +1,6 @@
 import { Theme } from '../Theme';
 
-export const standard: Theme = {
+export const standardTheme: Theme = {
   primaryColor: '#ff5722',
   navigationBackgroundColor: '#333333',
   errorColor: '#ff0000',

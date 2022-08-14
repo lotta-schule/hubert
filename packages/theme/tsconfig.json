@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "module": "esnext",
+
     "rootDir": "./src",
     "moduleResolution": "node",
     "allowUmdGlobalAccess": false,
