@@ -4,7 +4,7 @@ import { useParameter, useGlobals } from '@storybook/api';
 import { AddonPanel, ArgsTable } from '@storybook/components';
 import { styled } from '@storybook/theming';
 import { schema, DefaultThemes, ThemeName } from '@lotta-schule/theme';
-import { Grid, ThemePropControl } from '../component';
+import { generateArgs } from '../generateArgs';
 
 const PARAM_KEY = 'hubertTheme';
 
@@ -27,32 +27,7 @@ export const Panel = ({ active, key }: RenderOptions) => {
     <AddonPanel active={!!active} key={key}>
       <StyledHeader>Edit the current theme</StyledHeader>
       <ArgsTable
-        rows={Object.entries(schema).reduce(
-          (acc, [property, { description, fallbackKey, type }]) => ({
-            ...acc,
-            [property]: {
-              key: property,
-              name: property,
-              description,
-              defaultValue: (DefaultThemes.standard as any)[property],
-              type: {
-                name: 'string',
-                required: fallbackKey ? false : true,
-              },
-              control: (() => {
-                switch (type) {
-                  case 'color':
-                    return { type: 'color' };
-                  case 'fontFamily':
-                    return { type: 'text' };
-                  default:
-                    return { type: 'text' };
-                }
-              })(),
-            },
-          }),
-          {}
-        )}
+        rows={generateArgs()}
         args={theme}
         updateArgs={(args) => {
           setGlobals({

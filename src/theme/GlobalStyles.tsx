@@ -44,18 +44,16 @@ export const GlobalStyles = React.memo(() => {
       document.documentElement.style.setProperty(`--lotta-${varKey}`, varVal);
 
       if (varKey.endsWith('-font-family')) {
-        const fontName = varVal.match("'(.+)'")?.[1];
+        const fontName = varVal.match("'(.+)'")?.[1] ?? varVal;
         const fontDef = allFonts.find((f) => f.name === fontName);
-        if (fontDef) {
+        if (fontName && fontDef) {
           if (
-            !document.head.querySelector(
-              `link[data-font-name="${fontDef.name}"]`
-            )
+            !document.head.querySelector(`link[data-font-name="${fontName}"]`)
           ) {
             const link = document.createElement('link');
             link.setAttribute('rel', 'stylesheet');
             link.setAttribute('href', fontDef.url);
-            link.setAttribute('data-font-name', fontDef.name);
+            link.setAttribute('data-font-name', fontName);
             document.head.appendChild(link);
           }
         }

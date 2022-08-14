@@ -38,7 +38,7 @@ describe('ThemeStylesheetManager', () => {
         document.documentElement.style.getPropertyValue(
           '--lotta-text-font-family'
         )
-      ).toEqual("'Muli'");
+      ).toEqual('Muli');
 
       expect(
         document.head.querySelector('link[data-font-name="Muli"]')

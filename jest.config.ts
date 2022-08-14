@@ -165,9 +165,7 @@ export default {
   // ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-  // testPathIgnorePatterns: [
-  //   "/node_modules/"
-  // ],
+  testPathIgnorePatterns: ['/node_modules/', '/packages/'],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
   // testRegex: [],
@@ -196,7 +194,7 @@ export default {
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   transformIgnorePatterns: [
-    '/node_modules/',
+    '/node_modules/(?!@lotta-schule/theme)',
     '\\.pnp\\.[^\\/]+$',
     '^.+\\.module\\.(css|sass|scss)$',
   ],
