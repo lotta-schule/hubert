@@ -1,34 +1,37 @@
 import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
-import { Label, LabelProps } from '../../label';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Label } from '../../label';
 import { Input, Select } from '../../form';
 
 export default {
   title: 'Form/Label',
   component: Label,
   argTypes: {},
-} as Meta;
+  args: {
+    label: 'I am a pretty label',
+  },
+} as ComponentMeta<typeof Label>;
 
-const Template: Story<Omit<LabelProps, 'ref'>> = (args) => (
-  <section>
-    <Label style={{ marginBottom: '3em' }} {...args}>
-      <Input />
-    </Label>
-
-    <Label style={{ marginBottom: '3em' }} {...args}>
-      <Select>
-        <option>Bla</option>
-        <option>Blu</option>
-      </Select>
-    </Label>
-
-    <Label style={{ marginBottom: '3em' }} {...args}>
-      Simple Text
-    </Label>
-  </section>
+export const InputLabel: ComponentStory<typeof Label> = ({ ...args }) => (
+  <Label {...args}>
+    <Input />
+  </Label>
 );
+InputLabel.storyName = 'Label for an Input';
 
-export const Default = Template.bind({});
-Default.args = {
-  label: 'I am a pretty label',
-};
+export const SelectLabel: ComponentStory<typeof Label> = ({ ...args }) => (
+  <Label {...args}>
+    <Select>
+      <option>Bla</option>
+      <option>Blu</option>
+    </Select>
+  </Label>
+);
+SelectLabel.storyName = 'Label for a Select';
+
+export const TextLabel: ComponentStory<typeof Label> = ({ ...args }) => (
+  <Label {...args}>
+    <span>Simple Text</span>
+  </Label>
+);
+TextLabel.storyName = 'Label for a Text';

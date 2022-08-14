@@ -1,6 +1,6 @@
 {
   "name": "@lotta-schule/storybook-addon-theme",
-  "version": "0.0.1-alpha.5",
+  "version": "0.0.2",
   "description": "Addon for storybook which allows managing the Hubert theme from within the documentation",
   "author": "Alexis Rinaldoni <alexis@rinaldoni.net>",
   "license": "GPL-3.0-or-later",
