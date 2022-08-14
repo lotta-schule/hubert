@@ -3,7 +3,7 @@ import { RenderOptions } from '@storybook/addons';
 import { useParameter, useGlobals } from '@storybook/api';
 import { AddonPanel, ArgsTable } from '@storybook/components';
 import { styled } from '@storybook/theming';
-import { schema, DefaultThemes, ThemeName } from '@lotta-schule/theme';
+import { DefaultThemes, ThemeName } from '@lotta-schule/theme';
 import { generateArgs } from '../generateArgs';
 
 const PARAM_KEY = 'hubertTheme';
