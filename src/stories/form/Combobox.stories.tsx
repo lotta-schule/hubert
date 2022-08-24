@@ -1,7 +1,10 @@
 import * as React from 'react';
-import { ComponentMeta, Story } from '@storybook/react';
-import { ComboBox, ComboBoxProps } from '../../form/comboBox';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { expect } from '@storybook/jest';
+import { userEvent, waitFor, within } from '@storybook/testing-library';
+import { ComboBox } from '../../form/comboBox';
 import { AccessAlarm, Home, AccountBalance } from '@material-ui/icons';
+import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'form/ComboBox',
@@ -9,6 +12,7 @@ export default {
   subcomponents: {},
   args: {
     title: 'Chose an icon ... wisely',
+    onSelect: action('onSelect'),
   },
   docs: {
     description: {
@@ -20,30 +24,44 @@ export default {
   },
 } as ComponentMeta<typeof ComboBox>;
 
-const Template: Story<ComboBoxProps> = (args) => <ComboBox {...args} />;
-
-export const WithPredefinedItems = Template.bind({});
+export const WithPredefinedItems: ComponentStory<typeof ComboBox> = (args) => (
+  <ComboBox {...args} />
+);
 WithPredefinedItems.args = {
   items: [
-    { key: 'home', leftSection: <Home />, label: 'Home' },
+    { key: 'home', leftSection: <Home />, label: 'Home', textValue: 'Home' },
     {
       key: 'alarm',
       leftSection: <AccessAlarm />,
       label: 'Alarm with right X',
+      textValue: 'Alarm',
       selected: true,
     },
     {
       key: 'account',
       leftSection: <AccountBalance />,
       label: 'Balance',
+      textValue: 'Balance',
     },
   ],
 };
+WithPredefinedItems.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
 
-export const WithRequestedItems = Template.bind({});
+  userEvent.click(canvas.getByRole('button'));
+  await waitFor(() => {
+    expect(canvas.getByRole('listbox')).toBeVisible();
+  });
+
+  userEvent.click(canvas.getByRole('option', { name: 'Balance' }));
+};
+
+export const WithRequestedItems: ComponentStory<typeof ComboBox> = (args) => (
+  <ComboBox {...args} />
+);
 WithRequestedItems.args = {
   items: async (value: string) => {
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    await new Promise((resolve) => setTimeout(resolve, 250));
     return new Array(Math.floor(Math.random() * 50))
       .fill(value)
       .map((content, i) => ({
@@ -54,3 +72,15 @@ WithRequestedItems.args = {
   },
 };
 WithRequestedItems.storyName = 'fetching items while typing';
+WithRequestedItems.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+
+  userEvent.click(canvas.getByRole('combobox'));
+  await userEvent.keyboard('sample text', { delay: 100 });
+
+  await waitFor(() => {
+    expect(canvas.getByRole('listbox')).toBeVisible();
+  });
+
+  userEvent.click(canvas.queryAllByRole('option')?.[0]);
+};

@@ -1,30 +1,25 @@
 import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
-import { Checkbox, CheckboxProps } from '../../form';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { expect } from '@storybook/jest';
+import { userEvent, within } from '@storybook/testing-library';
+import { Checkbox } from '../../form';
 
 export default {
   title: 'Form/Checkbox',
   component: Checkbox,
-} as Meta;
+  args: {
+    children: 'Yes, I accept all the evil I am forced to',
+  },
+} as ComponentMeta<typeof Checkbox>;
 
-const Template: Story<CheckboxProps> = (props) => {
-  return <Checkbox {...props} />;
-};
+export const Default: ComponentStory<typeof Checkbox> = (args) => (
+  <Checkbox {...args} />
+);
+Default.args = {};
+Default.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
 
-export const Default = Template.bind({});
-Default.args = {
-  children: 'Yes, I accept all the evil I am forced to',
-};
+  userEvent.click(canvas.getByRole('checkbox'));
 
-export const Checked = Template.bind({});
-Checked.args = {
-  children: 'Yes, I accept all the evil I am forced to',
-  isSelected: true,
-};
-
-export const CustomColor = Template.bind({});
-CustomColor.args = {
-  children: 'You agree going to sea in a yellow submarine?',
-  isSelected: true,
-  featureColor: [255, 255, 0],
+  expect(canvas.getByRole('checkbox')).toBeChecked();
 };

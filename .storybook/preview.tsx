@@ -1,5 +1,6 @@
 import { DecoratorFn } from '@storybook/react';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import { GlobalTypes } from '@storybook/csf';
 import { DefaultThemes } from '@lotta-schule/theme';
 import { HubertProvider } from '../src/HubertProvider';
 
@@ -27,3 +28,20 @@ export const decorators: DecoratorFn[] = [
     );
   },
 ];
+
+export const globalTypes: GlobalTypes = {
+  theme: {
+    name: 'Theme',
+    description: 'The theme for the Hubert components',
+    defaultValue: 'default',
+    toolbar: {
+      icon: 'circlehollow',
+      // Array of plain string values or MenuItem shape (see below)
+      items: ['default'],
+      // Property that specifies if the name of the item will be displayed
+      showName: true,
+      // Change title based on selected value
+      dynamicTitle: true,
+    },
+  },
+};
