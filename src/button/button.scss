@@ -35,9 +35,10 @@ aside nav.lotta-navbar ul {
     padding: 0.4em;
 }
 
-.lotta-button.only-icon
-    :not(.lotta-button-group .lotta-button)
-    :not(.lotta-button.variant__fill)
-    :hover {
+.lotta-button.only-icon {
+    &:not(.lotta-button-group .lotta-button):not(.lotta-button.variant__fill) {
+        &:hover {
     background-color: rgba(var(--lotta-primary-color), 0.2);
+        }
+    }
 }
