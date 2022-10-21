@@ -73,6 +73,7 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm -w @lotta-schule/theme run build
+      - run: npm -w @lotta-schule/storybook-addon-theme run build
       - run: npm -w @lotta-schule/storybook-addon-theme pack
       - name: Upload package artifact
         uses: actions/upload-artifact@v3
