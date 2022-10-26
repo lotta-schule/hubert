@@ -1,23 +1,27 @@
 {
   "name": "@lotta-schule/theme",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Theme definition for hubert, lotta's component library",
   "author": "Alexis Rinaldoni <alexis@rinaldoni.net>",
   "license": "GPL-3.0-or-later",
+  "type": "module",
+  "source": "src/index.ts",
+  "exports": {
+    "require": "./dist/lotta-theme.cjs",
+    "default": "./dist/lotta-theme.js"
+  },
+  "main": "dist/lotta-theme.cjs",
+  "module": "dist/lotta-theme.module.js",
+  "unpkg": "dist/lotta-theme.umd.js",
+  "types": "dist/lotta-theme.d.ts",
   "scripts": {
-    "start": "npm run build -- --watch",
-    "build": "tsc",
+    "start": "microbundle watch",
+    "build": "microbundle",
     "lint": "eslint --ext js,jsx,ts,tsx src"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist/**/*",
-    "README.md",
-    "*.js"
-  ],
   "devDependencies": {
     "@types/node": "^18.6.4",
+    "microbundle": "^0.15.1",
     "typescript": "^4.7.4"
   }
 }

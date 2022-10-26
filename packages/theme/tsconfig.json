@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "module": "CommonJS",
+    "target": "es6",
+    "module": "esnext",
 
     "rootDir": "./src",
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "allowUmdGlobalAccess": false,
 
     "lib": [],
