@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useTheme } from './ThemeContext';
-import { headerFonts, textFonts } from './fonts';
 import { kebabCase } from 'lodash';
 import Color from 'colorjs.io';
 
@@ -10,10 +9,25 @@ import '../button/button.scss';
 import '../button/button-group.scss';
 import '../button/navigation-button.scss';
 
-export const GlobalStyles = React.memo(() => {
-  const theme = useTheme();
+export type ExternalFont = {
+  /**
+   * The name under which the font is registered in the theme, e.g. 'Roboto'
+   **/
+  name: string;
 
-  const allFonts = [...headerFonts, ...textFonts];
+  /**
+   * The URL to the font's CSS file, e.g. 'https://fonts.googleapis.com/css2?family=Roboto&display=fallback',
+   * or could be a local file, e.g. '/fonts/Roboto.css' (served under the same domain as the app)
+   **/
+  url: string;
+};
+
+export type GlobalStylesProps = {
+  supportedFonts?: ExternalFont[];
+};
+
+export const GlobalStyles = React.memo(({ supportedFonts = [] }) => {
+  const theme = useTheme();
 
   const getVarValue = (value: string) => {
     try {
@@ -45,7 +59,7 @@ export const GlobalStyles = React.memo(() => {
 
       if (varKey.endsWith('-font-family')) {
         const fontName = varVal.match("'(.+)'")?.[1] ?? varVal;
-        const fontDef = allFonts.find((f) => f.name === fontName);
+        const fontDef = supportedFonts.find((f) => f.name === fontName);
         if (fontName && fontDef) {
           if (
             !document.head.querySelector(`link[data-font-name="${fontName}"]`)

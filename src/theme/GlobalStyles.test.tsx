@@ -32,7 +32,11 @@ describe('ThemeStylesheetManager', () => {
       };
     });
     it('should set the correct import style for fonts', () => {
-      render(<GlobalStyles />);
+      render(
+        <GlobalStyles
+          supportedFonts={[{ name: 'Muli', url: '/fonts/muli.css' }]}
+        />
+      );
 
       expect(
         document.documentElement.style.getPropertyValue(
