@@ -16,6 +16,7 @@ export const Message = React.memo<MessageProps>(
     const otherStyle: React.CSSProperties = {
       backgroundColor: `color(${color} saturation(-30))`,
       borderColor: color,
+      color,
     };
 
     return (
