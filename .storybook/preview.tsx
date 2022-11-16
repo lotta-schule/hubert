@@ -14,7 +14,6 @@ export const parameters = {
   },
   viewport: {
     viewports: INITIAL_VIEWPORTS,
-    defaultViewport: 'responsive',
   },
 };
 
@@ -32,6 +31,7 @@ export const decorators: DecoratorFn[] = [
 export const globalTypes: GlobalTypes = {
   theme: {
     name: 'Theme',
+    title: 'Hubert Theme',
     description: 'The theme for the Hubert components',
     defaultValue: 'default',
     toolbar: {
