@@ -12,7 +12,7 @@ export type PopoverProps = {
   isOpen: boolean;
   onClose: () => void;
   placement?: PopperProps<{}>['placement'];
-  triggerRef?: React.RefObject<HTMLElement>;
+  triggerRef: React.RefObject<HTMLElement>;
 };
 
 export const Popover = React.forwardRef(
@@ -33,7 +33,7 @@ export const Popover = React.forwardRef(
     );
 
     const { styles: popperStyle, attributes: popperProps } = usePopper(
-      triggerRef?.current,
+      triggerRef.current,
       ref.current,
       {
         placement,
@@ -60,7 +60,6 @@ export const Popover = React.forwardRef(
             <FocusScope restoreFocus>
               <DismissButton onDismiss={onClose} />
               {children}
-              <DismissButton onDismiss={onClose} />
             </FocusScope>
           </motion.div>
         )}

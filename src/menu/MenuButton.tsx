@@ -69,23 +69,25 @@ export const MenuButton = React.forwardRef(
     return (
       <div className={clsx(styles.root, className)} style={style}>
         <Button ref={ref} {...buttonProps} {...ariaButtonProps} />
-        <Popover
-          isOpen={state.isOpen}
-          onClose={state.close}
-          placement={placement}
-          triggerRef={ref}
-        >
-          <Menu
-            {...mergeProps(
-              { ...menuProps, autoFocus: !!menuProps.autoFocus },
-              props
-            )}
-            className={styles.menu}
+        {ref.current && (
+          <Popover
+            isOpen={state.isOpen}
             onClose={state.close}
+            placement={placement}
+            triggerRef={ref}
           >
-            {props.children}
-          </Menu>
-        </Popover>
+            <Menu
+              {...mergeProps(
+                { ...menuProps, autoFocus: !!menuProps.autoFocus },
+                props
+              )}
+              className={styles.menu}
+              onClose={state.close}
+            >
+              {props.children}
+            </Menu>
+          </Popover>
+        )}
       </div>
     );
   }
