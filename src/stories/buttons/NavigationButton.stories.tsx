@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 import { NavigationButton, NavigationButtonProps } from '../../button';
-import { Close } from '@material-ui/icons';
+import { Close } from '../../icon';
 
 export default {
   title: 'Buttons/NavigationButton',

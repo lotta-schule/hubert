@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Close } from '@material-ui/icons';
 import { Button } from '../button/Button';
+import { Close } from '../icon';
 import clsx from 'clsx';
 
 import styles from './Deletable.module.scss';

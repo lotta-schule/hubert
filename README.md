@@ -4,7 +4,7 @@ Hubert is a slim component library we use for the
 [lotta project](https://lotta.schule), a modern, easy-to use open source
 solution for the educational sector which wants to get privacy and security right.
 
-[https://lotta-schule.github.io/hubert](See available components on our storybook)
+[See available components on our storybook](https://lotta-schule.github.io/hubert)
 
 ## Install
 

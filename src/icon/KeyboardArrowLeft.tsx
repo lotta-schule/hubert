@@ -3,17 +3,18 @@ import clsx from 'clsx';
 
 import styles from './SvgIcon.module.scss';
 
-export const DragHandle = React.memo<React.SVGProps<SVGSVGElement>>(
+export const KeyboardArrowLeft = React.memo<React.SVGProps<SVGSVGElement>>(
   ({ className, ...props }) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
+      focusable="false"
       viewBox="0 0 24 24"
+      aria-hidden="true"
       className={clsx(styles.root, className)}
-      {...(props as any)}
+      {...props}
     >
-      <title>draggable</title>
-      <path d="M2 11h16v2H2zm0-4h16v2H2zm8 11l3-3H7l3 3zm0-16L7 5h6l-3-3z" />
+      <path d="M15.41 16.59 10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" />
     </svg>
   )
 );
-DragHandle.displayName = 'DragHandleIcon';
+KeyboardArrowLeft.displayName = 'KeyboardArrowLeftIcon';

@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { expect } from '@storybook/jest';
 import { userEvent, waitFor, within } from '@storybook/testing-library';
 import { ComboBox } from '../../form/comboBox';
-import { AccessAlarm, Home, AccountBalance } from '@material-ui/icons';
+import { DragHandle, Close, KeyboardArrowLeft } from '../../icon';
 import { action } from '@storybook/addon-actions';
 
 export default {
@@ -29,17 +29,22 @@ export const WithPredefinedItems: ComponentStory<typeof ComboBox> = (args) => (
 );
 WithPredefinedItems.args = {
   items: [
-    { key: 'home', leftSection: <Home />, label: 'Home', textValue: 'Home' },
+    {
+      key: 'home',
+      leftSection: <DragHandle />,
+      label: 'Home',
+      textValue: 'Home',
+    },
     {
       key: 'alarm',
-      leftSection: <AccessAlarm />,
+      leftSection: <Close />,
       label: 'Alarm with right X',
       textValue: 'Alarm',
       selected: true,
     },
     {
       key: 'account',
-      leftSection: <AccountBalance />,
+      leftSection: <KeyboardArrowLeft />,
       label: 'Balance',
       textValue: 'Balance',
     },
@@ -66,7 +71,7 @@ WithRequestedItems.args = {
       .fill(value)
       .map((content, i) => ({
         key: content + i,
-        leftSection: <Home />,
+        leftSection: <Close />,
         label: content + (i * Math.random() * 1024).toString(16),
       }));
   },

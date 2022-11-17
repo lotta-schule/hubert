@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Close } from '@material-ui/icons';
+import { Close } from '../icon';
 import { motion } from 'framer-motion';
 import { Button } from '../button/Button';
 import { Divider } from '../divider/Divider';

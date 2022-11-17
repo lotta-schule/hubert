@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Meta } from '@storybook/react';
-import { OpenInNew } from '@material-ui/icons';
+import { Close } from '../../icon';
 import { List, ListItem, ListItemSecondaryText, ListProps } from '../../list';
 import { Avatar } from '../../avatar';
 import { Button } from '../../button';
@@ -69,12 +69,12 @@ export const ActionList = (args: ListProps) => (
   <List {...args}>
     <ListItem
       leftSection={<Avatar src={getRandomAvatarUrl()} />}
-      rightSection={<Button icon={<OpenInNew />} />}
+      rightSection={<Button icon={<Close />} />}
     >
       Test
     </ListItem>
-    <ListItem rightSection={<Button icon={<OpenInNew />} />}>Test</ListItem>
-    <ListItem rightSection={<Button icon={<OpenInNew />} />}>Test</ListItem>
-    <ListItem rightSection={<Button icon={<OpenInNew />} />}>Test</ListItem>
+    <ListItem rightSection={<Button icon={<Close />} />}>Test</ListItem>
+    <ListItem rightSection={<Button icon={<Close />} />}>Test</ListItem>
+    <ListItem rightSection={<Button icon={<Close />} />}>Test</ListItem>
   </List>
 );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { FormatBold, FormatItalic, FormatUnderlined } from '@material-ui/icons';
+import { Close, KeyboardArrowLeft, KeyboardArrowRight } from '../../icon';
 import { Button, ButtonGroup } from '../../button';
 import { Toolbar, ToolbarProps } from '../../layout';
 
@@ -20,9 +20,9 @@ Default.args = {
   args: {},
   content: (
     <>
-      <Button small key={0} icon={<FormatBold />} selected />
-      <Button small key={1} icon={<FormatItalic />} />
-      <Button small key={2} icon={<FormatUnderlined />} />
+      <Button small key={0} icon={<KeyboardArrowLeft />} selected />
+      <Button small key={1} icon={<Close />} />
+      <Button small key={2} icon={<KeyboardArrowRight />} />
     </>
   ),
 };
@@ -42,7 +42,7 @@ Many.args = {
       <ButtonGroup>
         <Button small key={5} label={'U'} />
         <Button small key={6} label={'U'} />
-        <Button small key={7} icon={<FormatUnderlined />} />
+        <Button small key={7} icon={<Close />} />
         <Button small key={8} label={'U'} />
         <Button small key={9} label={'U'} />
         <Button small key={10} label={'U'} />

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { CollectionElement, Node } from '@react-types/shared';
 import { Item } from '../menu';
 import { ListItem, ListItemProps } from './ListItem';
-import { Check } from '@material-ui/icons';
+import { Check } from '../icon';
 
 export type ListItemPreliminaryItem = {
   key: React.Key;

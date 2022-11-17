@@ -3,7 +3,6 @@ import { useComboBoxState } from '@react-stately/combobox';
 import { useComboBox } from '@react-aria/combobox';
 import { useButton } from '@react-aria/button';
 import { debounce } from 'lodash';
-import { ExpandMore } from '@material-ui/icons';
 import {
   ListItemFactory,
   ListItemPreliminaryItem,
@@ -14,6 +13,7 @@ import { Label } from '../../label';
 import { ListBox } from '../../menu/ListBox';
 import { Popover } from '../../popover/new/Popover';
 import { CircularProgress } from '../../progress';
+import { ExpandMore } from '../../icon';
 import clsx from 'clsx';
 
 import styles from './ComboBox.module.scss';

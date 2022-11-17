@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Menu, Book } from '@material-ui/icons';
 import { ItemProps } from '@react-types/shared';
+import { Close, ChevronRight } from '../icon';
 import { Item } from '../menu';
 import { render } from '../test-utils';
 import { ListItemFactory, ListItemPreliminaryItem } from './ListItemFactory';
@@ -11,8 +11,8 @@ describe('list/ListItemFactory', () => {
       const preliminaryItem: ListItemPreliminaryItem = {
         key: 'test',
         label: 'Test',
-        leftSection: <Menu />,
-        rightSection: <Book />,
+        leftSection: <Close />,
+        rightSection: <ChevronRight />,
         description: 'Test description',
       };
 
@@ -51,8 +51,8 @@ describe('list/ListItemFactory', () => {
           rendered: ListItemFactory.createItem({
             key: 'test',
             label: 'Test',
-            leftSection: <Menu />,
-            rightSection: <Book />,
+            leftSection: <Close />,
+            rightSection: <ChevronRight />,
             description: 'Test description',
           }).props.children,
         } as any)
@@ -69,12 +69,13 @@ describe('list/ListItemFactory', () => {
                 <span>
                   <svg
                     aria-hidden="true"
-                    class="MuiSvgIcon-root"
+                    class="root"
                     focusable="false"
                     viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+                      d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
                     />
                   </svg>
                 </span>
@@ -92,12 +93,13 @@ describe('list/ListItemFactory', () => {
               <div>
                 <svg
                   aria-hidden="true"
-                  class="MuiSvgIcon-root"
+                  class="root"
                   focusable="false"
                   viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"
+                    d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
                   />
                 </svg>
               </div>

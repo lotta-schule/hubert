@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
+import { KeyboardArrowLeft, KeyboardArrowRight } from '../icon';
 import { NavigationButton } from '../button/NavigationButton';
 import clsx from 'clsx';
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { Close } from '@material-ui/icons';
+import { Close } from '../../icon';
 import { Button, ButtonProps } from '../../button';
 
 export default {

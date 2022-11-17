@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 import { MenuButton, Item } from '../../menu';
 import { action } from '@storybook/addon-actions';
-import { AccessAlarm, Home } from '@material-ui/icons';
+import { Close, ChevronRight } from '../../icon';
 
 export default {
   title: 'menus/MenuButton',
@@ -24,10 +24,10 @@ const Template: Story = (args: any) => (
   >
     <MenuButton {...args}>
       <Item key={'Menuitem 1'}>
-        <Home /> MenuItem 1
+        <Close /> MenuItem 1
       </Item>
       <Item key={'Menuitem 2'}>
-        <AccessAlarm />
+        <ChevronRight />
         MenuItem 1
       </Item>
       <Item key={'Menuitem 3'}>MenuItem 3</Item>

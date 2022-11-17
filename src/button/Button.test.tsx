@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Close } from '@material-ui/icons';
+import { Close } from '../icon';
 import { render } from '../test-utils';
 import { Button } from './Button';
 

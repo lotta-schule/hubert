@@ -1,6 +1,6 @@
 {
   "name": "@lotta-schule/hubert",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "Component Library for lotta",
   "workspaces": [
     "packages/*"
@@ -106,7 +106,6 @@
     "whatwg-fetch": "^3.6.2"
   },
   "peerDependencies": {
-    "@material-ui/icons": ">= 4.0.0",
     "framer-motion": ">= 6.3.0 < 8",
     "react": ">= 17.0.0 < 19",
     "react-dom": ">= 17.0.0 < 19",
