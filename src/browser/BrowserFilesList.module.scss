@@ -1,0 +1,28 @@
+.root {
+  width: 33.3333%;
+  min-width: 200px;
+  height: 100%;
+  display: list-item;
+  border-right: 1px solid rgba(var(--lotta-accent-grey-color));
+
+  li {
+    display: flex;
+    width: 100%;
+    padding: var(--lotta-spacing);
+    font-size: 10pt;
+
+    cursor: pointer;
+    .fileIcon {
+      width: 20%;
+    }
+    .fileName {
+      width: 70%;
+    }
+    .fileEdit {
+      width: 10%;
+    }
+    &:hover {
+      background-color: rgba(var(--lotta-accent-grey-color), 0.3);
+    }
+  }
+}

@@ -1,0 +1,21 @@
+.root {
+  margin: auto;
+  min-width: 33.333%;
+  height: 100%;
+  padding: var(--lotta-spacing);
+  .previewImage {
+    width: 200px;
+    height: 150px;
+    background-color: rgba(var(--lotta-accent-grey-color));
+    border-radius: var(--lotta-border-radius);
+    margin: 0 auto;
+  }
+  .infoSection {
+    margin: 0 auto;
+    width: 200px;
+    font-size: 10pt;
+  }
+  .deleteButton {
+    float: right;
+  }
+}
