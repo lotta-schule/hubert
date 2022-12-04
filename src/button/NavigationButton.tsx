@@ -2,17 +2,29 @@ import * as React from 'react';
 import { Button, ButtonProps } from './Button';
 import clsx from 'clsx';
 
-export type NavigationButtonProps = ButtonProps;
+import styles from './NavigationButton.module.scss';
+
+export type NavigationButtonProps = Omit<ButtonProps, 'variant'> & {
+  secondary?: boolean;
+  selected?: boolean;
+};
 
 export const NavigationButton = React.forwardRef<
   HTMLButtonElement,
   NavigationButtonProps
->((props, ref) => {
+>(({ className, secondary, ...buttonProps }, ref) => {
   return (
     <Button
-      {...props}
+      {...buttonProps}
       ref={ref}
-      className={clsx('lotta-navigation-button', props.className)}
+      classes={{
+        root: clsx(styles.root, className, {
+          [styles.secondary]: secondary,
+          [styles.selected]: buttonProps.selected,
+        }),
+        icon: styles.icon,
+        label: styles.label,
+      }}
     />
   );
 });

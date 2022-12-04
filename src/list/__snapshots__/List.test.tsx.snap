@@ -152,12 +152,13 @@ exports[`List should render with subsection right 1`] = `
         <div>
           <button
             aria-current="false"
-            class="lotta-base-button variant__default lotta-button"
+            class="root root"
+            data-variant="default"
             role="button"
             type="button"
           >
             <span
-              class="lotta-button_text"
+              class="label"
             >
               Test
             </span>
@@ -175,12 +176,13 @@ exports[`List should render with subsection right 1`] = `
         <div>
           <button
             aria-current="false"
-            class="lotta-base-button variant__default lotta-button"
+            class="root root"
+            data-variant="default"
             role="button"
             type="button"
           >
             <span
-              class="lotta-button_text"
+              class="label"
             >
               Test
             </span>
@@ -198,12 +200,13 @@ exports[`List should render with subsection right 1`] = `
         <div>
           <button
             aria-current="false"
-            class="lotta-base-button variant__default lotta-button"
+            class="root root"
+            data-variant="default"
             role="button"
             type="button"
           >
             <span
-              class="lotta-button_text"
+              class="label"
             >
               Test
             </span>
@@ -221,12 +224,13 @@ exports[`List should render with subsection right 1`] = `
         <div>
           <button
             aria-current="false"
-            class="lotta-base-button variant__default lotta-button"
+            class="root root"
+            data-variant="default"
             role="button"
             type="button"
           >
             <span
-              class="lotta-button_text"
+              class="label"
             >
               Test
             </span>

@@ -10,12 +10,13 @@ exports[`util/Tooltip should render 1`] = `
     >
       <button
         aria-current="false"
-        class="lotta-base-button variant__default lotta-button"
+        class="root root"
+        data-variant="default"
         role="button"
         type="button"
       >
         <span
-          class="lotta-button_text"
+          class="label"
         >
           Test
         </span>

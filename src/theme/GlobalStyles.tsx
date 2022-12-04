@@ -3,11 +3,7 @@ import { useTheme } from './ThemeContext';
 import { kebabCase } from 'lodash';
 import Color from 'colorjs.io';
 
-import './globalStylesheet.scss';
-import '../button/base-button.scss';
-import '../button/button.scss';
-import '../button/button-group.scss';
-import '../button/navigation-button.scss';
+import './GlobalStyles.module.scss';
 
 export type ExternalFont = {
   /**

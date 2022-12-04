@@ -1,4 +1,4 @@
-.lotta-base-button {
+.root {
   position: relative;
   border: 1px solid rgba(var(--lotta-primary-color), 1);
   color: rgba(var(--lotta-primary-color), 1);
@@ -27,33 +27,27 @@
     border-color: rgba(var(--lotta-disabled-color), 1);
   }
 
-  &:hover:not([disabled]) {
-    background-color: rgba(var(--lotta-primary-color), 0.1);
-    transition: linear;
-    transition-duration: 0.2s;
-  }
-
   &.selected {
     border: 1px solid rgba(var(--lotta-primary-color), 1);
     background-color: rgba(var(--lotta-primary-color), 0.2);
     filter: brightness(90%);
 
     &:hover {
-      filter: brightness(0.9);
+      filter: brightness(90%);
     }
     &:active {
       filter: brightness(70%);
     }
   }
 
-  &.full-width {
+  &.fullWidth {
     width: 100%;
   }
 
   /**
       * Custom styles for different variants
       */
-  &.variant__fill {
+  &[data-variant='fill'] {
     background-color: rgba(var(--lotta-primary-color), 1);
     color: rgba(var(--lotta-contrast-text-color), 1);
     border: none;
@@ -69,10 +63,10 @@
       filter: none;
     }
   }
-  &.variant__borderless {
+  &[data-variant='borderless'] {
     border: none;
   }
-  &.variant__error {
+  &[data-variant='error'] {
     background-color: rgba(var(--lotta-error-color), 1);
     color: #fff;
     border: none;
