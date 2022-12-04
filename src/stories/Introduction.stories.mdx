@@ -35,10 +35,12 @@ import { HubertProvider } from '@lotta-schule/hubert';
 
 export const MyTopComponent = () => (
   <HubertProvider
-    supportedFonts={{
-      Quicksand:
-        'https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap',
-    }}
+    supportedFonts={[
+      {
+        name: 'Quicksand',
+        url: 'https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap',
+      },
+    ]}
   >
     <MyMainComponent />
   </HubertProvider>
