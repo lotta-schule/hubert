@@ -1,18 +1,23 @@
 import * as React from 'react';
-import clsx from 'clsx';
-import { Button } from './../button/Button';
+import { Icon } from '../icon';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './BrowserFilePreview.module.scss';
 
 export const BrowserFilePreview = React.memo(() => {
   return (
     <div className={styles.root}>
-      <div className={styles.previewImage}>
-        <div className={styles.deleteButton}>
-          <Button />
-        </div>
+      <div className={styles.previewImage}></div>
+      <div className={styles.infoSection}>
+        {' '}
+        Informationen Informationen Informationen Informationen Informationen
+        Informationen Informationen Informationen Informationen Informationen
+        Informationen Informationen Informationen Informationen Informationen
+        Informationen Informationen Informationen Informationen Informationen
+        Informationen Informationen Informationen Informationen Informationen
+        Informationen Informationen Informationen Informationen Informationen
+        Informationen
       </div>
-      <div className={styles.infoSection}> Informationen</div>
     </div>
   );
 });

@@ -4,5 +4,6 @@ export * from './ChevronRight';
 export * from './Close';
 export * from './DragHandle';
 export * from './ExpandMore';
+export * from './Icon';
 export * from './KeyboardArrowLeft';
 export * from './KeyboardArrowRight';

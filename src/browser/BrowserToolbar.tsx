@@ -1,8 +1,9 @@
 import * as React from 'react';
-import clsx from 'clsx';
+import { Icon } from '../icon';
 import { Input } from './../form/input/Input';
 
 import styles from './BrowserToolbar.module.scss';
+import { faCloudUpload, faFolderPlus } from '@fortawesome/free-solid-svg-icons';
 
 export const BrowserToolbar = React.memo(() => {
   return (
@@ -10,9 +11,12 @@ export const BrowserToolbar = React.memo(() => {
       <div className={styles.leftContainer}>paths</div>
       <div className={styles.searchField}>
         {' '}
-        <Input />
+        <Input placeholder="Datei suchen" />
       </div>
-      <div className={styles.rightContainer}>Icons</div>
+      <div className={styles.rightContainer}>
+        <Icon icon={faFolderPlus} />
+        <Icon icon={faCloudUpload} />
+      </div>
     </div>
   );
 });

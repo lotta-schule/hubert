@@ -2,6 +2,12 @@
   background-color: rgba(var(--lotta-page-background-color), 1);
   height: 300px;
   display: flex;
-  overflow: auto;
+  overflow: hidden;
   display: -webkit-box;
+
+  .BrowserColumns {
+    width: 66.666%;
+    display: inherit;
+    overflow: auto;
+  }
 }
