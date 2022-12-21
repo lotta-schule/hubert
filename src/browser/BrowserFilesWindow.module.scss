@@ -3,11 +3,11 @@
   height: 300px;
   display: flex;
   overflow: hidden;
-  display: -webkit-box;
+  display: flex;
 
   .BrowserColumns {
-    width: 66.666%;
-    display: inherit;
+    display: flex;
     overflow: auto;
+    width: 100%;
   }
 }
