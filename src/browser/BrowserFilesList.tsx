@@ -19,7 +19,7 @@ export const BrowserFilesList = React.memo(
   ({ narrow }: BrowserFilesListProps) => {
     return (
       <ul className={clsx(styles.root, { [styles.narrow]: narrow })}>
-        <li>
+        <li className={styles.selected}>
           <div className={styles.fileIcon}>
             <Icon icon={faFileImage} />
           </div>

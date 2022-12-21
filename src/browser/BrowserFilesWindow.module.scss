@@ -11,3 +11,9 @@
     width: 100%;
   }
 }
+.paths {
+  background-color: rgba(var(--lotta-accent-grey-color), 1);
+  padding: var(--lotta-spacing);
+  font-size: 8pt;
+  color: rgba(var(--lotta-text-color), 0.5);
+}

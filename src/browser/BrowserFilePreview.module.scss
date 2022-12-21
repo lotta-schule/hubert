@@ -4,10 +4,10 @@
   height: 100%;
   padding: var(--lotta-spacing);
   display: grid;
+
   .previewImage {
-    width: 200px;
+    max-width: 90%;
     height: 150px;
-    background-color: rgba(var(--lotta-accent-grey-color));
     border-radius: var(--lotta-border-radius);
     margin: 0 auto;
   }

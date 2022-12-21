@@ -8,7 +8,7 @@ import { faCloudUpload, faFolderPlus } from '@fortawesome/free-solid-svg-icons';
 export const BrowserToolbar = React.memo(() => {
   return (
     <div className={styles.root}>
-      <div className={styles.leftContainer}>paths</div>
+      <div className={styles.leftContainer}>file name</div>
       <div className={styles.searchField}>
         {' '}
         <Input placeholder="Datei suchen" />

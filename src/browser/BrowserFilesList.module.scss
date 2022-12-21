@@ -7,7 +7,7 @@
   overflow: scroll;
 
   &.narrow {
-    flex: 0 0 33.3%;
+    flex: 0 0 33.333%;
   }
 
   li {
@@ -26,12 +26,20 @@
       margin: auto;
     }
     .fileEdit {
-      width: 15%;
-      display: inline;
-      margin: auto;
+      color: rgba(var(--lotta-primary-color), 0);
+      width: 20%;
+      min-width: 4.5em;
     }
     &:hover {
       background-color: rgba(var(--lotta-accent-grey-color), 0.3);
+      .fileEdit {
+        display: inline;
+        margin: auto;
+        color: rgba(var(--lotta-primary-color), 1);
+      }
+    }
+    &.selected {
+      background-color: rgba(var(--lotta-primary-color), 0.15);
     }
   }
 }
