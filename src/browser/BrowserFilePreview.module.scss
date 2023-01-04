@@ -1,20 +1,38 @@
+@import '../breakpoints';
+
 .root {
   margin: auto;
-  min-width: 33.333%;
+  width: 33.333%;
   height: 100%;
   padding: var(--lotta-spacing);
   display: grid;
+  @media screen and (max-width: $max-xs) {
+    width: 50%;
+  }
 
   .previewImage {
     max-width: 90%;
-    height: 150px;
     border-radius: var(--lotta-border-radius);
     margin: 0 auto;
+    & img {
+      @media screen and (max-width: $max-xs) {
+        height: 60px;
+      }
+      @media screen and (min-width: $min-sm) {
+        height: 100px;
+      }
+      @media screen and (min-width: $min-lg) {
+        height: 150px;
+      }
+    }
   }
   .infoSection {
-    margin: 0 auto;
-    width: 200px;
+    margin-top: var(--lotta-spacing);
+    margin-left: 10%;
+    margin-right: 10%;
+    width: auto;
     font-size: 10pt;
-    overflow: auto;
+    overflow: scroll;
+    text-align: center;
   }
 }
