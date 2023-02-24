@@ -1,3 +1,4 @@
+---
 name: CI
 
 on:
@@ -104,4 +105,3 @@ jobs:
           name: npm package
           path: lotta-schule-hubert*.tgz
           if-no-files-found: error
-
