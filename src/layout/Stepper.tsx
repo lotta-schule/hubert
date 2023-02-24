@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '../icon';
-import { NavigationButton } from '../button/NavigationButton';
+import { NavigationButton } from '../button';
 import clsx from 'clsx';
 
 import styles from './Stepper.module.scss';
@@ -23,6 +23,7 @@ export const Stepper = React.memo<StepperProps>(
           onClick={() => onStep(currentStep - 1)}
           disabled={currentStep <= 0}
           aria-label={'Vorheriger Schritt'}
+          style={{ color: 'rgba(var(--lotta-text-color), 1)' }}
         >
           vorheriges
         </NavigationButton>
@@ -35,6 +36,7 @@ export const Stepper = React.memo<StepperProps>(
           onClick={() => onStep(currentStep + 1)}
           disabled={currentStep >= maxSteps - 1}
           aria-label={'Nächster Schritt'}
+          style={{ color: 'rgba(var(--lotta-text-color), 1)' }}
         >
           nächstes
         </NavigationButton>

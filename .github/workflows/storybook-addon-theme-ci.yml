@@ -1,3 +1,4 @@
+---
 name: 'Storybook Theme Addon - CI'
 
 on:
@@ -17,8 +18,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: 'npm' # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-dependencies
-      - run: npm ci 
+          cache: 'npm'
+      - run: npm ci
       - run: npm -w @lotta-schule/storybook-addon-theme run lint
   test:
     runs-on: ubuntu-latest
@@ -30,7 +31,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: 'npm' # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-dependencies
+          cache: 'npm'
       - run: npm ci
       - run: npm -w @lotta-schule/theme run build
       - run: npm -w @lotta-schule/storybook-addon-theme test -- --ci --coverage
@@ -81,4 +82,3 @@ jobs:
           name: npm package storybook-addon-theme
           path: lotta-schule-storybook-addon-theme*.tgz
           if-no-files-found: error
-
