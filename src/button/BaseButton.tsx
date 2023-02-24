@@ -1,6 +1,8 @@
 import * as React from 'react';
 import clsx from 'clsx';
 
+import styles from './BaseButton.module.scss';
+
 export type BaseButtonProps = {
   /**
    * Wether the button is currently 'active' or 'selected'
@@ -61,13 +63,9 @@ export const BaseButton = React.forwardRef<any, BaseButtonProps>(
         type: props.type ?? 'button',
         role: 'button',
         style,
+        'data-variant': variant,
         [selectedAriaAttribute]: selected,
-        className: clsx(
-          'lotta-base-button',
-          `variant__${variant}`,
-          { selected, 'full-width': fullWidth },
-          className
-        ),
+        className: clsx(styles.root, className, { selected, fullWidth }),
         ...props,
       },
       children

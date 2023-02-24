@@ -4,7 +4,7 @@ import { ArrowUpwardRounded } from '../icon';
 import { motion } from 'framer-motion';
 import { useScrollEvent, useWindowSize } from '../util';
 
-import styles from './scroll-to-top-button.module.scss';
+import styles from './ScrollToTopButton.module.scss';
 
 const AnimatedButton = motion(Button);
 

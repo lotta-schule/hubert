@@ -1,6 +1,6 @@
 {
   "name": "@lotta-schule/hubert",
-  "version": "0.0.23",
+  "version": "0.0.25",
   "description": "Component Library for lotta",
   "workspaces": [
     "packages/*"

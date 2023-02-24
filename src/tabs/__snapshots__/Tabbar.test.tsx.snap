@@ -11,65 +11,70 @@ exports[`tabs/Tabbar snapshot test 1`] = `
     >
       <button
         aria-selected="false"
-        class="lotta-base-button variant__default lotta-button lotta-navigation-button tab"
+        class="root root root tab"
+        data-variant="default"
         role="tab"
         type="button"
         value="0"
       >
         <span
-          class="lotta-button_text"
+          class="label label"
         >
           Tab1 bla bla bla
         </span>
       </button>
       <button
         aria-selected="false"
-        class="lotta-base-button variant__default lotta-button lotta-navigation-button tab"
+        class="root root root tab"
+        data-variant="default"
         role="tab"
         type="button"
         value="1"
       >
         <span
-          class="lotta-button_text"
+          class="label label"
         >
           Tab2
         </span>
       </button>
       <button
         aria-selected="false"
-        class="lotta-base-button variant__default lotta-button lotta-navigation-button tab"
+        class="root root root tab"
+        data-variant="default"
         role="tab"
         type="button"
         value="2"
       >
         <span
-          class="lotta-button_text"
+          class="label label"
         >
           Tab3
         </span>
       </button>
       <button
         aria-selected="true"
-        class="lotta-base-button variant__default selected lotta-button lotta-navigation-button tab"
+        class="root root root tab selected selected"
+        data-variant="default"
         role="tab"
         type="button"
         value="3"
       >
         <span
-          class="lotta-button_text"
+          class="label label"
         >
           Tab4 dingsi bumso
         </span>
       </button>
       <button
         aria-selected="false"
-        class="lotta-base-button variant__default lotta-button lotta-navigation-button tab"
+        class="root root root tab"
+        data-variant="default"
         role="tab"
         type="button"
         value="4"
       >
         <span
-          class="lotta-button_text"
+          class="label label"
         >
           Tab5
         </span>

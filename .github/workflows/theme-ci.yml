@@ -1,3 +1,4 @@
+---
 name: 'Theme - CI'
 
 on:
@@ -17,8 +18,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: 'npm' # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-dependencies
-      - run: npm ci 
+          cache: 'npm'
+      - run: npm ci
       - run: npm -w @lotta-schule/theme run lint
   pack:
     runs-on: ubuntu-latest
@@ -42,4 +43,3 @@ jobs:
           name: npm package theme
           path: lotta-schule-theme*.tgz
           if-no-files-found: error
-
