@@ -72,7 +72,7 @@ export const GlobalStyles = React.memo(
       }
     }, [theme]);
 
-    return <div className={styles.root} />;
+    return <div className={styles.globalRoot} />;
   }
 );
 GlobalStyles.displayName = 'GlobalHubertStyles';
