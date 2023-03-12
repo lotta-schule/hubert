@@ -60,6 +60,9 @@ describe('list/ListItemFactory', () => {
       expect(screen.container).toMatchInlineSnapshot(`
         <div>
           <div
+            class="globalRoot"
+          />
+          <div
             data-overlay-container="true"
           >
             <li
@@ -120,6 +123,9 @@ describe('list/ListItemFactory', () => {
       );
       expect(screen.container).toMatchInlineSnapshot(`
         <div>
+          <div
+            class="globalRoot"
+          />
           <div
             data-overlay-container="true"
           >

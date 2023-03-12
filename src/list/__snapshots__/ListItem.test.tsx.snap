@@ -3,6 +3,9 @@
 exports[`list/ListItem should render a list item 1`] = `
 <div>
   <div
+    class="globalRoot"
+  />
+  <div
     data-overlay-container="true"
   >
     <li
