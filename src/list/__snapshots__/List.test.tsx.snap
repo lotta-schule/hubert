@@ -3,9 +3,6 @@
 exports[`List should render 1`] = `
 <div>
   <div
-    class="globalRoot"
-  />
-  <div
     data-overlay-container="true"
   >
     <ul
@@ -54,9 +51,6 @@ exports[`List should render 1`] = `
 
 exports[`List should render with subsection left 1`] = `
 <div>
-  <div
-    class="globalRoot"
-  />
   <div
     data-overlay-container="true"
   >
@@ -134,9 +128,6 @@ exports[`List should render with subsection left 1`] = `
 
 exports[`List should render with subsection right 1`] = `
 <div>
-  <div
-    class="globalRoot"
-  />
   <div
     data-overlay-container="true"
   >
