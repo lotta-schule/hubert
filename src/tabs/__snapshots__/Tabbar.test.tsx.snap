@@ -3,6 +3,9 @@
 exports[`tabs/Tabbar snapshot test 1`] = `
 <div>
   <div
+    class="globalRoot"
+  />
+  <div
     data-overlay-container="true"
   >
     <div
