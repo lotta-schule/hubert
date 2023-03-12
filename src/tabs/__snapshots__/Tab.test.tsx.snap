@@ -3,9 +3,6 @@
 exports[`tabs/Tab should render a Tab button 1`] = `
 <div>
   <div
-    class="globalRoot"
-  />
-  <div
     data-overlay-container="true"
   >
     <button
