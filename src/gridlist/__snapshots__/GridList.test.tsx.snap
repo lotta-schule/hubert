@@ -3,9 +3,6 @@
 exports[`GridList should render a GridList 1`] = `
 <div>
   <div
-    class="globalRoot"
-  />
-  <div
     data-overlay-container="true"
   >
     <ul

@@ -3,7 +3,7 @@ import { useTheme } from './ThemeContext';
 import { kebabCase } from 'lodash';
 import Color from 'colorjs.io';
 
-import styles from './GlobalStyles.module.scss';
+import './GlobalStyles.scss';
 
 export type ExternalFont = {
   /**
@@ -72,7 +72,7 @@ export const GlobalStyles = React.memo(
       }
     }, [theme]);
 
-    return <div className={styles.globalRoot} />;
+    return null;
   }
 );
 GlobalStyles.displayName = 'GlobalHubertStyles';
