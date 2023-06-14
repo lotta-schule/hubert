@@ -7,7 +7,6 @@ import { useMenuTrigger } from '@react-aria/menu';
 import { mergeProps } from '@react-aria/utils';
 import { Popover, PopoverProps } from '../popover/new/Popover';
 import { Menu, WithDescription } from './Menu';
-import clsx from 'clsx';
 
 import styles from './MenuButton.module.scss';
 
