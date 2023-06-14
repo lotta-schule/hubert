@@ -11,13 +11,14 @@ exports[`Stepper should render a stepper 1`] = `
       <button
         aria-current="false"
         aria-label="Vorheriger Schritt"
-        class="lotta-base-button variant__default lotta-button lotta-navigation-button small"
+        class="root root root small"
+        data-variant="default"
         disabled=""
         role="button"
         type="button"
       >
         <span
-          class="lotta-button_icon"
+          class="icon icon"
         >
           <svg
             aria-hidden="true"
@@ -32,7 +33,7 @@ exports[`Stepper should render a stepper 1`] = `
           </svg>
         </span>
         <span
-          class="lotta-button_text"
+          class="label label"
         >
           vorheriges
         </span>
@@ -45,12 +46,13 @@ exports[`Stepper should render a stepper 1`] = `
       <button
         aria-current="false"
         aria-label="Nächster Schritt"
-        class="lotta-base-button variant__default lotta-button lotta-navigation-button small"
+        class="root root root small"
+        data-variant="default"
         role="button"
         type="button"
       >
         <span
-          class="lotta-button_icon"
+          class="icon icon"
         >
           <svg
             aria-hidden="true"
@@ -65,7 +67,7 @@ exports[`Stepper should render a stepper 1`] = `
           </svg>
         </span>
         <span
-          class="lotta-button_text"
+          class="label label"
         >
           nächstes
         </span>

@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { DecoratorFn } from '@storybook/react';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { GlobalTypes } from '@storybook/csf';
@@ -21,7 +22,15 @@ export const decorators: DecoratorFn[] = [
   (Story, context) => {
     const theme = { ...DefaultThemes.standard, ...context.globals.hubertTheme };
     return (
-      <HubertProvider theme={theme}>
+      <HubertProvider
+        theme={theme}
+        supportedFonts={[
+          {
+            name: 'Muli',
+            url: 'https://fonts.googleapis.com/css2?family=Muli&display=swap',
+          },
+        ]}
+      >
         <Story />
       </HubertProvider>
     );

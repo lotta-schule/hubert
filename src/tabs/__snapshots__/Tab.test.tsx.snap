@@ -7,13 +7,14 @@ exports[`tabs/Tab should render a Tab button 1`] = `
   >
     <button
       aria-selected="false"
-      class="lotta-base-button variant__default lotta-button lotta-navigation-button tab"
+      class="root root root tab"
+      data-variant="default"
       role="tab"
       type="button"
       value="4"
     >
       <span
-        class="lotta-button_text"
+        class="label label"
       >
         Tab-Button
       </span>
