@@ -7,14 +7,11 @@ import { useMenuTrigger } from '@react-aria/menu';
 import { mergeProps } from '@react-aria/utils';
 import { Popover, PopoverProps } from '../popover/new/Popover';
 import { Menu, WithDescription } from './Menu';
-import clsx from 'clsx';
 
 import styles from './MenuButton.module.scss';
 
 export type MenuButtonProps = {
   buttonProps: Omit<ButtonProps, 'ref'>;
-  className?: string;
-  style?: React.CSSProperties;
   children: CollectionChildren<object>;
   placement?: PopoverProps['placement'];
   onOpenChange?: (_isOpen: boolean) => void;
@@ -23,14 +20,7 @@ export type MenuButtonProps = {
 
 export const MenuButton = React.forwardRef(
   (
-    {
-      buttonProps,
-      className,
-      onOpenChange,
-      placement,
-      style,
-      ...props
-    }: MenuButtonProps,
+    { buttonProps, onOpenChange, placement, ...props }: MenuButtonProps,
     forwardedRef: React.Ref<HTMLButtonElement | null>
   ) => {
     const isBrowser = typeof window !== 'undefined';
@@ -67,7 +57,7 @@ export const MenuButton = React.forwardRef(
     }
 
     return (
-      <div className={clsx(styles.root, className)} style={style}>
+      <>
         <Button ref={ref} {...buttonProps} {...ariaButtonProps} />
         {ref.current && (
           <Popover
@@ -88,7 +78,7 @@ export const MenuButton = React.forwardRef(
             </Menu>
           </Popover>
         )}
-      </div>
+      </>
     );
   }
 );
