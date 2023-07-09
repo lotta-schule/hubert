@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { GridList, GridListItem } from '../../gridlist';
 
 export default {
@@ -8,7 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story = (args) => (
+const Template: StoryFn = (args) => (
   <GridList {...args}>
     <GridListItem>
       <img src="https://picsum.photos/600/400" alt="" />
@@ -28,5 +28,7 @@ const Template: Story = (args) => (
   </GridList>
 );
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = {
+  render: Template,
+  args: {},
+};

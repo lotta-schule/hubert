@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { StoryObj, Meta, StoryFn } from '@storybook/react';
 import { Label } from '../../label';
 import { Input, Select } from '../../form';
 
@@ -10,28 +10,37 @@ export default {
   args: {
     label: 'I am a pretty label',
   },
-} as ComponentMeta<typeof Label>;
+} as Meta<typeof Label>;
 
-export const InputLabel: ComponentStory<typeof Label> = ({ ...args }) => (
-  <Label {...args}>
-    <Input />
-  </Label>
-);
-InputLabel.storyName = 'Label for an Input';
+export const InputLabel: StoryObj<typeof Label> = {
+  render: ({ ...args }) => (
+    <Label {...args}>
+      <Input />
+    </Label>
+  ),
 
-export const SelectLabel: ComponentStory<typeof Label> = ({ ...args }) => (
-  <Label {...args}>
-    <Select>
-      <option>Bla</option>
-      <option>Blu</option>
-    </Select>
-  </Label>
-);
-SelectLabel.storyName = 'Label for a Select';
+  name: 'Label for an Input',
+};
 
-export const TextLabel: ComponentStory<typeof Label> = ({ ...args }) => (
-  <Label {...args}>
-    <span>Simple Text</span>
-  </Label>
-);
-TextLabel.storyName = 'Label for a Text';
+export const SelectLabel: StoryObj<typeof Label> = {
+  render: ({ ...args }) => (
+    <Label {...args}>
+      <Select>
+        <option>Bla</option>
+        <option>Blu</option>
+      </Select>
+    </Label>
+  ),
+
+  name: 'Label for a Select',
+};
+
+export const TextLabel: StoryObj<typeof Label> = {
+  render: ({ ...args }) => (
+    <Label {...args}>
+      <span>Simple Text</span>
+    </Label>
+  ),
+
+  name: 'Label for a Text',
+};

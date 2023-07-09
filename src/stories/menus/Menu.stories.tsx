@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { Item, Menu } from '../../menu';
 
@@ -11,7 +11,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story = (args: any) => (
+const Template: StoryFn = (args: any) => (
   <Menu {...args}>
     <Item key={'Menuitem 1'}>MenuItem 1</Item>
     <Item key={'Menuitem 2'}>MenuItem 2</Item>
@@ -21,9 +21,12 @@ const Template: Story = (args: any) => (
   </Menu>
 );
 
-export const Default = Template.bind({});
-Default.args = {
-  title: 'Chose a MenuItem number',
-  onAction: action('onAction'),
-  onClose: undefined,
+export const Default = {
+  render: Template,
+
+  args: {
+    title: 'Chose a MenuItem number',
+    onAction: action('onAction'),
+    onClose: undefined,
+  },
 };

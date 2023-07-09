@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { LinearProgress, LinearProgressProps } from '../../progress';
 
 export default {
@@ -8,16 +8,14 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<LinearProgressProps> = (args) => (
-  <LinearProgress {...args} />
-);
-
-export const Default = Template.bind({});
-Default.args = {
-  value: 33.3,
+export const Default = {
+  args: {
+    value: 33.3,
+  },
 };
 
-export const Indefinite = Template.bind({});
-Indefinite.args = {
-  isIndeterminate: true,
+export const Indefinite = {
+  args: {
+    isIndeterminate: true,
+  },
 };

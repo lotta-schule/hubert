@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { Divider } from '../../divider/Divider';
 
 export default {
@@ -8,7 +8,6 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story = (args) => <Divider {...args} />;
-
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = {
+  args: {},
+};

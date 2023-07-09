@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { Radio, RadioGroup, RadioGroupProps } from '../../form';
 
 export default {
@@ -8,7 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<Omit<RadioGroupProps, 'ref'>> = (args) => {
+const Template: StoryFn<Omit<RadioGroupProps, 'ref'>> = (args) => {
   const [val, setVal] = React.useState('0');
   return (
     <RadioGroup
@@ -26,7 +26,7 @@ const Template: Story<Omit<RadioGroupProps, 'ref'>> = (args) => {
   );
 };
 
-const ColoredTemplate: Story<Omit<RadioGroupProps, 'ref'>> = (args) => (
+const ColoredTemplate: StoryFn<Omit<RadioGroupProps, 'ref'>> = (args) => (
   <RadioGroup {...args} name={'radio-group'}>
     <Radio featureColor={[255, 0, 0]} value={'0'}>
       Option 0
@@ -46,8 +46,12 @@ const ColoredTemplate: Story<Omit<RadioGroupProps, 'ref'>> = (args) => (
   </RadioGroup>
 );
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = {
+  render: Template,
+  args: {},
+};
 
-export const Colored = ColoredTemplate.bind({});
-Colored.args = {};
+export const Colored = {
+  render: ColoredTemplate,
+  args: {},
+};
