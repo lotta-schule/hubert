@@ -1,6 +1,10 @@
 import * as React from 'react';
 
-export const NoSsr: React.FC = ({ children }) => {
+export type NoSsrProps = {
+  children: React.ReactNode;
+};
+
+export const NoSsr = ({ children }: NoSsrProps) => {
   const [hasRendered, setHasRendered] = React.useState(false);
   React.useEffect(() => {
     setHasRendered(true);

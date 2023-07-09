@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { render, waitFor } from '../../test-utils';
 import { ComboBox } from './ComboBox';
 import userEvent from '@testing-library/user-event';
@@ -20,11 +21,14 @@ describe('Combobox', () => {
 
   describe('with predefined items', () => {
     it('should show all options when clicking on the button', async () => {
+      const user = userEvent.setup();
+
       const screen = render(
         <ComboBox title={'Chose something'} items={defaultItems} />
       );
+
       expect(screen.getByRole('combobox')).toBeVisible();
-      userEvent.click(screen.getByRole('button'));
+      await user.click(screen.getByRole('button'));
       await waitFor(() => {
         expect(screen.getByRole('listbox')).toBeVisible();
       });
@@ -32,10 +36,13 @@ describe('Combobox', () => {
     });
 
     it('should filter items when text is entered', async () => {
+      const user = userEvent.setup();
+
       const screen = render(
         <ComboBox title={'Chose something'} items={defaultItems} />
       );
-      userEvent.type(screen.getByRole('combobox'), 'Do');
+
+      await user.type(screen.getByRole('combobox'), 'Do');
       await waitFor(() => {
         expect(screen.getByRole('listbox')).toBeVisible();
       });
@@ -66,10 +73,13 @@ describe('Combobox', () => {
     });
 
     it('should show all options when clicking on the button', async () => {
+      const user = userEvent.setup();
+
       const screen = render(
         <ComboBox title={'Chose something'} items={onItems} />
       );
-      userEvent.type(screen.getByRole('combobox'), 'D');
+
+      await user.type(screen.getByRole('combobox'), 'D');
       await waitFor(() => {
         expect(onItems).toHaveBeenCalledWith('D');
       });
@@ -83,8 +93,10 @@ describe('Combobox', () => {
   });
 
   describe('onSelect', () => {
-    it('should be possible to add a custom value', () => {
+    it('should be possible to add a custom value', async () => {
+      const user = userEvent.setup();
       const onSelect = jest.fn();
+
       const screen = render(
         <ComboBox
           title={'Chose something'}
@@ -92,13 +104,16 @@ describe('Combobox', () => {
           onSelect={onSelect}
         />
       );
-      userEvent.type(screen.getByRole('combobox'), 'Papaya{Enter}');
+
+      await user.type(screen.getByRole('combobox'), 'Papaya{Enter}');
       expect(onSelect).toHaveBeenCalledWith('Papaya');
     });
   });
 
   describe('reset input value on select', () => {
     it('should reset input value on select', async () => {
+      const user = userEvent.setup();
+
       const screen = render(
         <ComboBox
           title={'Chose something'}
@@ -106,13 +121,16 @@ describe('Combobox', () => {
           allowsCustomValue
         />
       );
-      userEvent.type(screen.getByRole('combobox'), 'Apple{Enter}');
+
+      await user.type(screen.getByRole('combobox'), 'Apple{Enter}');
       await waitFor(() => {
         expect(screen.getByRole('combobox')).toHaveValue('');
       });
     });
 
-    it('should not reset input value on select when noResetInputOnSelect is passed', () => {
+    it('should not reset input value on select when noResetInputOnSelect is passed', async () => {
+      const user = userEvent.setup();
+
       const screen = render(
         <ComboBox
           title={'Chose something'}
@@ -121,14 +139,17 @@ describe('Combobox', () => {
           noResetInputOnSelect
         />
       );
-      userEvent.type(screen.getByRole('combobox'), 'Apple{Enter}');
+      await user.type(screen.getByRole('combobox'), 'Apple{Enter}');
+
       expect(screen.getByRole('combobox')).toHaveValue('Apple');
     });
   });
 
   describe('onSelect', () => {
     it('should call onSelect with item key when a proposed option is selected', async () => {
+      const user = userEvent.setup();
       const onSelect = jest.fn();
+
       const screen = render(
         <ComboBox
           title={'Chose something'}
@@ -136,18 +157,19 @@ describe('Combobox', () => {
           onSelect={onSelect}
         />
       );
-      await waitFor(() => {
-        userEvent.click(screen.getByRole('button', { name: /vorschläge/i }));
-      });
+
+      await user.click(screen.getByRole('button', { name: /vorschläge/i }));
       await waitFor(() => {
         expect(screen.getByRole('option', { name: /apple/i })).toBeVisible();
       });
-      userEvent.click(screen.getByRole('option', { name: /apple/i }));
+      await user.click(screen.getByRole('option', { name: /apple/i }));
       expect(onSelect).toHaveBeenCalledWith('Apple');
     });
 
     it('should call onSelect with item key when the value of a proposed item is typed', async () => {
+      const user = userEvent.setup();
       const onSelect = jest.fn();
+
       const screen = render(
         <ComboBox
           title={'Chose something'}
@@ -155,14 +177,17 @@ describe('Combobox', () => {
           onSelect={onSelect}
         />
       );
-      userEvent.type(screen.getByRole('combobox'), 'Apple{Enter}');
+
+      await user.type(screen.getByRole('combobox'), 'Apple{Enter}');
       await waitFor(() => {
         expect(onSelect).toHaveBeenCalledWith('Apple');
       });
     });
 
-    it('should not call onSelect when the value of an unpropsed item is entered', () => {
+    it('should not call onSelect when the value of an unpropsed item is entered', async () => {
+      const user = userEvent.setup();
       const onSelect = jest.fn();
+
       const screen = render(
         <ComboBox
           title={'Chose something'}
@@ -170,13 +195,16 @@ describe('Combobox', () => {
           onSelect={onSelect}
         />
       );
-      userEvent.type(screen.getByRole('combobox'), 'Dragonfruit{Enter}');
+
+      await user.type(screen.getByRole('combobox'), 'Dragonfruit{Enter}');
       expect(onSelect).not.toHaveBeenCalled();
     });
 
     describe('custom properties', () => {
-      it('should call onSelect when selecting an unpropsed item when allowsCustomValue is passed', () => {
+      it('should call onSelect when selecting an unpropsed item when allowsCustomValue is passed', async () => {
+        const user = userEvent.setup();
         const onSelect = jest.fn();
+
         const screen = render(
           <ComboBox
             allowsCustomValue
@@ -185,13 +213,16 @@ describe('Combobox', () => {
             onSelect={onSelect}
           />
         );
-        userEvent.type(screen.getByRole('combobox'), 'Dragonfruit{Enter}');
+
+        await user.type(screen.getByRole('combobox'), 'Dragonfruit{Enter}');
         expect(onSelect).toHaveBeenCalledWith('Dragonfruit');
       });
     });
 
     describe('closing the listbox', () => {
       it('should not close the listbox on select when predefined items are passed (as array)', async () => {
+        const user = userEvent.setup();
+
         const screen = render(
           <ComboBox
             title={'Chose something'}
@@ -199,18 +230,21 @@ describe('Combobox', () => {
             onSelect={jest.fn()}
           />
         );
-        userEvent.click(screen.getByRole('button', { name: /vorschläge/i }));
+
+        await user.click(screen.getByRole('button', { name: /vorschläge/i }));
         await waitFor(() => {
           expect(screen.getByRole('option', { name: /apple/i })).toBeVisible();
         });
-        userEvent.click(screen.getByRole('option', { name: /apple/i }));
-        waitFor(() => {
+        await user.click(screen.getByRole('option', { name: /apple/i }));
+        await waitFor(() => {
           expect(screen.queryByRole('option', { name: /apple/i })).toBeNull();
         });
       });
 
       it('should not close the listbox on select when dynamic items are passed (as callback)', async () => {
+        const user = userEvent.setup();
         const getItems = jest.fn(async () => defaultItems);
+
         const screen = render(
           <ComboBox
             title={'Chose something'}
@@ -218,7 +252,8 @@ describe('Combobox', () => {
             onSelect={jest.fn()}
           />
         );
-        userEvent.type(screen.getByRole('combobox'), 'Apple{Enter}');
+
+        await user.type(screen.getByRole('combobox'), 'Apple{Enter}');
         await waitFor(() => {
           expect(getItems).toHaveBeenCalledWith('Apple');
         });

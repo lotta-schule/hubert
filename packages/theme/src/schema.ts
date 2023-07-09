@@ -1,11 +1,12 @@
 import { Theme } from './Theme';
 
+export type CSSType = 'value' | 'number' | 'length' | 'color' | 'font-family';
+
 export const schema: Record<
   keyof Theme,
   {
-    type: 'value' | 'length' | 'color' | 'fontFamily';
+    type: CSSType;
     description: string;
-    fallbackKey?: keyof Theme;
   }
 > = {
   primaryColor: {
@@ -77,11 +78,11 @@ export const schema: Record<
     description: 'Border radius',
   },
   textFontFamily: {
-    type: 'fontFamily',
+    type: 'font-family',
     description: 'font family for text',
   },
   titleFontFamily: {
-    type: 'fontFamily',
+    type: 'font-family',
     description: 'font family for titles',
   },
 };

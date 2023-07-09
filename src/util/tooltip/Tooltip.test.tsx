@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { render } from '@testing-library/react';
 import { Button } from '../../button/Button';
 import { Tooltip } from './Tooltip';
@@ -13,14 +14,14 @@ describe('util/Tooltip', () => {
     expect(screen.container).toMatchSnapshot();
   });
 
-  it('should keep a button clickable', () => {
+  it('should keep a button clickable', async () => {
     const onClick = jest.fn();
     const screen = render(
       <Tooltip label="Test">
         <Button onClick={onClick}>Test</Button>
       </Tooltip>
     );
-    userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByRole('button'));
     expect(onClick).toHaveBeenCalled();
   });
 });

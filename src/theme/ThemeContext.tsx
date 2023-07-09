@@ -1,5 +1,5 @@
-import { DefaultThemes, Theme } from '@lotta-schule/theme';
 import * as React from 'react';
+import { DefaultThemes, Theme } from '@lotta-schule/theme';
 
 export const ThemeContext = React.createContext({
   theme: DefaultThemes.standard,

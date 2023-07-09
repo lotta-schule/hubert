@@ -1,7 +1,8 @@
-import userEvent from '@testing-library/user-event';
+import * as React from 'react';
 import { render, waitFor } from '../test-utils';
 import { MenuButton } from './MenuButton';
 import { Item } from './MenuItem';
+import userEvent from '@testing-library/user-event';
 
 describe('Menu', () => {
   it('should render a Menu button', async () => {
@@ -13,7 +14,7 @@ describe('Menu', () => {
       </MenuButton>
     );
     expect(screen.getByRole('button')).toHaveTextContent('Click');
-    userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByRole('button'));
     await waitFor(() => {
       expect(screen.getByRole('menu')).toBeVisible();
     });

@@ -11,12 +11,12 @@ export type TabbarProps = {
   children?: any;
 };
 
-export const Tabbar: React.FC<TabbarProps> = ({
+export const Tabbar = ({
   className,
   onChange,
   value,
   children,
-}) => {
+}: TabbarProps) => {
   return (
     <div className={clsx(styles.tabbar, className)} role={'tablist'}>
       {React.Children.map(
@@ -24,6 +24,7 @@ export const Tabbar: React.FC<TabbarProps> = ({
         (child: React.ReactElement<TabProps>, i) =>
           child &&
           React.cloneElement(child as any, {
+            role: child.props.role ?? 'tab',
             key: i,
             onClick: () => {
               onChange?.(child.props.value as string);

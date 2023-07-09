@@ -12,10 +12,6 @@ solution for the educational sector which wants to get privacy and security righ
 npm install @lotta-schule/hubert
 ```
 
-At the top of your react tree, add the Provider, which loads some basic styling:
+## Usage
 
-```typescript
-<HubertProvider>
-  <MyMainComponent />
-</HubertProvider>
-```
+### Do you need a context?

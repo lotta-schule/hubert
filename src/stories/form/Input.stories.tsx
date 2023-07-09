@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { StoryObj, StoryFn, Meta } from '@storybook/react';
+import { StoryObj, Meta } from '@storybook/react';
 import { within } from '@testing-library/react';
 import { userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
@@ -19,7 +18,7 @@ export const Default: StoryObj<typeof Input> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    userEvent.click(canvas.getByRole('textbox'));
+    await userEvent.click(canvas.getByRole('textbox'));
     await userEvent.keyboard('sample text', { delay: 100 });
 
     expect(canvas.getByRole('textbox')).toHaveValue('sample text');
@@ -42,7 +41,7 @@ export const Multiline: StoryObj<typeof Input> = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    userEvent.click(canvas.getByRole('textbox'));
+    await userEvent.click(canvas.getByRole('textbox'));
     await userEvent.keyboard('sample text\nwith newline', { delay: 100 });
 
     expect(canvas.getByRole('textbox')).toHaveValue(

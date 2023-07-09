@@ -1,24 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`tabs/Tab should render a Tab button 1`] = `
-<div>
-  <div
-    data-overlay-container="true"
+<button
+  aria-selected="false"
+  class="root root root tab"
+  data-variant="default"
+  role="tab"
+  type="button"
+  value="4"
+>
+  <span
+    class="label label"
   >
-    <button
-      aria-selected="false"
-      class="root root root tab"
-      data-variant="default"
-      role="tab"
-      type="button"
-      value="4"
-    >
-      <span
-        class="label label"
-      >
-        Tab-Button
-      </span>
-    </button>
-  </div>
-</div>
+    Tab-Button
+  </span>
+</button>
 `;

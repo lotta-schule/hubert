@@ -1,13 +1,14 @@
-import userEvent from '@testing-library/user-event';
+import * as React from 'react';
 import { render } from '../test-utils';
 import { Stepper } from './Stepper';
+import userEvent from '@testing-library/user-event';
 
 describe('Stepper', () => {
   it('should render a stepper', () => {
     const screen = render(
       <Stepper currentStep={0} maxSteps={3} onStep={jest.fn()} />
     );
-    expect(screen.container).toMatchSnapshot();
+    expect(screen.getByRole('spinbutton')).toMatchSnapshot();
   });
 
   it('should render the correct step count', () => {
@@ -18,12 +19,12 @@ describe('Stepper', () => {
   });
 
   describe('previous step', () => {
-    it('should select the previous step on button click', () => {
+    it('should select the previous step on button click', async () => {
       const onStep = jest.fn();
       const screen = render(
         <Stepper currentStep={1} maxSteps={3} onStep={onStep} />
       );
-      userEvent.click(screen.getByRole('button', { name: /vorherig/i }));
+      await userEvent.click(screen.getByRole('button', { name: /vorherig/i }));
       expect(onStep).toHaveBeenCalledWith(0);
     });
 
@@ -36,12 +37,12 @@ describe('Stepper', () => {
   });
 
   describe('next step', () => {
-    it('should select the next step on button click', () => {
+    it('should select the next step on button click', async () => {
       const onStep = jest.fn();
       const screen = render(
         <Stepper currentStep={1} maxSteps={3} onStep={onStep} />
       );
-      userEvent.click(screen.getByRole('button', { name: /nächst/i }));
+      await userEvent.click(screen.getByRole('button', { name: /nächst/i }));
       expect(onStep).toHaveBeenCalledWith(2);
     });
 
