@@ -2,7 +2,7 @@ import { StoryObj, Meta } from '@storybook/react';
 import { userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import { Input } from '../../form';
-import { within } from 'test-utils';
+import { within } from '../../test-utils';
 
 export default {
   title: 'Form/Input',

@@ -220,14 +220,15 @@ describe('Combobox', () => {
     });
 
     describe('closing the listbox', () => {
-      it('should not close the listbox on select when predefined items are passed (as array)', async () => {
+      it('should close the listbox on select when predefined items are passed (as array)', async () => {
         const user = userEvent.setup();
+        const onSelect = jest.fn();
 
         const screen = render(
           <ComboBox
             title={'Chose something'}
             items={defaultItems}
-            onSelect={jest.fn()}
+            onSelect={onSelect}
           />
         );
 
@@ -235,7 +236,11 @@ describe('Combobox', () => {
         await waitFor(() => {
           expect(screen.getByRole('option', { name: /apple/i })).toBeVisible();
         });
+
         await user.click(screen.getByRole('option', { name: /apple/i }));
+        await waitFor(() => {
+          expect(onSelect).toHaveBeenCalledWith('Apple');
+        });
         await waitFor(() => {
           expect(screen.queryByRole('option', { name: /apple/i })).toBeNull();
         });
