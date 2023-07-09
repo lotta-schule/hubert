@@ -1,6 +1,5 @@
-import * as React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-import { LinearProgress, LinearProgressProps } from '../../progress';
+import { Meta } from '@storybook/react';
+import { LinearProgress } from '../../progress';
 
 export default {
   title: 'Progress/LinearProgress',

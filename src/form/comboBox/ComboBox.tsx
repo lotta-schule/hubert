@@ -175,7 +175,6 @@ export const ComboBox = React.memo(
       labelProps,
     } = useComboBox(
       {
-        children: ListItemFactory.createItem,
         autoFocus,
         inputRef,
         buttonRef,

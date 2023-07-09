@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { StoryObj, Meta, StoryFn } from '@storybook/react';
+import { StoryObj, Meta } from '@storybook/react';
 import { expect } from '@storybook/jest';
 import { userEvent, within } from '@storybook/testing-library';
 import { Checkbox } from '../../form';

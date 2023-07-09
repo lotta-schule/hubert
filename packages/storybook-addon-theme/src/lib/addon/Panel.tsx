@@ -4,6 +4,7 @@ import { AddonPanel } from '@storybook/components';
 import { PureArgsTable } from '@storybook/blocks';
 import { styled } from '@storybook/theming';
 import { DefaultThemes, schema } from '@lotta-schule/theme';
+import { generateArgsTableRows } from '../../util';
 
 export const Panel = ({ active, key }: any) => {
   const StyledHeader = styled.h2`
@@ -20,30 +21,7 @@ export const Panel = ({ active, key }: any) => {
     ...globals.hubertTheme,
   };
 
-  const rows = Object.entries(schema).reduce(
-    (acc, [property, { description, fallbackKey, type }]) => ({
-      ...acc,
-      [property]: {
-        name: property,
-        description,
-        type: {
-          name: 'string',
-          required: fallbackKey ? false : true,
-        },
-        control: (() => {
-          switch (type) {
-            case 'color':
-              return { type: 'color' };
-            case 'fontFamily':
-              return { type: 'text' };
-            default:
-              return { type: 'text' };
-          }
-        })(),
-      },
-    }),
-    {}
-  );
+  const rows = generateArgsTableRows(schema);
 
   return (
     <AddonPanel active={!!active} key={key}>

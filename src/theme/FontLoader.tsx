@@ -40,3 +40,4 @@ export const FontLoader = React.memo(
     );
   }
 );
+FontLoader.displayName = 'FontLoader';

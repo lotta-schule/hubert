@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StoryObj, StoryFn, Meta } from '@storybook/react';
+import { StoryObj, Meta } from '@storybook/react';
 import { Popover } from '../../popover';
 
 export default {
@@ -7,7 +7,9 @@ export default {
   component: Popover,
 } as Meta;
 
-export const WithRichText: StoryObj = {
+type Story = StoryObj<typeof Popover>;
+
+export const WithRichText: Story = {
   render: (args) => {
     return (
       <Popover buttonProps={{ label: 'Click me' }} {...args}>
@@ -40,8 +42,8 @@ export const WithRichText: StoryObj = {
   },
 };
 
-export const WithImage: StoryObj = {
-  render: ({ args }) => {
+export const WithImage: Story = {
+  render: (args) => {
     return (
       <Popover buttonProps={{ label: 'Label' }} {...args}>
         <img

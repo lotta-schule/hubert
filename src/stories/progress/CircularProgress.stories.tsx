@@ -1,6 +1,5 @@
-import * as React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-import { CircularProgress, CircularProgressProps } from '../../progress';
+import { Meta } from '@storybook/react';
+import { CircularProgress } from '../../progress';
 
 export default {
   title: 'Progress/CircularProgress',

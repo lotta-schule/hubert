@@ -59,7 +59,7 @@ export const Popover = React.forwardRef(
           >
             <FocusScope restoreFocus>
               <DismissButton onDismiss={onClose} />
-              {children}
+              {children as any}
             </FocusScope>
           </motion.div>
         )}

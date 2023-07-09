@@ -1,6 +1,5 @@
-import * as React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-import { Avatar, AvatarProps } from '../../avatar';
+import { Meta } from '@storybook/react';
+import { Avatar } from '../../avatar';
 
 export default {
   title: 'User/Avatar',

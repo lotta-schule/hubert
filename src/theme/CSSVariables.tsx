@@ -16,3 +16,4 @@ export const CSSVariables = React.memo(({ theme }: CSSVariablesProps) => {
 
   return <style>{':root {\n' + cssVarsInit + '\n}'}</style>;
 });
+CSSVariables.displayName = 'CSSVariables';

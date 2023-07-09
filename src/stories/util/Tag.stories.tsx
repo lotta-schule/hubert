@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { actions } from '@storybook/addon-actions';
 import { Tag } from '../../tag';
 

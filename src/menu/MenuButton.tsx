@@ -29,15 +29,17 @@ export const MenuButton = React.forwardRef(
 
     React.useImperativeHandle(forwardedRef, () => ref.current);
 
-    const state = useMenuTriggerState({
-      closeOnSelect: true,
-      onOpenChange,
-    });
+    const state = useMenuTriggerState({});
     const { menuTriggerProps, menuProps } = useMenuTrigger(
       { type: 'menu', isDisabled: buttonProps.disabled },
       state,
       ref
     );
+
+    React.useEffect(() => {
+      onOpenChange?.(state.isOpen);
+    }, [state.isOpen]);
+
     const element = React.useRef<HTMLDivElement | null>(null);
     const { buttonProps: ariaButtonProps } = useButton(menuTriggerProps, ref);
 
@@ -74,7 +76,7 @@ export const MenuButton = React.forwardRef(
               className={styles.menu}
               onClose={state.close}
             >
-              {props.children}
+              {props.children as any}
             </Menu>
           </Popover>
         )}

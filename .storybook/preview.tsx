@@ -9,6 +9,7 @@ import { Preview } from '@storybook/react';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { DefaultThemes } from '@lotta-schule/theme';
 import { HubertProvider } from '../src/HubertProvider';
+import { GlobalStyles } from '../src/theme';
 
 const preview: Preview = {
   decorators: [
@@ -19,15 +20,16 @@ const preview: Preview = {
         ...context.globals.hubertTheme,
       };
       return (
-        <HubertProvider
-          theme={theme}
-          supportedFonts={[
-            {
-              name: 'Muli',
-              url: 'https://fonts.googleapis.com/css2?family=Muli&display=swap',
-            },
-          ]}
-        >
+        <HubertProvider>
+          <GlobalStyles
+            theme={theme}
+            supportedFonts={[
+              {
+                name: 'Muli',
+                url: 'https://fonts.googleapis.com/css2?family=Muli&display=swap',
+              },
+            ]}
+          />
           {Story() as any}
         </HubertProvider>
       );

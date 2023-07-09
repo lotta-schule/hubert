@@ -257,7 +257,9 @@ describe('Combobox', () => {
         await waitFor(() => {
           expect(getItems).toHaveBeenCalledWith('Apple');
         });
-        expect(screen.getByRole('option', { name: /apple/i })).toBeVisible();
+        await waitFor(() => {
+          expect(screen.getByRole('option', { name: /apple/i })).toBeVisible();
+        });
       });
     });
   });

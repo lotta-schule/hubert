@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { Close } from '../../icon';
-import { Button, ButtonProps } from '../../button';
+import { Button } from '../../button';
 
 export default {
   title: 'Buttons/Button',

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { Tooltip } from '../../util';
 import { Button } from '../../button';
 

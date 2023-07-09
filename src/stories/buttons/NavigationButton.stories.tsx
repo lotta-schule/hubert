@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-import { NavigationButton, NavigationButtonProps } from '../../button';
+import { Meta } from '@storybook/react';
+import { NavigationButton } from '../../button';
 import { Close } from '../../icon';
 
 export default {
