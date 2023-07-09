@@ -6,7 +6,6 @@ import styles from './NavigationButton.module.scss';
 
 export type NavigationButtonProps = Omit<ButtonProps, 'variant'> & {
   secondary?: boolean;
-  selected?: boolean;
 };
 
 export const NavigationButton = React.forwardRef<

@@ -65,7 +65,10 @@ export const BaseButton = React.forwardRef<any, BaseButtonProps>(
         style,
         'data-variant': variant,
         [selectedAriaAttribute]: selected,
-        className: clsx(styles.root, className, { selected, fullWidth }),
+        className: clsx(styles.root, className, {
+          [styles.selected]: selected,
+          [styles.fullWidth]: fullWidth,
+        }),
         ...props,
       },
       children
