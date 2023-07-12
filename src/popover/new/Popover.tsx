@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import { DismissButton, useOverlay } from '@react-aria/overlays';
 import { FocusScope } from '@react-aria/focus';

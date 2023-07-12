@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import { useComboBoxState } from '@react-stately/combobox';
 import { useComboBox } from '@react-aria/combobox';

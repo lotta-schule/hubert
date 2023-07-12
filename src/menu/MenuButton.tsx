@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import { useMenuTriggerState } from '@react-stately/menu';
 import { CollectionChildren } from '@react-types/shared';

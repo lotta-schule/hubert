@@ -5,11 +5,7 @@ import styles from './Toolbar.module.scss';
 
 export type ToolbarProps = React.HTMLProps<HTMLDivElement>;
 
-export const Toolbar: React.FC<ToolbarProps> = ({
-  children,
-  className,
-  ...props
-}) => {
+export const Toolbar = ({ children, className, ...props }: ToolbarProps) => {
   return (
     <div className={clsx(styles.root, className)} {...props}>
       {children}

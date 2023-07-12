@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import { useListBox, AriaListBoxOptions } from '@react-aria/listbox';
 import { ComboBoxState } from '@react-stately/combobox';

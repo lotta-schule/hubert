@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import { Node } from '@react-types/shared';
 import { ListState } from '@react-stately/list';

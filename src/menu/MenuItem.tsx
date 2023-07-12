@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import { useFocus } from '@react-aria/interactions';
 import { Item as AriaItem } from '@react-stately/collections';

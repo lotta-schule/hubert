@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import type { ToggleProps } from '@react-types/checkbox';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
