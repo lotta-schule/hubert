@@ -53,7 +53,7 @@ exports[`tabs/Tabbar snapshot test 1`] = `
       </button>
       <button
         aria-selected="true"
-        class="root root root tab selected selected"
+        class="root root root tab selected selected selected"
         data-variant="default"
         role="tab"
         type="button"
