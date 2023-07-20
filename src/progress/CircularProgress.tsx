@@ -8,6 +8,7 @@ import styles from './CircularProgress.module.scss';
 export interface CircularProgressProps extends AriaProgressBarProps {
   value?: number;
   size?: React.CSSProperties['width'];
+  color?: React.CSSProperties['fill'];
   showValue?: boolean;
   isIndeterminate?: boolean;
   style?: React.CSSProperties;
@@ -15,11 +16,12 @@ export interface CircularProgressProps extends AriaProgressBarProps {
 }
 
 export const CircularProgress = React.memo<CircularProgressProps>(
-  ({ className, showValue, size = '5em', ...props }) => {
+  ({ className, color, showValue, size = '5em', ...props }) => {
     const { value, isIndeterminate } = props;
     const { progressBarProps } = useProgressBar(props);
     const style: React.CSSProperties = {
       ...(value !== undefined && { '--value': value / 100 }),
+      ...(color !== undefined && { '--lotta-circular-progress-color': color }),
       width: size,
       height: size,
       ...props.style,
