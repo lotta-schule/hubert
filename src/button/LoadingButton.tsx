@@ -25,6 +25,7 @@ export const LoadingButton = React.forwardRef<
     >
       <CircularProgress
         isIndeterminate
+        aria-hidden={loading ? false : true}
         color={'rgb(var(--lotta-disabled-color))'}
         className={clsx(styles.circularProgress)}
         size={'1.4em'}
