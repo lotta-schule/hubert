@@ -9,13 +9,14 @@ describe('Tag', () => {
   });
 
   it('should show a Delete Button when a onDelete prop is given', async () => {
+    const fireEvent = userEvent.setup({ delay: 100 });
     const fn = jest.fn();
     const screen = render(<Tag onDelete={fn}>Tag</Tag>);
     const deleteButton = screen.getByRole('button', {
       name: 'Tag Tag löschen',
     });
     expect(deleteButton).toBeVisible();
-    await userEvent.click(deleteButton);
+    await fireEvent.click(deleteButton);
     expect(fn).toHaveBeenCalled();
   });
 });

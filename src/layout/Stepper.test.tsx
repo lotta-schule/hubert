@@ -20,11 +20,12 @@ describe('Stepper', () => {
 
   describe('previous step', () => {
     it('should select the previous step on button click', async () => {
+      const fireEvent = userEvent.setup();
       const onStep = jest.fn();
       const screen = render(
         <Stepper currentStep={1} maxSteps={3} onStep={onStep} />
       );
-      await userEvent.click(screen.getByRole('button', { name: /vorherig/i }));
+      await fireEvent.click(screen.getByRole('button', { name: /vorherig/i }));
       expect(onStep).toHaveBeenCalledWith(0);
     });
 
@@ -38,11 +39,12 @@ describe('Stepper', () => {
 
   describe('next step', () => {
     it('should select the next step on button click', async () => {
+      const fireEvent = userEvent.setup();
       const onStep = jest.fn();
       const screen = render(
         <Stepper currentStep={1} maxSteps={3} onStep={onStep} />
       );
-      await userEvent.click(screen.getByRole('button', { name: /nächst/i }));
+      await fireEvent.click(screen.getByRole('button', { name: /nächst/i }));
       expect(onStep).toHaveBeenCalledWith(2);
     });
 

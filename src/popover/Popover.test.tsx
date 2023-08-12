@@ -15,12 +15,13 @@ describe('Popover', () => {
   });
 
   it('should open when the button is clicked', async () => {
+    const fireEvent = userEvent.setup();
     const screen = render(
       <Popover buttonProps={{ label: 'Open Popover' }}>
         <div>TADA</div>
       </Popover>
     );
-    await userEvent.click(screen.getByRole('button'));
+    await fireEvent.click(screen.getByRole('button'));
     await waitFor(() => {
       expect(screen.getByText('TADA')).toBeVisible();
     });

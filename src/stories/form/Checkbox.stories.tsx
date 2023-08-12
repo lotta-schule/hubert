@@ -16,9 +16,10 @@ export const Default: StoryObj<typeof Checkbox> = {
   args: {},
 
   play: async ({ canvasElement }) => {
+    const fireEvent = userEvent.setup({ delay: 100 });
     const canvas = within(canvasElement);
 
-    userEvent.click(canvas.getByRole('checkbox'));
+    await fireEvent.click(canvas.getByRole('checkbox'));
 
     expect(canvas.getByRole('checkbox')).toBeChecked();
   },

@@ -15,13 +15,14 @@ describe('util/Tooltip', () => {
   });
 
   it('should keep a button clickable', async () => {
+    const fireEvent = userEvent.setup();
     const onClick = jest.fn();
     const screen = render(
       <Tooltip label="Test">
         <Button onClick={onClick}>Test</Button>
       </Tooltip>
     );
-    await userEvent.click(screen.getByRole('button'));
+    await fireEvent.click(screen.getByRole('button'));
     expect(onClick).toHaveBeenCalled();
   });
 });

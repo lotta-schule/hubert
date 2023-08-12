@@ -50,14 +50,15 @@ export const WithPredefinedItems: StoryObj<typeof ComboBox> = {
   },
 
   play: async ({ canvasElement }) => {
+    const fireEvent = userEvent.setup({ delay: 100 });
     const canvas = within(canvasElement);
 
-    userEvent.click(canvas.getByRole('button'));
+    await fireEvent.click(canvas.getByRole('button'));
     await waitFor(() => {
       expect(canvas.getByRole('listbox')).toBeVisible();
     });
 
-    userEvent.click(canvas.getByRole('option', { name: 'Balance' }));
+    await fireEvent.click(canvas.getByRole('option', { name: 'Balance' }));
   },
 };
 
@@ -78,15 +79,16 @@ export const WithRequestedItems: StoryObj<typeof ComboBox> = {
   name: 'fetching items while typing',
 
   play: async ({ canvasElement }) => {
+    const fireEvent = userEvent.setup({ delay: 100 });
     const canvas = within(canvasElement);
 
-    userEvent.click(canvas.getByRole('combobox'));
-    await userEvent.keyboard('sample text', { delay: 100 });
+    await fireEvent.click(canvas.getByRole('combobox'));
+    await fireEvent.keyboard('sample text');
 
     await waitFor(() => {
       expect(canvas.getByRole('listbox')).toBeVisible();
     });
 
-    userEvent.click(canvas.queryAllByRole('option')?.[0]);
+    await fireEvent.click(canvas.queryAllByRole('option')?.[0]);
   },
 };

@@ -6,6 +6,7 @@ import userEvent from '@testing-library/user-event';
 
 describe('Menu', () => {
   it('should render a Menu button', async () => {
+    const fireEvent = userEvent.setup();
     const screen = render(
       <MenuButton title={'Test Menu'} buttonProps={{ label: 'Click' }}>
         <Item key={'a'}>A</Item>
@@ -14,7 +15,7 @@ describe('Menu', () => {
       </MenuButton>
     );
     expect(screen.getByRole('button')).toHaveTextContent('Click');
-    await userEvent.click(screen.getByRole('button'));
+    await fireEvent.click(screen.getByRole('button'));
     await waitFor(() => {
       expect(screen.getByRole('menu')).toBeVisible();
     });

@@ -16,10 +16,11 @@ export const Default: StoryObj<typeof Input> = {
   },
 
   play: async ({ canvasElement }) => {
+    const fireEvent = userEvent.setup({ delay: 100 });
     const canvas = within(canvasElement);
 
-    await userEvent.click(canvas.getByRole('textbox'));
-    await userEvent.keyboard('sample text', { delay: 100 });
+    await fireEvent.click(canvas.getByRole('textbox'));
+    await fireEvent.keyboard('sample text');
 
     expect(canvas.getByRole('textbox')).toHaveValue('sample text');
   },
@@ -39,10 +40,11 @@ export const Multiline: StoryObj<typeof Input> = {
   } as any,
 
   play: async ({ canvasElement }) => {
+    const fireEvent = userEvent.setup({ delay: 100 });
     const canvas = within(canvasElement);
 
-    await userEvent.click(canvas.getByRole('textbox'));
-    await userEvent.keyboard('sample text\nwith newline', { delay: 100 });
+    await fireEvent.click(canvas.getByRole('textbox'));
+    await fireEvent.keyboard('sample text\nwith newline');
 
     expect(canvas.getByRole('textbox')).toHaveValue(
       'sample text\nwith newline'

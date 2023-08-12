@@ -10,13 +10,14 @@ describe('shared/general/form/checkbox', () => {
   });
 
   it('should show a selected checkbox and unselect it on click', async () => {
+    const fireEvent = userEvent.setup();
     const onChange = jest.fn();
     const screen = render(
       <Checkbox isSelected onChange={onChange}>
         A label
       </Checkbox>
     );
-    await userEvent.click(screen.getByRole('checkbox'));
+    await fireEvent.click(screen.getByRole('checkbox'));
     expect(onChange).toHaveBeenCalledWith(false);
   });
 });
