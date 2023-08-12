@@ -8,6 +8,7 @@ export default {
   component: Checkbox,
   args: {
     children: 'Yes, I accept all the evil I am forced to',
+    isDisabled: false,
   },
 } as Meta<typeof Checkbox>;
 
