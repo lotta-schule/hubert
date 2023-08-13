@@ -74,6 +74,8 @@ jobs:
           # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-dependencies
           cache: 'npm'
       - run: npm ci
+      - run: npm -w @lotta-schule/theme run build
+      - run: npm -w @lotta-schule/storybook-addon-theme run build
       - name: build dev version
         run: NODE_ENV=development npm run storybook:build
       - name: Run storybook test-runner
