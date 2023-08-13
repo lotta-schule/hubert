@@ -7,8 +7,13 @@ import userEvent from '@testing-library/user-event';
 describe('Menu', () => {
   it('should render a Menu button', async () => {
     const fireEvent = userEvent.setup();
+    const onOpenChange = jest.fn();
     const screen = render(
-      <MenuButton title={'Test Menu'} buttonProps={{ label: 'Click' }}>
+      <MenuButton
+        title={'Test Menu'}
+        buttonProps={{ label: 'Click' }}
+        onOpenChange={onOpenChange}
+      >
         <Item key={'a'}>A</Item>
         <Item key={'b'}>B</Item>
         <Item key={'c'}>C</Item>
@@ -19,5 +24,6 @@ describe('Menu', () => {
     await waitFor(() => {
       expect(screen.getByRole('menu')).toBeVisible();
     });
+    expect(onOpenChange).toHaveBeenCalledWith(true);
   });
 });
