@@ -72,6 +72,7 @@ jobs:
           node-version: 20
           # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-dependencies
           cache: 'npm'
+      - run: npm ci
       - name: Run storybook test-runner
         run: npm run storybook:test:ci -- --coverage
       - uses: codecov/codecov-action@v3
