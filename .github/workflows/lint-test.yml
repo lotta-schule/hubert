@@ -1,0 +1,83 @@
+---
+name: 'Run checks and tests'
+
+on:
+  push:
+    paths-ignore:
+      - 'packages/**'
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-dependencies
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run lint
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npm -w @lotta-schule/theme run build
+      - run: npm -w @lotta-schule/storybook-addon-theme run build
+      - run: npm run typecheck
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-dependencies
+          cache: 'npm'
+      - run: npm ci
+      - run: npm -w @lotta-schule/theme run build
+      - run: npm test -- --ci --coverage
+      - uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: './coverage'
+          fail_ci_if_error: false
+          move_coverage_to_trash: true
+          verbose: true
+  interaction-tests:
+    runs-on: ubuntu-latest
+    name: Running interaction tests
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-dependencies
+          cache: 'npm'
+      - name: Run storybook test-runner
+        run: npm run storybook:test:ci -- --coverage
+      - uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: './coverage'
+          fail_ci_if_error: false
+          move_coverage_to_trash: true
+          verbose: true
