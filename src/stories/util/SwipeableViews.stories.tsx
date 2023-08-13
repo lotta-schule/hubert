@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { fireEvent, waitFor, within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import { SwipeableViews } from '../../util/SwipeableViews';
@@ -62,7 +62,7 @@ export const Default: StoryObj<typeof SwipeableViews> = {
     );
   },
   args: {
-    selectedIndex: 3,
+    selectedIndex: 0,
   },
   play: async ({ canvasElement }) => {
     const screen = within(canvasElement);
@@ -77,6 +77,7 @@ export const Default: StoryObj<typeof SwipeableViews> = {
       expect(swipeableViews).not.toHaveStyle('left: 0px');
     });
 
+    await new Promise((reslve) => setTimeout(reslve, 500));
     fireEvent.click(previousButton);
 
     await waitFor(() => {

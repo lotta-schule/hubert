@@ -1,10 +1,4 @@
 import * as React from 'react';
-import type {
-  Renderer,
-  PartialStoryFn as StoryFunction,
-  StoryContext,
-} from '@storybook/types';
-import { useGlobals } from '@storybook/preview-api';
 import { Preview } from '@storybook/react';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { DefaultThemes } from '@lotta-schule/theme';
@@ -14,7 +8,6 @@ import { GlobalStyles } from '../src/theme';
 const preview: Preview = {
   decorators: [
     (Story, context) => {
-      const [globals] = useGlobals();
       const theme = {
         ...DefaultThemes.standard,
         ...context.globals.hubertTheme,
