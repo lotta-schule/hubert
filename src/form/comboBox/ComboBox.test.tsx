@@ -56,7 +56,14 @@ describe('Combobox', () => {
   });
 
   describe('With fetched items', () => {
-    const onItems = jest.fn(async () => defaultItems);
+    const onItems = jest.fn(
+      async (timeout = 0) =>
+        new Promise<typeof defaultItems>((resolve) => {
+          setTimeout(() => {
+            resolve(defaultItems);
+          }, timeout);
+        })
+    );
 
     afterEach(() => {
       onItems.mockClear();
@@ -80,6 +87,7 @@ describe('Combobox', () => {
       );
 
       await user.type(screen.getByRole('combobox'), 'D');
+      expect(screen.getByRole('combobox')).toBeVisible();
       await waitFor(() => {
         expect(onItems).toHaveBeenCalledWith('D');
       });
