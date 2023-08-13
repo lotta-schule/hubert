@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { Deletable, DeletableProps } from '../../util';
 
 export default {
@@ -8,7 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<DeletableProps> = (args) => (
+const Template: StoryFn<DeletableProps> = (args) => (
   <Deletable {...args}>
     <img
       alt={''}
@@ -17,7 +17,10 @@ const Template: Story<DeletableProps> = (args) => (
   </Deletable>
 );
 
-export const Default = Template.bind({});
-Default.args = {
-  onDelete: () => {},
+export const Default = {
+  render: Template,
+
+  args: {
+    onDelete: () => {},
+  },
 };

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { StoryObj, Meta } from '@storybook/react';
 import { Popover } from '../../popover';
 
 export default {
@@ -7,46 +7,52 @@ export default {
   component: Popover,
 } as Meta;
 
-export const WithRichText: Story = (args) => {
-  return (
-    <Popover buttonProps={{ label: 'Click me' }} {...args}>
-      <div>
-        <p>
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-          ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-          sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-          et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-          takimata sanctus est Lorem ipsum dolor sit amet.
-        </p>
-        <ul>
-          <li>Vera; or, The Nihilists (1880) (text)</li>
-          <li>The Duchess of Padua (1883) (text)</li>
-          <li>Lady Windermere's Fan (1892) (text)</li>
-          <li>A Woman of No Importance (1893) (text)</li>
-          <li>An Ideal Husband (1895) (text)</li>
-          <li>The Importance of Being Earnest (1895) (text)</li>
-          <li>Salomé (1896) Translated from French by Lord Alfred Douglas</li>
-          <li>La Sainte Courtisane (Incomplete) (text)</li>
-          <li>A Florentine Tragedy (Incomplete) (text)</li>
-        </ul>
-      </div>
-    </Popover>
-  );
+type Story = StoryObj<typeof Popover>;
+
+export const WithRichText: Story = {
+  render: (args) => {
+    return (
+      <Popover buttonProps={{ label: 'Click me' }} {...args}>
+        <div>
+          <p>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+            et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+            accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+            no sea takimata sanctus est Lorem ipsum dolor sit amet.
+          </p>
+          <ul>
+            <li>Vera; or, The Nihilists (1880) (text)</li>
+            <li>The Duchess of Padua (1883) (text)</li>
+            <li>Lady Windermere's Fan (1892) (text)</li>
+            <li>A Woman of No Importance (1893) (text)</li>
+            <li>An Ideal Husband (1895) (text)</li>
+            <li>The Importance of Being Earnest (1895) (text)</li>
+            <li>Salomé (1896) Translated from French by Lord Alfred Douglas</li>
+            <li>La Sainte Courtisane (Incomplete) (text)</li>
+            <li>A Florentine Tragedy (Incomplete) (text)</li>
+          </ul>
+        </div>
+      </Popover>
+    );
+  },
 };
 
-export const WithImage: Story = ({ args }) => {
-  return (
-    <Popover buttonProps={{ label: 'Label' }} {...args}>
-      <img
-        src="https://picsum.photos/600/400"
-        alt="Wahrscheinlich wunderschönes Foto"
-      />
-      <br />
-      <small>Bildunterschrift</small>
-    </Popover>
-  );
+export const WithImage: Story = {
+  render: (args) => {
+    return (
+      <Popover buttonProps={{ label: 'Label' }} {...args}>
+        <img
+          src="https://picsum.photos/600/400"
+          alt="Wahrscheinlich wunderschönes Foto"
+        />
+        <br />
+        <small>Bildunterschrift</small>
+      </Popover>
+    );
+  },
 };

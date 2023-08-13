@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import { useLabel } from '@react-aria/label';
 import clsx from 'clsx';

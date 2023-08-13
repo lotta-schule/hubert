@@ -1,6 +1,5 @@
-import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
-import { CircularProgress, CircularProgressProps } from '../../progress';
+import { Meta } from '@storybook/react';
+import { CircularProgress } from '../../progress';
 
 export default {
   title: 'Progress/CircularProgress',
@@ -8,22 +7,21 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<CircularProgressProps> = (args) => (
-  <CircularProgress {...args} />
-);
-
-export const Default = Template.bind({});
-Default.args = {
-  value: 33.3,
+export const Default = {
+  args: {
+    value: 33.3,
+  },
 };
 
-export const ShowValue = Template.bind({});
-ShowValue.args = {
-  value: 33.3,
-  showValue: true,
+export const ShowValue = {
+  args: {
+    value: 33.3,
+    showValue: true,
+  },
 };
 
-export const Indefinite = Template.bind({});
-Indefinite.args = {
-  isIndeterminate: true,
+export const Indefinite = {
+  args: {
+    isIndeterminate: true,
+  },
 };

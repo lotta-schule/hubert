@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import { useComboBoxState } from '@react-stately/combobox';
 import { useComboBox } from '@react-aria/combobox';
@@ -175,7 +177,6 @@ export const ComboBox = React.memo(
       labelProps,
     } = useComboBox(
       {
-        children: ListItemFactory.createItem,
         autoFocus,
         inputRef,
         buttonRef,

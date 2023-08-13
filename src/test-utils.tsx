@@ -1,24 +1,27 @@
 import * as React from 'react';
-import { render, RenderOptions } from '@testing-library/react';
-import { HubertProvider } from './HubertProvider';
 import { DefaultThemes } from '@lotta-schule/theme';
+import { render, RenderOptions } from '@testing-library/react';
+import { MotionConfig } from 'framer-motion';
+import { HubertProvider } from './HubertProvider';
+import { GlobalStyles } from './theme';
 
-const ProviderFactory = (): React.FC => {
-  const ComponentClass: React.FC = ({ children }) => {
-    return (
-      <HubertProvider theme={DefaultThemes.standard}>{children}</HubertProvider>
-    );
-  };
+const theme = DefaultThemes.standard;
 
-  return ComponentClass;
-};
+const Wrapper = ({ children }: any) => (
+  <HubertProvider>
+    <MotionConfig transition={{ duration: 0 }}>
+      <GlobalStyles theme={theme} />
+      {children}
+    </MotionConfig>
+  </HubertProvider>
+);
 
 const customRender = (
   ui: React.ReactElement,
   renderOptions: Omit<RenderOptions, 'wrapper'> = {}
 ) =>
   render(ui, {
-    wrapper: ProviderFactory(),
+    wrapper: Wrapper,
     ...renderOptions,
   });
 

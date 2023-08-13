@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { Collapse, CollapseProps } from '../../util';
 
 export default {
@@ -8,7 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<CollapseProps> = (args) => (
+const Template: StoryFn<CollapseProps> = (args) => (
   <Collapse {...args}>
     <div>
       <p>
@@ -37,7 +37,10 @@ const Template: Story<CollapseProps> = (args) => (
   </Collapse>
 );
 
-export const Default = Template.bind({});
-Default.args = {
-  visible: true,
+export const Default = {
+  render: Template,
+
+  args: {
+    visible: true,
+  },
 };

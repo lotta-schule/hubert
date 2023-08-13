@@ -1,5 +1,5 @@
 ---
-name: CD
+name: Deploy Storybook and push npm package
 
 permissions:
   contents: write
@@ -7,7 +7,7 @@ permissions:
 on:
   workflow_run:
     workflows:
-      - CI
+      - 'Run checks and tests'
     types:
       - completed
     branches:
@@ -91,7 +91,7 @@ jobs:
   deploy-storybook:
     runs-on: ubuntu-latest
     needs:
-      - publish_artifact
+      - check_version_name_tag
     steps:
       - uses: actions/checkout@v3
         with:

@@ -1,51 +1,53 @@
-import * as React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { within } from '@testing-library/react';
+import { StoryObj, Meta } from '@storybook/react';
 import { userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import { Input } from '../../form';
+import { within } from '../../test-utils';
 
 export default {
   title: 'Form/Input',
   component: Input,
   argTypes: {},
-} as ComponentMeta<typeof Input>;
+} as Meta<typeof Input>;
 
-export const Default: ComponentStory<typeof Input> = (args) => (
-  <Input {...args} />
-);
-Default.args = {
-  placeholder: 'Please type something interesting ...',
-};
-Default.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
+export const Default: StoryObj<typeof Input> = {
+  args: {
+    placeholder: 'Please type something interesting ...',
+  },
 
-  userEvent.click(canvas.getByRole('textbox'));
-  await userEvent.keyboard('sample text', { delay: 100 });
+  play: async ({ canvasElement }) => {
+    const fireEvent = userEvent.setup({ delay: 100 });
+    const canvas = within(canvasElement);
 
-  expect(canvas.getByRole('textbox')).toHaveValue('sample text');
-};
+    await fireEvent.click(canvas.getByRole('textbox'));
+    await fireEvent.keyboard('sample text');
 
-export const Inline: ComponentStory<typeof Input> = (args) => (
-  <Input {...args} />
-);
-Inline.args = {
-  ...Default.args,
-  inline: true,
+    expect(canvas.getByRole('textbox')).toHaveValue('sample text');
+  },
 };
 
-export const Multiline: ComponentStory<typeof Input> = (args) => (
-  <Input {...args} />
-);
-Multiline.args = {
-  ...Default.args,
-  multiline: true,
-} as any;
-Multiline.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
+export const Inline: StoryObj<typeof Input> = {
+  args: {
+    ...Default.args,
+    inline: true,
+  },
+};
 
-  userEvent.click(canvas.getByRole('textbox'));
-  await userEvent.keyboard('sample text\nwith newline', { delay: 100 });
+export const Multiline: StoryObj<typeof Input> = {
+  args: {
+    ...Default.args,
+    multiline: true,
+  } as any,
 
-  expect(canvas.getByRole('textbox')).toHaveValue('sample text\nwith newline');
+  play: async ({ canvasElement }) => {
+    const fireEvent = userEvent.setup({ delay: 100 });
+    const canvas = within(canvasElement);
+
+    await fireEvent.click(canvas.getByRole('textbox'));
+    await fireEvent.keyboard('sample text\nwith newline');
+
+    expect(canvas.getByRole('textbox')).toHaveValue(
+      'sample text\nwith newline'
+    );
+  },
 };

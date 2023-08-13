@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { Message, ErrorMessage, SuccessMessage } from '../../message';
 
 export default {
@@ -7,27 +7,35 @@ export default {
   component: Message,
 } as Meta;
 
-const DefaultTemplate: Story = (args: any) => <Message {...args} />;
-const ErrorTemplate: Story = (args: any) => <ErrorMessage {...args} />;
-const SuccessTemplate: Story = (args: any) => <SuccessMessage {...args} />;
+const ErrorTemplate: StoryFn = (args: any) => <ErrorMessage {...args} />;
+const SuccessTemplate: StoryFn = (args: any) => <SuccessMessage {...args} />;
 
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  message: 'Hallo',
-  color: '#ccc',
-};
-export const Empty = DefaultTemplate.bind({});
-Empty.args = {
-  message: '',
-  color: '#ccc',
+export const Default = {
+  args: {
+    message: 'Hallo',
+    color: '#ccc',
+  },
 };
 
-export const ErrorMsg = ErrorTemplate.bind({});
-ErrorMsg.args = {
-  error: new Error('Upsi'),
+export const Empty = {
+  args: {
+    message: '',
+    color: '#ccc',
+  },
 };
 
-export const SuccessMsg = SuccessTemplate.bind({});
-SuccessMsg.args = {
-  message: 'Glückwunsch',
+export const ErrorMsg = {
+  render: ErrorTemplate,
+
+  args: {
+    error: new Error('Upsi'),
+  },
+};
+
+export const SuccessMsg = {
+  render: SuccessTemplate,
+
+  args: {
+    message: 'Glückwunsch',
+  },
 };
