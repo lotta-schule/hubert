@@ -2,11 +2,10 @@
 name: 'Build storybook and pack npm package'
 
 on:
-  workflow_run:
-    workflows:
-      - Run checks and tests
-    types:
-      - completed
+  push:
+    paths-ignore:
+      - 'packages/**'
+  pull_request:
 
 jobs:
   build-storybook:
@@ -16,15 +15,15 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Use Node.js 16.x
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
           cache: 'npm'
       - run: npm ci
       - run: npm -w @lotta-schule/theme run build
       - run: npm -w @lotta-schule/storybook-addon-theme run build
-      - run: npm run build
+      - run: npm run storybook:build
         env:
           STORYBOOK_BASE_HREF: /${{ github.event.repository.name }}
       - run: tar -czf storybook.tgz --directory=storybook-static .
@@ -42,10 +41,10 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Use Node.js 16.x
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
           cache: 'npm'
       - run: npm ci
       - run: npm pack
