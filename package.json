@@ -10,7 +10,7 @@
     "test": "jest",
     "storybook:build": "storybook build --output-dir=storybook-static",
     "storybook:test": "test-storybook",
-    "storybook:test:ci": "concurrently -k -s first -n \"STORYBOOK,TEST\" -c \"magenta,blue\" \"npm run storybook:build -- --quiet && npx http-server storybook-static --port 6006 --silent\" \"wait-on tcp:6006 && npm run storybook:test -- --coverage\"",
+    "storybook:test:ci": "concurrently -k -s first -n \"STORYBOOK,TEST\" -c \"magenta,blue\" \"npx http-server storybook-static --port 6006 --silent\" \"wait-on tcp:6006 && npm run storybook:test -- --coverage\"",
     "lint": "eslint --ext js,jsx,ts,tsx src",
     "typecheck": "tsc --noEmit",
     "prepare": "husky install"
