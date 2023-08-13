@@ -33,11 +33,6 @@ export const SwipeableViews = ({
         className={styles.movingStrip}
         data-testid="movingStrip"
         initial={false}
-        dragConstraints={{ left: 0, right: 0 }}
-        dragElastic={{
-          right: selectedIndex > 0 ? 1 : 0.25,
-          left: selectedIndex < views.length - 1 ? 1 : 0.25,
-        }}
         animate={{
           left: `${-selectedIndex * 100}%`,
         }}
@@ -52,6 +47,12 @@ export const SwipeableViews = ({
             damping: 2,
           },
         }}
+        drag={'x'}
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={{
+          right: selectedIndex > 0 ? 1 : 0.25,
+          left: selectedIndex < views.length - 1 ? 1 : 0.25,
+        }}
         onDragEnd={(_e: DragEvent, { offset, velocity }) => {
           const swipeOffsetThreshold = 25;
           const swipeVelocityThreshold = 100;
@@ -65,10 +66,9 @@ export const SwipeableViews = ({
             }
           }
         }}
-        drag={'x'}
       >
-        {views.map((view, i) => (
-          <div key={view.key || i} className={styles.viewElement}>
+        {views.map((view) => (
+          <div key={view.key} className={styles.viewElement}>
             {React.cloneElement(view)}
           </div>
         ))}
