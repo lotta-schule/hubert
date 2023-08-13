@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { Stepper, StepperProps } from '../../layout';
 
 export default {
@@ -8,7 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<{
+const Template: StoryFn<{
   args: Omit<StepperProps, 'currentStep' | 'onStep'>;
   content: React.ReactElement;
 }> = ({ args }) => {
@@ -27,9 +27,12 @@ const Template: Story<{
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {
+export const Default = {
+  render: Template,
+
   args: {
-    maxSteps: 4,
+    args: {
+      maxSteps: 4,
+    },
   },
 };

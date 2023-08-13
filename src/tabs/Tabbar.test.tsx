@@ -1,7 +1,8 @@
-import userEvent from '@testing-library/user-event';
+import * as React from 'react';
 import { render } from '../test-utils';
 import { Tab } from './Tab';
 import { Tabbar } from './Tabbar';
+import userEvent from '@testing-library/user-event';
 
 describe('tabs/Tabbar', () => {
   it('snapshot test', () => {
@@ -14,7 +15,7 @@ describe('tabs/Tabbar', () => {
         <Tab value={'4'}>Tab5</Tab>
       </Tabbar>
     );
-    expect(screen.container).toMatchSnapshot();
+    expect(screen.getByRole('tablist')).toMatchSnapshot();
   });
 
   it('should have the correct tab selected', () => {
@@ -32,8 +33,10 @@ describe('tabs/Tabbar', () => {
     );
   });
 
-  it('should call onChange with the correct value', () => {
+  it('should call onChange with the correct value', async () => {
+    const user = userEvent.setup();
     const onChange = jest.fn();
+
     const screen = render(
       <Tabbar value={'2'} onChange={onChange}>
         <Tab value={'0'}>Tab1 bla bla bla</Tab>
@@ -43,7 +46,8 @@ describe('tabs/Tabbar', () => {
         <Tab value={'4'}>Tab5</Tab>
       </Tabbar>
     );
-    userEvent.click(screen.getByRole('tab', { name: 'Tab5' }));
+
+    await user.click(screen.getByRole('tab', { name: 'Tab5' }));
     expect(onChange).toHaveBeenCalledWith('4');
   });
 });

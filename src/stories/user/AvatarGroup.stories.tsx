@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { Avatar, AvatarGroup, AvatarProps } from '../../avatar';
 
 export default {
@@ -12,7 +12,7 @@ const getRandomAvatarUrl = () =>
     Math.random() * 1000
   )}.svg`;
 
-const Template: Story<AvatarProps> = (args) => (
+const Template: StoryFn<AvatarProps> = (args) => (
   <AvatarGroup {...args}>
     <Avatar src={getRandomAvatarUrl()} />
     <Avatar src={getRandomAvatarUrl()} />
@@ -23,8 +23,11 @@ const Template: Story<AvatarProps> = (args) => (
   </AvatarGroup>
 );
 
-export const Lotta = Template.bind({});
-Lotta.args = {
-  src: getRandomAvatarUrl(),
-  title: 'Rosa Luxemburg',
+export const Lotta = {
+  render: Template,
+
+  args: {
+    src: getRandomAvatarUrl(),
+    title: 'Rosa Luxemburg',
+  },
 };

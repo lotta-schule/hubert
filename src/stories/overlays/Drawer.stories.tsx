@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { Drawer } from '../../drawer';
 import { Button } from '../../button';
 
@@ -9,7 +9,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story = (args) => {
+const Template: StoryFn = (args) => {
   const [isOpen, setIsOpen] = React.useState(false);
   return (
     <div>
@@ -24,12 +24,15 @@ Template.parameters = {
   },
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  children: (
-    <div>
-      <img src="https://picsum.photos/300/200" alt="" />
-      <div>Ich bin eine Box mit Inhalt</div>
-    </div>
-  ),
+export const Default = {
+  render: Template,
+
+  args: {
+    children: (
+      <div>
+        <img src="https://picsum.photos/300/200" alt="" />
+        <div>Ich bin eine Box mit Inhalt</div>
+      </div>
+    ),
+  },
 };

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import userEvent from '@testing-library/user-event';
 import { render } from '../../test-utils';
 import { Radio } from './Radio';
 import { RadioGroup } from './RadioGroup';
+import userEvent from '@testing-library/user-event';
 
 describe('shared/general/form/radio', () => {
   it('should render with correct name', () => {
@@ -31,11 +31,13 @@ describe('shared/general/form/radio', () => {
     expect(screen.getByRole('radio', { name: '2' })).toBeChecked();
   });
 
-  it('should call onChange with the newly selected value', () => {
+  it('should call onChange with the newly selected value', async () => {
+    const user = userEvent.setup();
     const onChange = jest.fn((ev, val) => {
       expect(ev.type).toEqual('change');
       expect(val).toEqual('3');
     });
+
     const screen = render(
       <RadioGroup name={'form-name'} onChange={onChange}>
         <Radio value={'0'} label={'0'} />
@@ -44,7 +46,8 @@ describe('shared/general/form/radio', () => {
         <Radio value={'3'} label={'3'} />
       </RadioGroup>
     );
-    userEvent.click(screen.getByRole('radio', { name: '3' }));
+
+    await user.click(screen.getByRole('radio', { name: '3' }));
     expect(onChange).toHaveBeenCalled();
   });
 });

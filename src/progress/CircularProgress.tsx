@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import { AriaProgressBarProps } from '@react-types/progress';
 import { useProgressBar } from '@react-aria/progress';

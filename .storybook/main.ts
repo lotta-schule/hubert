@@ -8,14 +8,15 @@ const config = {
     '@storybook/preset-scss',
     '@lotta-schule/storybook-addon-theme',
   ],
-  framework: '@storybook/react',
-  core: {
-    builder: 'webpack5',
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {},
   },
   features: {
-    storyStoreV7: true,
     interactionsDebugger: true,
   },
+  docs: {
+    autodocs: true,
+  },
 };
-
 export default config;

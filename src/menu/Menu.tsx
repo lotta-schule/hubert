@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import { useTreeState } from '@react-stately/tree';
 import { CollectionChildren } from '@react-types/shared';

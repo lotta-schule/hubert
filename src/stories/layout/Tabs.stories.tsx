@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { Tab, Tabbar } from '../../tabs';
 
 export default {
@@ -8,7 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   const [value, setValue] = React.useState('0');
   return (
     <Tabbar value={value} onChange={(value) => setValue(value as string)}>
@@ -21,7 +21,10 @@ const Template: Story = () => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  value: 2,
+export const Default = {
+  render: Template,
+
+  args: {
+    value: 2,
+  },
 };

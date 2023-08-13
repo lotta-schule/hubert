@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { Close } from '../../icon';
-import { Button, ButtonProps } from '../../button';
+import { Button } from '../../button';
 
 export default {
   title: 'Buttons/Button',
@@ -11,22 +11,21 @@ export default {
   },
 } as Meta;
 
-const Template: Story<Omit<ButtonProps, 'ref'>> = (args) => (
-  <Button {...args} />
-);
-
-export const Primary = Template.bind({});
-Primary.args = {
-  label: 'Button',
+export const Primary = {
+  args: {
+    label: 'Button',
+  },
 };
 
-export const IconWithLabelButton = Template.bind({});
-IconWithLabelButton.args = {
-  label: 'Button with Icon',
-  icon: <Close />,
+export const IconWithLabelButton = {
+  args: {
+    label: 'Button with Icon',
+    icon: <Close />,
+  },
 };
 
-export const IconButton = Template.bind({});
-IconButton.args = {
-  icon: <Close />,
+export const IconButton = {
+  args: {
+    icon: <Close />,
+  },
 };

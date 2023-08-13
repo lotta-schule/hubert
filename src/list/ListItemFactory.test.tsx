@@ -25,7 +25,7 @@ describe('list/ListItemFactory', () => {
       ).toEqual('Test');
       expect(item.props.children).toHaveLength(4);
       expect(
-        React.Children.toArray(item.props.children!).find(
+        React.Children.toArray(item.props.children as any).find(
           (child: React.ReactNode) => child === 'Test'
         )
       ).toBeTruthy();
@@ -57,11 +57,7 @@ describe('list/ListItemFactory', () => {
           }).props.children,
         } as any)
       );
-      expect(screen.container).toMatchInlineSnapshot(`
-        <div>
-          <div
-            data-overlay-container="true"
-          >
+      expect(screen.getByRole('listitem')).toMatchInlineSnapshot(`
             <li
               class="li"
             >
@@ -104,8 +100,6 @@ describe('list/ListItemFactory', () => {
                 </svg>
               </div>
             </li>
-          </div>
-        </div>
       `);
     });
 
@@ -118,11 +112,7 @@ describe('list/ListItemFactory', () => {
           }).props.children,
         } as any)
       );
-      expect(screen.container).toMatchInlineSnapshot(`
-        <div>
-          <div
-            data-overlay-container="true"
-          >
+      expect(screen.getByRole('listitem')).toMatchInlineSnapshot(`
             <li
               class="li"
             >
@@ -137,8 +127,6 @@ describe('list/ListItemFactory', () => {
                 </div>
               </div>
             </li>
-          </div>
-        </div>
       `);
     });
   });

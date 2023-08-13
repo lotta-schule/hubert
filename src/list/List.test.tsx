@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { render } from '../test-utils';
 import { Avatar } from '../avatar/Avatar';
 import { Button } from '../button/Button';
@@ -14,7 +15,7 @@ describe('List', () => {
         <ListItem>Test</ListItem>
       </List>
     );
-    expect(screen.container).toMatchSnapshot();
+    expect(screen.getByRole('list')).toMatchSnapshot();
   });
 
   it('should render with subsection left', () => {
@@ -26,7 +27,7 @@ describe('List', () => {
         <ListItem leftSection={<Avatar src={''} />}>Test</ListItem>
       </List>
     );
-    expect(screen.container).toMatchSnapshot();
+    expect(screen.getByRole('list')).toMatchSnapshot();
   });
 
   it('should render with subsection right', () => {
@@ -43,6 +44,6 @@ describe('List', () => {
         <ListItem rightSection={<Button>Test</Button>}>Test</ListItem>
       </List>
     );
-    expect(screen.container).toMatchSnapshot();
+    expect(screen.getByRole('list')).toMatchSnapshot();
   });
 });

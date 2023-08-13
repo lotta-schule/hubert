@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { MenuButton, Item } from '../../menu';
 import { action } from '@storybook/addon-actions';
 import { Close, ChevronRight } from '../../icon';
@@ -12,7 +12,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story = (args: any) => (
+const Template: StoryFn = (args: any) => (
   <div
     style={{
       width: '100vw',
@@ -37,13 +37,16 @@ const Template: Story = (args: any) => (
   </div>
 );
 
-export const Default = Template.bind({});
-Default.args = {
-  buttonProps: {
-    label: 'Open the menu',
+export const Default = {
+  render: Template,
+
+  args: {
+    buttonProps: {
+      label: 'Open the menu',
+    },
+    title: 'Chose a MenuItem number',
+    onAction: action('onAction'),
+    onClose: action('onClose'),
+    onOpenChange: action('onOpenChange'),
   },
-  title: 'Chose a MenuItem number',
-  onAction: action('onAction'),
-  onClose: action('onClose'),
-  onOpenChange: action('onOpenChange'),
 };

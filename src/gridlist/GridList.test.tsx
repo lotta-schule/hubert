@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { render } from '../test-utils';
 import { GridList, GridListItem } from './GridList';
 
@@ -23,6 +24,41 @@ describe('GridList', () => {
       </GridList>
     );
 
-    expect(screen.container).toMatchSnapshot();
+    expect(screen.getByRole('list')).toMatchInlineSnapshot(`
+      <ul
+        class="root"
+      >
+        <li>
+          <img
+            alt=""
+            src="https://picsum.photos/600/400"
+          />
+        </li>
+        <li>
+          <img
+            alt=""
+            src="https://picsum.photos/600/400"
+          />
+        </li>
+        <li>
+          <img
+            alt=""
+            src="https://picsum.photos/600/400"
+          />
+        </li>
+        <li>
+          <img
+            alt=""
+            src="https://picsum.photos/600/400"
+          />
+        </li>
+        <li>
+          <img
+            alt=""
+            src="https://picsum.photos/600/400"
+          />
+        </li>
+      </ul>
+    `);
   });
 });

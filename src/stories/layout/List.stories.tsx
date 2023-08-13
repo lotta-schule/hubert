@@ -18,63 +18,71 @@ const getRandomAvatarUrl = () =>
     Math.random() * 1000
   )}.svg`;
 
-export const Default = (args: ListProps) => (
-  <List {...args}>
-    <ListItem>Test</ListItem>
-    <ListItem>Test</ListItem>
-    <ListItem>Test</ListItem>
-    <ListItem>Test</ListItem>
-  </List>
-);
+export const Default = {
+  render: (args: ListProps) => (
+    <List {...args}>
+      <ListItem>Test</ListItem>
+      <ListItem>Test</ListItem>
+      <ListItem>Test</ListItem>
+      <ListItem>Test</ListItem>
+    </List>
+  ),
+};
 
-export const WithSecondaryText = (args: ListProps) => (
-  <List {...args}>
-    <ListItem>
-      Test
-      <ListItemSecondaryText>Secondary Text</ListItemSecondaryText>
-    </ListItem>
-    <ListItem>
-      Test
-      <ListItemSecondaryText>Secondary Text</ListItemSecondaryText>
-    </ListItem>
-    <ListItem>
-      Test
-      <ListItemSecondaryText>Secondary Text</ListItemSecondaryText>
-    </ListItem>
-    <ListItem>
-      Test
-      <ListItemSecondaryText>Secondary Text</ListItemSecondaryText>
-    </ListItem>
-  </List>
-);
+export const WithSecondaryText = {
+  render: (args: ListProps) => (
+    <List {...args}>
+      <ListItem>
+        Test
+        <ListItemSecondaryText>Secondary Text</ListItemSecondaryText>
+      </ListItem>
+      <ListItem>
+        Test
+        <ListItemSecondaryText>Secondary Text</ListItemSecondaryText>
+      </ListItem>
+      <ListItem>
+        Test
+        <ListItemSecondaryText>Secondary Text</ListItemSecondaryText>
+      </ListItem>
+      <ListItem>
+        Test
+        <ListItemSecondaryText>Secondary Text</ListItemSecondaryText>
+      </ListItem>
+    </List>
+  ),
+};
 
-export const AvatarList = (args: ListProps) => (
-  <List {...args}>
-    <ListItem leftSection={<Avatar src={getRandomAvatarUrl()} />}>
-      Test
-    </ListItem>
-    <ListItem leftSection={<Avatar src={getRandomAvatarUrl()} />}>
-      Test
-    </ListItem>
-    <ListItem leftSection={<Avatar src={getRandomAvatarUrl()} />}>
-      Test
-    </ListItem>
-    <ListItem leftSection={<Avatar src={getRandomAvatarUrl()} />}>
-      Test
-    </ListItem>
-  </List>
-);
+export const AvatarList = {
+  render: (args: ListProps) => (
+    <List {...args}>
+      <ListItem leftSection={<Avatar src={getRandomAvatarUrl()} />}>
+        Test
+      </ListItem>
+      <ListItem leftSection={<Avatar src={getRandomAvatarUrl()} />}>
+        Test
+      </ListItem>
+      <ListItem leftSection={<Avatar src={getRandomAvatarUrl()} />}>
+        Test
+      </ListItem>
+      <ListItem leftSection={<Avatar src={getRandomAvatarUrl()} />}>
+        Test
+      </ListItem>
+    </List>
+  ),
+};
 
-export const ActionList = (args: ListProps) => (
-  <List {...args}>
-    <ListItem
-      leftSection={<Avatar src={getRandomAvatarUrl()} />}
-      rightSection={<Button icon={<Close />} />}
-    >
-      Test
-    </ListItem>
-    <ListItem rightSection={<Button icon={<Close />} />}>Test</ListItem>
-    <ListItem rightSection={<Button icon={<Close />} />}>Test</ListItem>
-    <ListItem rightSection={<Button icon={<Close />} />}>Test</ListItem>
-  </List>
-);
+export const ActionList = {
+  render: (args: ListProps) => (
+    <List {...args}>
+      <ListItem
+        leftSection={<Avatar src={getRandomAvatarUrl()} />}
+        rightSection={<Button icon={<Close />} />}
+      >
+        Test
+      </ListItem>
+      <ListItem rightSection={<Button icon={<Close />} />}>Test</ListItem>
+      <ListItem rightSection={<Button icon={<Close />} />}>Test</ListItem>
+      <ListItem rightSection={<Button icon={<Close />} />}>Test</ListItem>
+    </List>
+  ),
+};
