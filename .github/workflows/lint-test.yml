@@ -2,11 +2,10 @@
 name: 'Run checks and tests'
 
 on:
-  workflow_run:
-    workflows:
-      - 'Build storybook and pack npm package'
-    types:
-      - completed
+  push:
+    paths-ignore:
+      - 'packages/**'
+  pull_request:
 
 jobs:
   lint:
@@ -17,7 +16,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-dependencies
           cache: 'npm'
       - run: npm ci
       - run: npm run lint
@@ -42,7 +40,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-dependencies
           cache: 'npm'
       - run: npm ci
       - run: npm -w @lotta-schule/theme run build
@@ -63,7 +60,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-dependencies
           cache: 'npm'
       - run: npm ci
       - run: npm -w @lotta-schule/theme run build

@@ -2,10 +2,11 @@
 name: 'Build storybook and pack npm package'
 
 on:
-  push:
-    paths-ignore:
-      - 'packages/**'
-  pull_request:
+  workflow_run:
+    workflows:
+      - 'Run checks and tests'
+    types:
+      - completed
 
 jobs:
   build-storybook:
