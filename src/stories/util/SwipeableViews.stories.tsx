@@ -26,12 +26,12 @@ export const Default: StoryObj<typeof SwipeableViews> = {
       setIndex(selectedIndex);
     }, [selectedIndex]);
     const images = [
-      'https://picsum.photos/seed/asdf/1000/600',
-      'https://picsum.photos/seed/poin/1000/600',
-      'https://picsum.photos/seed/123/1000/600',
-      'https://picsum.photos/seed/987y/1000/600',
-      'https://picsum.photos/seed/65748/1000/600',
-      'https://picsum.photos/seed/678/1000/600',
+      'https://picsum.photos/id/3/1000/600',
+      'https://picsum.photos/id/6/1000/600',
+      'https://picsum.photos/id/9/1000/600',
+      'https://picsum.photos/id/12/1000/600',
+      'https://picsum.photos/id/15/1000/600',
+      'https://picsum.photos/id/18/1000/600',
     ];
     return (
       <div>

@@ -30,7 +30,7 @@ export const Default = {
   args: {
     children: (
       <div>
-        <img src="https://picsum.photos/300/200" alt="" />
+        <img src="https://picsum.photos/id/69/300/200" alt="" />
         <div>Ich bin eine Box mit Inhalt</div>
       </div>
     ),

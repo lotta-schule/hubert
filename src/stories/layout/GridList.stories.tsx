@@ -11,19 +11,19 @@ export default {
 const Template: StoryFn = (args) => (
   <GridList {...args}>
     <GridListItem>
-      <img src="https://picsum.photos/600/400" alt="" />
+      <img src="https://picsum.photos/id/7/600/400" alt="" />
     </GridListItem>
     <GridListItem>
-      <img src="https://picsum.photos/600/400" alt="" />
+      <img src="https://picsum.photos/id/14/600/400" alt="" />
     </GridListItem>
     <GridListItem>
-      <img src="https://picsum.photos/600/400" alt="" />
+      <img src="https://picsum.photos/id/21/600/400" alt="" />
     </GridListItem>
     <GridListItem>
-      <img src="https://picsum.photos/600/400" alt="" />
+      <img src="https://picsum.photos/id/28/600/400" alt="" />
     </GridListItem>
     <GridListItem>
-      <img src="https://picsum.photos/600/400" alt="" />
+      <img src="https://picsum.photos/id/35/600/400" alt="" />
     </GridListItem>
   </GridList>
 );

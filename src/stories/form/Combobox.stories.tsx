@@ -64,15 +64,28 @@ export const WithPredefinedItems: StoryObj<typeof ComboBox> = {
 
 export const WithRequestedItems: StoryObj<typeof ComboBox> = {
   args: {
+    title: 'Search for a Star Wars character or species',
     items: async (value: string) => {
-      await new Promise((resolve) => setTimeout(resolve, 250));
-      return new Array(Math.floor(Math.random() * 50))
-        .fill(value)
-        .map((content, i) => ({
-          key: content + i,
-          leftSection: <Close />,
-          label: content + (i * Math.random() * 1024).toString(16),
-        }));
+      return Promise.all([
+        searchSWApi('people', value),
+        searchSWApi('species', value),
+      ]).then((results: { results: { name: string }[] }[]) => {
+        return results
+          .reduce(
+            (acc, result) => {
+              return acc.concat(result.results);
+            },
+            [] as { name: string }[]
+          )
+          .sort((a, b) => {
+            return a.name.localeCompare(b.name);
+          })
+          .map((result) => ({
+            key: result.name,
+            label: result.name,
+            leftSection: <Close />,
+          }));
+      });
     },
   },
 
@@ -83,12 +96,29 @@ export const WithRequestedItems: StoryObj<typeof ComboBox> = {
     const canvas = within(canvasElement);
 
     await fireEvent.click(canvas.getByRole('combobox'));
-    await fireEvent.keyboard('sample text');
+    await fireEvent.keyboard('yoda');
 
-    await waitFor(() => {
-      expect(canvas.getByRole('listbox')).toBeVisible();
-    });
+    await waitFor(
+      () => {
+        expect(canvas.getByRole('listbox')).toBeVisible();
+      },
+      { timeout: 15000 }
+    );
 
     await fireEvent.click(canvas.queryAllByRole('option')?.[0]);
   },
+};
+
+const searchSWApi = (
+  type: 'people' | 'starships' | 'vehicles' | 'species' | 'planets',
+  value: string
+) => {
+  return fetch(
+    'https://swapi.dev/api/' + type + '/?search=' + encodeURIComponent(value),
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  ).then((response) => response.json());
 };

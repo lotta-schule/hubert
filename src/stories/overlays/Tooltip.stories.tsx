@@ -20,7 +20,7 @@ export const Image = {
     children: <Button onClick={() => alert('click')} label={'Hover me'} />,
     label: (
       <img
-        src="https://picsum.photos/600/400"
+        src="https://picsum.photos/id/123/600/400"
         alt="Wahrscheinlich wunderschönes Foto"
       />
     ),

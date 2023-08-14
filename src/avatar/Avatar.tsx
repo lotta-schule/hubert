@@ -19,9 +19,6 @@ export interface AvatarProps {
   style?: React.CSSProperties;
 }
 
-/**
- * Primary UI shared for userAvatar interaction
- */
 export const Avatar = React.memo(
   React.forwardRef(
     (

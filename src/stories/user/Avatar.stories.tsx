@@ -1,22 +1,15 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { Avatar } from '../../avatar';
 
 export default {
   title: 'User/Avatar',
   component: Avatar,
-  argTypes: {
-    // backgroundColor: { control: 'color' },
-  },
-} as Meta;
+  argTypes: {},
+} as Meta<typeof Avatar>;
 
-const getRandomAvatarUrl = () =>
-  `https://avatars.dicebear.com/api/avataaars/${Math.floor(
-    Math.random() * 1000
-  )}.svg`;
-
-export const Lotta = {
+export const Default: StoryObj<typeof Avatar> = {
   args: {
-    src: getRandomAvatarUrl(),
+    src: 'https://avatars.dicebear.com/api/avataaars/rosa-luxemburg.svg',
     title: 'Rosa Luxemburg',
   },
 };

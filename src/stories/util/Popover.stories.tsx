@@ -47,7 +47,7 @@ export const WithImage: Story = {
     return (
       <Popover buttonProps={{ label: 'Label' }} {...args}>
         <img
-          src="https://picsum.photos/600/400"
+          src="https://picsum.photos/id/55/600/400"
           alt="Wahrscheinlich wunderschönes Foto"
         />
         <br />
