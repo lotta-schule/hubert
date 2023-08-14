@@ -1,28 +1,68 @@
 ---
-name: Deploy Storybook and push npm package
-
-permissions:
-  contents: write
+name: 'Build storybook and pack npm package'
 
 on:
   workflow_run:
     workflows:
-      - 'Build storybook and pack npm package'
+      - 'Run checks and tests'
     types:
       - completed
-    branches:
-      - main
 
 jobs:
+  build-storybook:
+    name: Build storybook page
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.workflow_run.head_branch }}
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npm -w @lotta-schule/theme run build
+      - run: npm -w @lotta-schule/storybook-addon-theme run build
+      - run: npm run storybook:build
+        env:
+          STORYBOOK_BASE_HREF: /${{ github.event.repository.name }}
+      - run: tar -czf storybook.tgz --directory=storybook-static .
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Storybook Static Site Documentation
+          path: storybook.tgz
+
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.workflow_run.head_branch }}
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npm pack
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: npm package
+          path: lotta-schule-hubert*.tgz
+          if-no-files-found: error
   check_version_name_tag:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.ref_name == 'main' }} && ${{ github.event.workflow_run.conclusion == 'success' }}
     outputs:
       version_name: ${{ steps.read_version.outputs.version_name }}
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          ref: ${{ github.event.workflow_run.head_branch }}
       - uses: actions/setup-node@v3
         with:
           node-version: '16.14'
@@ -39,6 +79,7 @@ jobs:
 
   publish_artifact:
     runs-on: ubuntu-latest
+    if: ${{ github.ref_name == 'main' }} && ${{ github.event.workflow_run.conclusion == 'success' }}
     needs:
       - check_version_name_tag
     steps:
@@ -93,10 +134,6 @@ jobs:
     needs:
       - check_version_name_tag
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
       - name: Download Storybook archive artifact
         uses: actions/github-script@v6
         with:
