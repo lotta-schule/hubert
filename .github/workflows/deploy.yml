@@ -7,7 +7,7 @@ permissions:
 on:
   workflow_run:
     workflows:
-      - 'Run checks and tests'
+      - 'Build storybook and pack npm package'
     types:
       - completed
     branches:
