@@ -5,32 +5,39 @@ import clsx from 'clsx';
 
 import styles from './Deletable.module.scss';
 
-export interface DeletableProps
-  extends Omit<React.HTMLProps<HTMLDivElement>, 'onClick'> {
-  className?: string;
-  title?: string;
-  onDelete?: React.MouseEventHandler<HTMLButtonElement> | null;
-}
+export type DeletableProps = Omit<
+  React.HTMLProps<HTMLDivElement> & {
+    className?: string;
+    title?: string;
+    onDelete?: React.MouseEventHandler<HTMLButtonElement> | null;
+  },
+  'ref'
+>;
 
-export const Deletable: React.FC<DeletableProps> = ({
-  children,
-  onDelete,
-  title = 'löschen',
-  className,
-  ...props
-}) => {
-  return (
-    <div className={clsx(styles.root, className)} {...props}>
-      {onDelete && (
-        <Button
-          small
-          className={styles.button}
-          icon={<Close />}
-          title={title}
-          onClick={onDelete ?? undefined}
-        />
-      )}
-      {children}
-    </div>
-  );
-};
+export const Deletable = React.forwardRef(
+  (
+    {
+      children,
+      onDelete,
+      title = 'löschen',
+      className,
+      ...props
+    }: DeletableProps,
+    ref: React.ForwardedRef<HTMLDivElement>
+  ) => {
+    return (
+      <div ref={ref} className={clsx(styles.root, className)} {...props}>
+        {onDelete && (
+          <Button
+            small
+            className={styles.button}
+            icon={<Close />}
+            title={title}
+            onClick={onDelete ?? undefined}
+          />
+        )}
+        {children}
+      </div>
+    );
+  }
+);
