@@ -13,8 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
@@ -27,8 +25,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
@@ -42,8 +38,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
@@ -60,13 +54,11 @@ jobs:
           fail_ci_if_error: false
           move_coverage_to_trash: true
           verbose: true
-  visual-and-interaction-tests:
+  interaction-tests:
     runs-on: ubuntu-latest
     name: Running interaction tests
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
@@ -76,7 +68,7 @@ jobs:
       - run: npm ci
       - run: npm -w @lotta-schule/theme run build
       - run: npm -w @lotta-schule/storybook-addon-theme run build
-      - name: build dev version
+      - name: build test version
         run: NODE_ENV=test npm run storybook:build
       - name: Run storybook test-runner
         run: npm run storybook:test:ci -- --coverage
@@ -87,10 +79,3 @@ jobs:
           fail_ci_if_error: false
           move_coverage_to_trash: true
           verbose: true
-      - name: Publish to Chromatic
-        uses: chromaui/action@v1
-        with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          skip: 'dependabot/**'
-          storybookBuildDir: 'storybook-static'
-          storybookConfigDir: '.storybook'

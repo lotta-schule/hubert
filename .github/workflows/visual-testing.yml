@@ -1,0 +1,34 @@
+---
+name: 'Visual Tests'
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  chromatic-deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-dependencies
+          cache: 'npm'
+      - run: npm ci
+      - run: npm -w @lotta-schule/theme run build
+      - run: npm -w @lotta-schule/storybook-addon-theme run build
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          skip: 'dependabot/**'
+          buildScriptName: 'storybook:build'
+        env:
+          NODE_ENV: test
