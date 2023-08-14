@@ -12,7 +12,7 @@ const Template: StoryFn<DeletableProps> = (args) => (
   <Deletable {...args}>
     <img
       alt={''}
-      style={{ backgroundColor: 'green', width: 150, height: 150 }}
+      style={{ backgroundColor: 'rgb(50, 255, 10)', width: 150, height: 150 }}
     />
   </Deletable>
 );
