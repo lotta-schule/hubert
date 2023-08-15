@@ -5,7 +5,7 @@ import { ToggleProps } from '@react-types/checkbox';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { useFocusRing } from '@react-aria/focus';
 import { useToggleState } from '@react-stately/toggle';
-import { useCheckbox } from '@react-aria/checkbox';
+import { AriaCheckboxProps, useCheckbox } from '@react-aria/checkbox';
 import clsx from 'clsx';
 
 import styles from './Checkbox.module.scss';
@@ -18,7 +18,7 @@ export type CheckboxProps = {
 
   children?: React.ReactNode;
 } & ToggleProps &
-  React.AriaAttributes;
+  AriaCheckboxProps;
 
 export const Checkbox = React.memo<CheckboxProps>(
   ({ style, className, featureColor, ...props }) => {
