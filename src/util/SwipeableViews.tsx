@@ -2,16 +2,21 @@ import * as React from 'react';
 import { motion } from 'framer-motion';
 
 import styles from './SwipeableViews.module.scss';
+import clsx from 'clsx';
 
 export type SwipeableViewsProps = {
   children: React.ReactElement[];
   selectedIndex: number;
+  className?: string;
+  style?: React.CSSProperties;
   onChange: (_index: number) => void;
 };
 
 export const SwipeableViews = ({
   selectedIndex,
   onChange,
+  style,
+  className,
   children,
 }: SwipeableViewsProps) => {
   const views = React.Children.toArray(children) as React.ReactElement[];
@@ -28,7 +33,7 @@ export const SwipeableViews = ({
   };
 
   return (
-    <div className={styles.root}>
+    <div style={style} className={clsx(styles.root, className)}>
       <motion.div
         className={styles.movingStrip}
         data-testid="movingStrip"
