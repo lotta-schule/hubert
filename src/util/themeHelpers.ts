@@ -5,7 +5,7 @@ export const extractFontNamesFromTheme = (theme: Theme) => {
     .filter(
       ([key]) =>
         /fontfamily$/i.test(key) ||
-        schema[key as keyof Theme].type === 'font-family'
+        schema[key as keyof Theme]?.type === 'font-family'
     )
     .flatMap(([, val]) =>
       val.split(',').map((v) => v.replace(/^[\s']*/, '').replace(/[\s']*$/, ''))
