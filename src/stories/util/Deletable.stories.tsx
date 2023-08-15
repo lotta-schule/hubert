@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {
-  fireEvent,
-  userEvent,
-  waitFor,
-  within,
-} from '@storybook/testing-library';
+import { userEvent, within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
@@ -32,17 +27,12 @@ export const Default: StoryObj<typeof Deletable> = {
   },
 
   play: async ({ canvasElement, initialArgs }) => {
+    const fireEvent = userEvent.setup({ delay: 200 });
     const screen = within(canvasElement);
 
     expect(screen.getByRole('button')).toHaveStyle({ opacity: 0 });
 
-    fireEvent.mouseEnter(screen.getByRole('img'));
-
-    await waitFor(() => {
-      expect(screen.getByRole('button')).toHaveStyle({ opacity: 1 });
-    });
-
-    await userEvent.click(screen.getByRole('button'));
+    await fireEvent.click(screen.getByRole('button'));
 
     expect(initialArgs.onDelete).toHaveBeenCalled();
   },

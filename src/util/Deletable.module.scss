@@ -12,11 +12,16 @@
     z-index: 1;
     transform: scale(0);
     opacity: 0;
+    svg {
+      width: 0.6em;
+      height: 0.6em;
+    }
   }
   &:hover {
     .button {
       transform: scale(1);
       opacity: 1;
+      padding: 0;
     }
   }
 }
