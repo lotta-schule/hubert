@@ -1,6 +1,6 @@
 {
   "name": "@lotta-schule/theme",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Theme definition for hubert, lotta's component library",
   "author": "Alexis Rinaldoni <alexis@rinaldoni.net>",
   "license": "GPL-3.0-or-later",
@@ -17,7 +17,8 @@
   "scripts": {
     "start": "microbundle watch",
     "build": "microbundle",
-    "lint": "eslint --ext js,jsx,ts,tsx src"
+    "lint": "eslint --ext js,jsx,ts,tsx src",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@types/node": "^20.4.1",

@@ -2,11 +2,7 @@
 name: 'Build storybook and pack npm package'
 
 on:
-  workflow_run:
-    workflows:
-      - 'Run checks and tests'
-    types:
-      - completed
+  workflow_call:
 
 jobs:
   build-storybook:
@@ -29,7 +25,7 @@ jobs:
       - name: Upload package artifact
         uses: actions/upload-artifact@v3
         with:
-          name: Storybook Static Site Documentation
+          name: storybook-static
           path: storybook.tgz
 
   package:
@@ -46,6 +42,6 @@ jobs:
       - name: Upload package artifact
         uses: actions/upload-artifact@v3
         with:
-          name: npm package
+          name: npm-package
           path: lotta-schule-hubert*.tgz
           if-no-files-found: error
