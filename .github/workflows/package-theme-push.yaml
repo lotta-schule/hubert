@@ -23,7 +23,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
       - run: npm ci
       - run: npm -w @lotta-schule/theme run build
       - run: npm -w @lotta-schule/theme pack
@@ -41,7 +41,7 @@ jobs:
       - build
     uses: ./.github/workflows/_check_version_tag.yaml
     with:
-      path: ./packages/theme
+      package-name: theme
 
   publish-npm-package:
     if: ${{ github.ref_name == 'main' }}
@@ -60,7 +60,7 @@ jobs:
         run: |
           npm publish lotta-schule-theme*.tgz
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.npm-token }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Create and push tag
         uses: actions/github-script@v6
         with:

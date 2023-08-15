@@ -4,13 +4,15 @@ name: 'Check that a tag for the version is still available'
 on:
   workflow_call:
     inputs:
-      path:
+      package-name:
         type: string
         required: false
-        default: .
     outputs:
-      version-name:
+      version:
         description: 'The version of the package, as read from package.json'
+        value: ${{ jobs.check-version-name-tag.outputs.version }}
+      version-name:
+        description: 'The version of the package, prefixed by its package name. This is what will be used to compare if a tag exists'
         value: ${{ jobs.check-version-name-tag.outputs.version-name }}
 
 jobs:
@@ -24,9 +26,17 @@ jobs:
           fetch-depth: 0
       - name: Read version from package.json
         run: |
-          export VERSION_NAME=$(node -p 'require("${{ inputs.path }}/package.json").version')
-          echo "version detected in package.json: $VERSION_NAME"
-          echo "version-name=$VERSION_NAME" >> $GITHUB_OUTPUT
+          path="${{ (inputs.package-name && format('./packages/{0}', inputs.package-name)) || '.' }}"
+          prefix="${{ inputs.package-name || '' }}"
+          export version=$(node -p "require('$path/package.json').version")
+          if [ -z "$prefix" ]; then
+            export version_name="$version"
+          else
+            export version_name="${prefix}@${version}"
+          fi
+          echo "version detected in package.json: $version_name (version $version)"
+          echo "version-name=$version_name" >> $GITHUB_OUTPUT
+          echo "version=$version" >> $GITHUB_OUTPUT
         id: read-version
       - name: Check that tag does not exist
         run: |
