@@ -1,7 +1,6 @@
-import * as React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { StoryObj, Meta } from '@storybook/react';
 import { expect } from '@storybook/jest';
-import { userEvent, within } from '@storybook/testing-library';
+import { fireEvent, waitFor, within } from '@storybook/testing-library';
 import { Checkbox } from '../../form';
 
 export default {
@@ -9,17 +8,20 @@ export default {
   component: Checkbox,
   args: {
     children: 'Yes, I accept all the evil I am forced to',
+    isDisabled: false,
   },
-} as ComponentMeta<typeof Checkbox>;
+} as Meta<typeof Checkbox>;
 
-export const Default: ComponentStory<typeof Checkbox> = (args) => (
-  <Checkbox {...args} />
-);
-Default.args = {};
-Default.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
+export const Default: StoryObj<typeof Checkbox> = {
+  args: {},
 
-  userEvent.click(canvas.getByRole('checkbox'));
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
 
-  expect(canvas.getByRole('checkbox')).toBeChecked();
+    fireEvent.click(canvas.getByRole('checkbox'));
+
+    await waitFor(() => {
+      expect(canvas.getByRole('checkbox')).toBeChecked();
+    });
+  },
 };

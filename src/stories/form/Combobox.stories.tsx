@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { StoryObj, Meta } from '@storybook/react';
 import { expect } from '@storybook/jest';
 import { userEvent, waitFor, within } from '@storybook/testing-library';
 import { ComboBox } from '../../form/comboBox';
@@ -22,70 +22,103 @@ export default {
             `,
     },
   },
-} as ComponentMeta<typeof ComboBox>;
+} as Meta<typeof ComboBox>;
 
-export const WithPredefinedItems: ComponentStory<typeof ComboBox> = (args) => (
-  <ComboBox {...args} />
-);
-WithPredefinedItems.args = {
-  items: [
-    {
-      key: 'home',
-      leftSection: <DragHandle />,
-      label: 'Home',
-      textValue: 'Home',
-    },
-    {
-      key: 'alarm',
-      leftSection: <Close />,
-      label: 'Alarm with right X',
-      textValue: 'Alarm',
-      selected: true,
-    },
-    {
-      key: 'account',
-      leftSection: <KeyboardArrowLeft />,
-      label: 'Balance',
-      textValue: 'Balance',
-    },
-  ],
-};
-WithPredefinedItems.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
-
-  userEvent.click(canvas.getByRole('button'));
-  await waitFor(() => {
-    expect(canvas.getByRole('listbox')).toBeVisible();
-  });
-
-  userEvent.click(canvas.getByRole('option', { name: 'Balance' }));
-};
-
-export const WithRequestedItems: ComponentStory<typeof ComboBox> = (args) => (
-  <ComboBox {...args} />
-);
-WithRequestedItems.args = {
-  items: async (value: string) => {
-    await new Promise((resolve) => setTimeout(resolve, 250));
-    return new Array(Math.floor(Math.random() * 50))
-      .fill(value)
-      .map((content, i) => ({
-        key: content + i,
+export const WithPredefinedItems: StoryObj<typeof ComboBox> = {
+  args: {
+    items: [
+      {
+        key: 'home',
+        leftSection: <DragHandle />,
+        label: 'Home',
+        textValue: 'Home',
+      },
+      {
+        key: 'alarm',
         leftSection: <Close />,
-        label: content + (i * Math.random() * 1024).toString(16),
-      }));
+        label: 'Alarm with right X',
+        textValue: 'Alarm',
+        selected: true,
+      },
+      {
+        key: 'account',
+        leftSection: <KeyboardArrowLeft />,
+        label: 'Balance',
+        textValue: 'Balance',
+      },
+    ],
+  },
+
+  play: async ({ canvasElement }) => {
+    const fireEvent = userEvent.setup({ delay: 100 });
+    const canvas = within(canvasElement);
+
+    await fireEvent.click(canvas.getByRole('button'));
+    await waitFor(() => {
+      expect(canvas.getByRole('listbox')).toBeVisible();
+    });
+
+    await fireEvent.click(canvas.getByRole('option', { name: 'Balance' }));
   },
 };
-WithRequestedItems.storyName = 'fetching items while typing';
-WithRequestedItems.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
 
-  userEvent.click(canvas.getByRole('combobox'));
-  await userEvent.keyboard('sample text', { delay: 100 });
+export const WithRequestedItems: StoryObj<typeof ComboBox> = {
+  args: {
+    title: 'Search for a Star Wars character or species',
+    items: async (value: string) => {
+      return Promise.all([
+        searchSWApi('people', value),
+        searchSWApi('species', value),
+      ]).then((results: { results: { name: string }[] }[]) => {
+        return results
+          .reduce(
+            (acc, result) => {
+              return acc.concat(result.results);
+            },
+            [] as { name: string }[]
+          )
+          .sort((a, b) => {
+            return a.name.localeCompare(b.name);
+          })
+          .map((result) => ({
+            key: result.name,
+            label: result.name,
+            leftSection: <Close />,
+          }));
+      });
+    },
+  },
 
-  await waitFor(() => {
-    expect(canvas.getByRole('listbox')).toBeVisible();
-  });
+  name: 'fetching items while typing',
 
-  userEvent.click(canvas.queryAllByRole('option')?.[0]);
+  play: async ({ canvasElement }) => {
+    const fireEvent = userEvent.setup({ delay: 100 });
+    const canvas = within(canvasElement);
+
+    await fireEvent.click(canvas.getByRole('combobox'));
+    await fireEvent.keyboard('yoda');
+
+    await waitFor(
+      () => {
+        expect(canvas.getByRole('listbox')).toBeVisible();
+      },
+      { timeout: 15000 }
+    );
+
+    await fireEvent.click(canvas.queryAllByRole('option')?.[0]);
+  },
+};
+
+const searchSWApi = (
+  type: 'people' | 'starships' | 'vehicles' | 'species' | 'planets',
+  value: string
+) => {
+  return fetch(
+    'https://swapi.dev/api/' + type + '/?search=' + encodeURIComponent(value),
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  ).then((response) => response.json());
 };

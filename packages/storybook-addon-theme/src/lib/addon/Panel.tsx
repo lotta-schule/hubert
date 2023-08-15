@@ -1,37 +1,36 @@
 import * as React from 'react';
-import { RenderOptions } from '@storybook/addons';
-import { useParameter, useGlobals } from '@storybook/api';
-import { AddonPanel, ArgsTable } from '@storybook/components';
+import { useGlobals } from '@storybook/api';
+import { AddonPanel } from '@storybook/components';
+import { PureArgsTable } from '@storybook/blocks';
 import { styled } from '@storybook/theming';
-import { DefaultThemes, ThemeName } from '@lotta-schule/theme';
-import { generateArgs } from '../generateArgs';
+import { DefaultThemes, schema } from '@lotta-schule/theme';
+import { generateArgsTableRows } from '../../util';
 
-const PARAM_KEY = 'hubertTheme';
-
-export const Panel = ({ active, key }: RenderOptions) => {
+export const Panel = ({ active, key }: any) => {
   const StyledHeader = styled.h2`
     padding: ${({ theme }) => theme.layoutMargin}px;
     font-size: ${({ theme }) => theme.typography.size.l2};
-    font-weight: ${({ theme }) => theme.typography.weight.black};
+    font-weight: ${({ theme }) => theme.typography.weight.bold};
   `;
 
   const [globals, setGlobals] = useGlobals();
-  const themeName = useParameter<ThemeName>(PARAM_KEY, 'standard');
+  const themeName = 'standard';
 
   const theme = {
     ...DefaultThemes[themeName],
     ...globals.hubertTheme,
   };
 
+  const rows = generateArgsTableRows(schema);
+
   return (
     <AddonPanel active={!!active} key={key}>
       <StyledHeader>Edit the current theme</StyledHeader>
-      <ArgsTable
-        rows={generateArgs()}
+      <PureArgsTable
+        rows={rows}
         args={theme}
         updateArgs={(args) => {
           setGlobals({
-            ...globals,
             hubertTheme: {
               ...globals.hubertTheme,
               ...args,

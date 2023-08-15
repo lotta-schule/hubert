@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import { ButtonGroupContextProvider } from './ButtonGroupContext';
 import clsx from 'clsx';

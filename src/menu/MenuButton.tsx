@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import { useMenuTriggerState } from '@react-stately/menu';
 import { CollectionChildren } from '@react-types/shared';
@@ -7,14 +9,11 @@ import { useMenuTrigger } from '@react-aria/menu';
 import { mergeProps } from '@react-aria/utils';
 import { Popover, PopoverProps } from '../popover/new/Popover';
 import { Menu, WithDescription } from './Menu';
-import clsx from 'clsx';
 
 import styles from './MenuButton.module.scss';
 
 export type MenuButtonProps = {
   buttonProps: Omit<ButtonProps, 'ref'>;
-  className?: string;
-  style?: React.CSSProperties;
   children: CollectionChildren<object>;
   placement?: PopoverProps['placement'];
   onOpenChange?: (_isOpen: boolean) => void;
@@ -23,14 +22,7 @@ export type MenuButtonProps = {
 
 export const MenuButton = React.forwardRef(
   (
-    {
-      buttonProps,
-      className,
-      onOpenChange,
-      placement,
-      style,
-      ...props
-    }: MenuButtonProps,
+    { buttonProps, onOpenChange, placement, ...props }: MenuButtonProps,
     forwardedRef: React.Ref<HTMLButtonElement | null>
   ) => {
     const isBrowser = typeof window !== 'undefined';
@@ -39,15 +31,17 @@ export const MenuButton = React.forwardRef(
 
     React.useImperativeHandle(forwardedRef, () => ref.current);
 
-    const state = useMenuTriggerState({
-      closeOnSelect: true,
-      onOpenChange,
-    });
+    const state = useMenuTriggerState({});
     const { menuTriggerProps, menuProps } = useMenuTrigger(
       { type: 'menu', isDisabled: buttonProps.disabled },
       state,
       ref
     );
+
+    React.useEffect(() => {
+      onOpenChange?.(state.isOpen);
+    }, [state.isOpen]);
+
     const element = React.useRef<HTMLDivElement | null>(null);
     const { buttonProps: ariaButtonProps } = useButton(menuTriggerProps, ref);
 
@@ -67,7 +61,7 @@ export const MenuButton = React.forwardRef(
     }
 
     return (
-      <div className={clsx(styles.root, className)} style={style}>
+      <>
         <Button ref={ref} {...buttonProps} {...ariaButtonProps} />
         {ref.current && (
           <Popover
@@ -84,11 +78,11 @@ export const MenuButton = React.forwardRef(
               className={styles.menu}
               onClose={state.close}
             >
-              {props.children}
+              {props.children as any}
             </Menu>
           </Popover>
         )}
-      </div>
+      </>
     );
   }
 );

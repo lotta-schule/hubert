@@ -1,10 +1,11 @@
-import { renderToStaticMarkup } from 'react-dom/server';
+import * as React from 'react';
+import { renderToString } from 'react-dom/server';
 import { render } from '../test-utils';
 import { NoSsr } from './NoSsr';
 
 describe('NoSsr', () => {
   it('should not render children at init', () => {
-    const html = renderToStaticMarkup(
+    const html = renderToString(
       <NoSsr>
         <p>Hello</p>
       </NoSsr>

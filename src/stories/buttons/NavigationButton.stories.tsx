@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
-import { NavigationButton, NavigationButtonProps } from '../../button';
+import { Meta } from '@storybook/react';
+import { NavigationButton } from '../../button';
 import { Close } from '../../icon';
 
 export default {
@@ -9,23 +9,22 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<Omit<NavigationButtonProps, 'ref'>> = (args) => (
-  <NavigationButton {...args} />
-);
-
-export const Default = Template.bind({});
-Default.args = {
-  label: 'Navigation-Button',
+export const Default = {
+  args: {
+    label: 'Navigation-Button',
+  },
 };
 
-export const Selected = Template.bind({});
-Selected.args = {
-  label: 'Navigation-Button selected',
-  selected: true,
+export const Selected = {
+  args: {
+    label: 'Navigation-Button selected',
+    selected: true,
+  },
 };
 
-export const IconButton = Template.bind({});
-IconButton.args = {
-  label: 'Navigation-Button with Icon',
-  icon: <Close />,
+export const IconButton = {
+  args: {
+    label: 'Navigation-Button with Icon',
+    icon: <Close />,
+  },
 };

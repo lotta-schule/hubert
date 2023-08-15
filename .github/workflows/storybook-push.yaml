@@ -1,0 +1,33 @@
+---
+name: 'Storybook'
+
+on:
+  push:
+    paths-ignore:
+      - 'packages/**'
+
+jobs:
+  lint-test:
+    uses: ./.github/workflows/_lint-test.yaml
+    secrets:
+      codecov-token: ${{ secrets.CODECOV_TOKEN }}
+
+  build:
+    uses: ./.github/workflows/_build.yaml
+
+  check-version-tag:
+    if: ${{ github.ref_name == 'main' }}
+    needs:
+      - build
+      - lint-test
+    uses: ./.github/workflows/_check_version_tag.yaml
+
+  deploy:
+    if: ${{ github.ref_name == 'main' }}
+    needs:
+      - check-version-tag
+    uses: ./.github/workflows/_deploy.yaml
+    with:
+      version: ${{ needs.check-version-tag.outputs.version }}
+    secrets:
+      npm-token: ${{ secrets.NPM_TOKEN }}

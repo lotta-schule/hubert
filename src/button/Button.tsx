@@ -56,8 +56,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           classes?.root,
           showOnlyIcon && [styles.onlyIcon, classes?.onlyIcon],
           {
-            small,
-            grouped,
+            [styles.small]: small,
+            [styles.grouped]: grouped,
           }
         )}
       >

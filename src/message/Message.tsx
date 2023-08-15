@@ -14,7 +14,7 @@ export interface MessageProps extends React.HTMLProps<HTMLDivElement> {
 export const Message = React.memo<MessageProps>(
   ({ message, color, className, children, ...otherProps }) => {
     const otherStyle: React.CSSProperties = {
-      backgroundColor: `color(${color} saturation(-30))`,
+      backgroundColor: `color(rgb(var(${color}) saturation(-30))`,
       borderColor: color,
       color,
     };

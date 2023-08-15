@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { Tooltip } from '../../util';
 import { Button } from '../../button';
 
@@ -8,21 +8,21 @@ export default {
   component: Tooltip,
 } as Meta;
 
-const Template: Story = (args: any) => <Tooltip {...args} />;
-
-export const Default = Template.bind({});
-Default.args = {
-  children: <Button onClick={() => alert('click')} label={'Hover me'} />,
-  label: 'Simple Tooltip',
+export const Default = {
+  args: {
+    children: <Button onClick={() => alert('click')} label={'Hover me'} />,
+    label: 'Simple Tooltip',
+  },
 };
 
-export const Image = Template.bind({});
-Image.args = {
-  children: <Button onClick={() => alert('click')} label={'Hover me'} />,
-  label: (
-    <img
-      src="https://picsum.photos/600/400"
-      alt="Wahrscheinlich wunderschönes Foto"
-    />
-  ),
+export const Image = {
+  args: {
+    children: <Button onClick={() => alert('click')} label={'Hover me'} />,
+    label: (
+      <img
+        src="https://picsum.photos/id/123/600/400"
+        alt="Wahrscheinlich wunderschönes Foto"
+      />
+    ),
+  },
 };

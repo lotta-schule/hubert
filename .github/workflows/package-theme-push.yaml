@@ -1,0 +1,73 @@
+---
+name: 'Package: Theme'
+
+on:
+  push:
+    paths:
+      - 'packages/theme/**'
+
+jobs:
+  lint-test:
+    uses: ./.github/workflows/_lint-test.yaml
+    with:
+      package-name: 'theme'
+      tasks: 'lint, typecheck'
+    secrets:
+      codecov-token: ''
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm -w @lotta-schule/theme run build
+      - run: npm -w @lotta-schule/theme pack
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: npm-package-theme
+          path: lotta-schule-theme*.tgz
+          if-no-files-found: error
+
+  check-version-tag:
+    if: ${{ github.ref_name == 'main' }}
+    needs:
+      - lint-test
+      - build
+    uses: ./.github/workflows/_check_version_tag.yaml
+    with:
+      package-name: theme
+
+  publish-npm-package:
+    if: ${{ github.ref_name == 'main' }}
+    needs:
+      - check-version-tag
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+      - uses: actions/download-artifact@v3
+        with:
+          name: npm-package-theme
+      - name: publish to npm
+        run: |
+          npm publish lotta-schule-theme*.tgz
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Create and push tag
+        uses: actions/github-script@v6
+        with:
+          script: |
+            await github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/theme@${{ needs.check-version-tag.outputs.version-name }}",
+              sha: context.sha
+            })

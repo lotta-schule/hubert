@@ -10,10 +10,12 @@ export type TabProps = Omit<ButtonProps, 'onClick' | 'ref'> & {
   selected?: boolean;
 };
 
-export const Tab: React.FC<TabProps> = ({ className, children, ...props }) => {
+export const Tab = ({ className, children, ...props }: TabProps) => {
   return (
     <NavigationButton
-      className={clsx(styles.tab, className)}
+      className={clsx(styles.tab, className, {
+        [styles.selected]: props.selected,
+      })}
       role={'tab'}
       {...props}
     >

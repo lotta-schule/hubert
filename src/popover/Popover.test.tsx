@@ -1,6 +1,7 @@
-import userEvent from '@testing-library/user-event';
+import * as React from 'react';
 import { render, waitFor } from '../test-utils';
 import { Popover } from './Popover';
+import userEvent from '@testing-library/user-event';
 
 describe('Popover', () => {
   it('should render a button and not the content', () => {
@@ -14,12 +15,13 @@ describe('Popover', () => {
   });
 
   it('should open when the button is clicked', async () => {
+    const fireEvent = userEvent.setup();
     const screen = render(
       <Popover buttonProps={{ label: 'Open Popover' }}>
         <div>TADA</div>
       </Popover>
     );
-    userEvent.click(screen.getByRole('button'));
+    await fireEvent.click(screen.getByRole('button'));
     await waitFor(() => {
       expect(screen.getByText('TADA')).toBeVisible();
     });

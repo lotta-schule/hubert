@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { Select, SelectProps } from '../../form';
 
 export default {
@@ -8,7 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<Omit<SelectProps, 'ref'>> = (args) => (
+const Template: StoryFn<Omit<SelectProps, 'ref'>> = (args) => (
   <Select {...args}>
     <optgroup label={'Gruppe 1'}>
       <option>Option 1</option>
@@ -23,5 +23,7 @@ const Template: Story<Omit<SelectProps, 'ref'>> = (args) => (
   </Select>
 );
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = {
+  render: Template,
+  args: {},
+};

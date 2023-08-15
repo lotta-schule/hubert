@@ -1,23 +1,21 @@
-import { Args } from '@storybook/components';
-import { schema } from '@lotta-schule/theme';
+import { schema as themeSchema } from '@lotta-schule/theme';
 
-export const generateArgs = (): Args =>
-  Object.entries(schema).reduce(
-    (acc, [property, { description, fallbackKey, type }]) => ({
+export const generateArgsTableRows = (schema: typeof themeSchema) => {
+  return Object.entries(schema).reduce(
+    (acc, [property, { description, type }]) => ({
       ...acc,
       [property]: {
-        key: property,
         name: property,
         description,
         type: {
           name: 'string',
-          required: fallbackKey ? false : true,
+          required: true,
         },
         control: (() => {
           switch (type) {
             case 'color':
               return { type: 'color' };
-            case 'fontFamily':
+            case 'font-family':
               return { type: 'text' };
             default:
               return { type: 'text' };
@@ -27,3 +25,4 @@ export const generateArgs = (): Args =>
     }),
     {}
   );
+};
