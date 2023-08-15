@@ -3,6 +3,11 @@ name: 'Check that a tag for the version is still available'
 
 on:
   workflow_call:
+    inputs:
+      path:
+        type: string
+        required: false
+        default: .
     outputs:
       version-name:
         description: 'The version of the package, as read from package.json'
@@ -19,7 +24,7 @@ jobs:
           fetch-depth: 0
       - name: Read version from package.json
         run: |
-          export VERSION_NAME=$(node -p 'require("./package.json").version')
+          export VERSION_NAME=$(node -p 'require("${{ inputs.path }}/package.json").version')
           echo "version detected in package.json: $VERSION_NAME"
           echo "version-name=$VERSION_NAME" >> $GITHUB_OUTPUT
         id: read-version
