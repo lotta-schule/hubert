@@ -28,6 +28,6 @@ jobs:
       - check-version-tag
     uses: ./.github/workflows/_deploy.yaml
     with:
-      version-name: ${{ needs.check-version-tag.outputs.version-name }}
+      version: ${{ needs.check-version-tag.outputs.version }}
     secrets:
       npm-token: ${{ secrets.NPM_TOKEN }}
