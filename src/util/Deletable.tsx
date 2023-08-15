@@ -41,3 +41,4 @@ export const Deletable = React.forwardRef(
     );
   }
 );
+Deletable.displayName = 'Deletable';
