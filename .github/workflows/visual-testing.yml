@@ -19,7 +19,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-dependencies
           cache: 'npm'
       - run: npm ci
       - run: npm -w @lotta-schule/theme run build
@@ -30,5 +29,6 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           skip: 'dependabot/**'
           buildScriptName: 'storybook:build'
+          autoAcceptChanges: 'develop'
         env:
           NODE_ENV: test
