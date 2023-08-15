@@ -54,7 +54,9 @@ export const AvatarList = {
   render: (args: ListProps) => (
     <List {...args}>
       {Array.from({ length: 10 }).map((_, i) => (
-        <ListItem leftSection={<Avatar src={getAvatarUrl(i)} />}>Test</ListItem>
+        <ListItem key={i} leftSection={<Avatar src={getAvatarUrl(i)} />}>
+          Test
+        </ListItem>
       ))}
     </List>
   ),
