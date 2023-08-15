@@ -1,6 +1,7 @@
 export * from './Collapse';
 export * from './Deletable';
 export * from './NoSsr';
+export * from './SwipeableViews';
 export * from './cssHelpers';
 export * from './themeHelpers';
 export * from './tooltip';
