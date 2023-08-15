@@ -13,10 +13,8 @@ export default {
   },
 } as Meta;
 
-const getRandomAvatarUrl = () =>
-  `https://avatars.dicebear.com/api/avataaars/${Math.floor(
-    Math.random() * 1000
-  )}.svg`;
+const getAvatarUrl = (i: string | number) =>
+  `https://avatars.dicebear.com/api/avataaars/${i}.svg`;
 
 export const Default = {
   render: (args: ListProps) => (
@@ -55,18 +53,9 @@ export const WithSecondaryText = {
 export const AvatarList = {
   render: (args: ListProps) => (
     <List {...args}>
-      <ListItem leftSection={<Avatar src={getRandomAvatarUrl()} />}>
-        Test
-      </ListItem>
-      <ListItem leftSection={<Avatar src={getRandomAvatarUrl()} />}>
-        Test
-      </ListItem>
-      <ListItem leftSection={<Avatar src={getRandomAvatarUrl()} />}>
-        Test
-      </ListItem>
-      <ListItem leftSection={<Avatar src={getRandomAvatarUrl()} />}>
-        Test
-      </ListItem>
+      {Array.from({ length: 10 }).map((_, i) => (
+        <ListItem leftSection={<Avatar src={getAvatarUrl(i)} />}>Test</ListItem>
+      ))}
     </List>
   ),
 };
@@ -75,7 +64,7 @@ export const ActionList = {
   render: (args: ListProps) => (
     <List {...args}>
       <ListItem
-        leftSection={<Avatar src={getRandomAvatarUrl()} />}
+        leftSection={<Avatar src={getAvatarUrl(999)} />}
         rightSection={<Button icon={<Close />} />}
       >
         Test
